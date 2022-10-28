@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/28 17:16:08 by owalsh           ###   ########.fr       */
+/*   Created: 2022/10/28 17:11:23 by owalsh            #+#    #+#             */
+/*   Updated: 2022/10/28 17:12:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3d.h"
 
-# include "minilibx-linux/mlx.h"
-# include "defines.h"
-# include "structs.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <errno.h>
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*i_s;
+	size_t	i;
 
-/*
-** UTILS
-*/
-int		is_space(char c);
-int		ft_strncmp(char *s1, char *s2, int n);
-int		ft_strlen(char *str);
-char	*get_next_line(int fd);
-void	*ft_memset(void *s, int c, size_t n);
-/*
-** PARSING
-*/
-
-
-#endif
+	i_s = s;
+	i = 0;
+	while (s && i < n)
+	{
+		i_s[i] = c;
+		i++;
+	}
+	return (s);
+}

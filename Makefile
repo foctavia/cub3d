@@ -22,7 +22,9 @@ OBJDIR 		= objs/
 SRCDIR		= src/
 INCDIR		= inc/
 
-SRC			= cub3d.c
+SRC			=	cub3d.c \
+				utils/error.c utils/gnl.c utils/is.c utils/mem.c utils/str.c \
+				parsing/parsing.c 
 
 OBJ 		= $(addprefix ${OBJDIR}, ${SRC:.c=.o})
 INC 		= -I./${INCDIR} -I./minilibx-linux
