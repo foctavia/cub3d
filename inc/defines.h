@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/28 17:28:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 16:28:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # define BUFFER_SIZE 1
 
+# define RED 255
+# define GREEN 256
+# define BLUE 257
+
 # define NORTH_TEXTURE 100
 # define SOUTH_TEXTURE 101
 # define WEST_TEXTURE 102
@@ -32,5 +36,11 @@
 # define ERR_MAP_PATH -2
 # define ERR_MAP_WRONGID -3
 # define ERR_MAP_INCOMPLETEID -4
+# define ERR_WRONG_FILE_EXTENSION -5
+# define ERR_MALLOC -6
+# define ERR_TOOMANY_ID -7
+# define ERR_MAP_UNEXPECTED -8
+# define ERR_MAP_WALL -9
+# define ERR_FORBIDDEN_CHAR -10
 
 #endif

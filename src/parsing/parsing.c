@@ -6,21 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:35:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/28 18:24:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 16:36:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	open_file(char *path)
-{
-	int	fd;
-
-	fd = open(path);
-	if (fd == -1)
-		ft_error(0, errno, path);
-	return (fd);
-}
 
 int	check_identifier(char *str)
 {
@@ -39,102 +29,88 @@ int	check_identifier(char *str)
 	return (FALSE);
 }
 
-int	add_texture(int id, char *line, char *path, t_game *game)
+void	assign_texture(t_game *game, int id, char *line, int n)
 {
-	int	i;
-
-	i = 2;
-	while (line && line[i] && is_space(line[i]))
-		i++;
-	if (!line[i])
-		exit(ft_error(ERR_MAP_INCOMPLETEID, 0, path));
 	if (id == NORTH_TEXTURE)
 	{
-		game->map->texture->north = &line[i];
-		game->map->no = 1;
+		if (!game->map->texture->north)
+			game->map->texture->north = ft_strndup(line, n);
+		game->map->no++;
 	}
 	else if (id == SOUTH_TEXTURE)
 	{
-		game->map->texture->south = &line[i];
-		game->map->so = 1;
+		if (!game->map->texture->south)
+			game->map->texture->south = ft_strndup(line, n);
+		game->map->so++;
 	}
 	else if (id == WEST_TEXTURE)
 	{
-		game->map->texture->west = &line[i];
-		game->map->we = 1;
+		if (!game->map->texture->west)
+			game->map->texture->west = ft_strndup(line, n);
+		game->map->we++;
 	}
 	else if (id == EAST_TEXTURE)
 	{
-		game->map->texture->east = &line[i];
-		game->map->ea = 1;
+		if (!game->map->texture->east)
+			game->map->texture->east = ft_strndup(line, n);
+		game->map->ea++;
 	}
-	else
-		return (EXIT_FAILURE);
+}
+
+int	add_texture(int id, char *line, int *i, t_game *game)
+{
+	int	j;
+
+	*i += 2;
+	while (line && line[*i] && is_space(line[*i]))
+		(*i)++;
+	if (!line[*i])
+		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
+	j = *i;
+	while (line && line[j] && !is_space(line[j]))
+		j++;
+	assign_texture(game, id, &line[*i], j - *i);
+	*i = j;
 	return (EXIT_SUCCESS);
 }
 
-void	set_rgb(char *line, char *path, int *red, int *green, int *blue)
+int	set_rgb(char *line, t_game *game, int *i, int color)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (line && is_digit(line[i]))
-		i++;
-	if (line[i] == ',')
-		line[i] = '\0';
+	j = *i;
+	while (line && line[*i] && is_digit(line[*i]))
+		(*i)++;
+	if ((color == RED || color == GREEN)
+		&& line[*i] == ',')
+		line[*i] = '\0';
+	else if (color == BLUE)
+		line[*i] = '\0';
 	else
-		exit(ft_error(ERR_MAP_INCOMPLETEID, 0, path));
-	*red = atoi(line);
-	line += i + 1;
-	i = 0;
-	while (line && is_digit(line[i]))
-		i++;
-	if (line[i] == ',')
-		line[i] = '\0';
-	else
-		exit(ft_error(ERR_MAP_INCOMPLETEID, 0, path));
-	*green = atoi(line);
-	line += i + 1;
-	i = 0;
-	while (line && is_digit(line[i]))
-		i++;
-	line[i] = '\0';
-	*blue = atoi(line);
-	line += i + 1;
+		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
+	(*i)++;
+	return (atoi(&line[j]));
 }
 
-
-int	add_color(int id, char *line, char *path, t_game *game)
+int	add_color(int id, char *line, int *i, t_game *game)
 {
-	int	i;
-	int	red;
-	int	green;
-	int	blue;
-
-	line++;
-	while (line && is_space(&line[0]))
-		line++;
-	if (!line[0])
-		exit(ft_error(ERR_MAP_INCOMPLETEID, 0, path));
-	set_rgb(line, path, &red, &green, &blue);
-	while (line && is_space(&line[0]))
-	{
-		if (!is_space(line[0]))
-			exit(ft_error(ERR_MAP_WRONGID, 0, path));
-		line++;
-	}
+	(*i)++;
+	while (line && line[*i] && is_space(line[*i]))
+		(*i)++;
+	if (!line[*i])
+		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
 	if (id == FLOOR)
 	{
-		game->map->floor->red = red;
-		game->map->floor->green = green;
-		game->map->floor->blue = blue;
+		game->map->floor->red = set_rgb(line, game, i, RED);
+		game->map->floor->green = set_rgb(line, game, i, GREEN);
+		game->map->floor->blue = set_rgb(line, game, i, BLUE);
 		game->map->f = 1;
 	}
 	if (id == CEILING)
 	{
-		game->map->ceiling->red = red;
-		game->map->ceiling->green = green;
-		game->map->ceiling->blue = blue;
+		game->map->ceiling->red = set_rgb(line, game, i, RED);
+		game->map->ceiling->green = set_rgb(line, game, i, GREEN);
+		game->map->ceiling->blue = set_rgb(line, game, i, BLUE);
 		game->map->c = 1;
 	}
 	return (EXIT_SUCCESS);
@@ -142,21 +118,81 @@ int	add_color(int id, char *line, char *path, t_game *game)
 
 int	complete_id(t_game *game)
 {
-	if (game->map->no == 1 && game->map->no == 1
-		&& game->map->no == 1 && game->map->no == 1
-		&& game->map->no == 1 && game->map->no == 1)
+	if (game && game->map && game->map->no == 1 && game->map->so == 1
+		&& game->map->we == 1 && game->map->ea == 1
+		&& game->map->f == 1 && game->map->c == 1)
 		return (TRUE);
+	else if (game && game->map && (game->map->no > 1 || game->map->so > 1
+		|| game->map->we > 1 || game->map->ea > 1
+		|| game->map->f > 1 || game->map->c > 1))
+		ft_error(ERR_TOOMANY_ID, 0, game->path, game);
 	return (FALSE);
 }
 
-int	parse_file(char *path, t_game *game)
+int	check_allowed_char(char c, t_game *game)
+{
+	int		i;
+	char	*allowed;
+
+	i = 0;
+	allowed = "10NWSO ";
+	while (allowed && allowed[i])
+	{
+		if (allowed[i] == c)
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	ft_error(ERR_FORBIDDEN_CHAR, 0, game->path, game);
+	return (EXIT_FAILURE);
+}
+
+int	read_content(int fd, t_game *game)
+{
+	int		i;
+	char	*line;
+	int		heigth;
+	int		length;
+
+	line = get_next_line(fd);
+	length = 0;
+	heigth = 0;
+	while (line)
+	{
+		i = 0;
+		if (line[0] != '\n')
+		{
+			while (line[i] && is_space(line[i]))
+				i++;
+			if (line[i] != '1')
+				ft_error(ERR_MAP_WALL, 0, game->path, game);
+			while (line && line[i] && line[i] != '\n' && !check_allowed_char(line[i], game))
+				i++;
+			if (i > length)
+				length = i;
+		}
+		heigth++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (EXIT_SUCCESS);
+}
+
+void	check_endline(char *line, int i, t_game *game)
+{
+	while (line[i] && is_space(line[i]))
+		i++;
+	if (line[i] != '\n' && line[i] != '\0')
+		ft_error(ERR_MAP_UNEXPECTED, 0, game->path, game);
+}
+
+int	ft_parse(t_game *game)
 {
 	char	*line;
 	int		fd;
 	int		i;
 	int		id;
 
-	fd = open(path);
+	fd = open(game->path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line && !complete_id(game))
 	{
@@ -167,31 +203,19 @@ int	parse_file(char *path, t_game *game)
 				i++;
 			id = check_identifier(&line[i]);
 			if (!id)
-				exit(ft_error(ERR_MAP_WRONGID, 0, path));
+				ft_error(ERR_MAP_WRONGID, 0, game->path, game);
 			if (id == FLOOR || id == CEILING)
-				add_color(id, &line[i], path, game);
+				add_color(id, line, &i, game);
 			else
-				add_texture(id, &line[i], path, game);
-			while (line[i] && is_space(line[i]))
-				i++;
-			if (line[i])
-				exit(ft_error(ERR_MAP_WRONGID, 0, path));
+				add_texture(id, line, &i, game);
+			check_endline(line, i, game);
 		}
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	if (complete_id(game))
-		read_content(fd, game, path);
-	return (EXIT_SUCCESS);
-}
-
-int	ft_init(char **argv, t_game *game)
-{
-	ft_memset(game, 0, sizeof(t_game));
-	if (!argv || !argv[0] || !argv[1])
-		exit(EXIT_FAILURE);
-	if (open_file(argv[1]) == -1)
-		exit(ft_error(ERR_MAP_PATH, 0, NULL));
-	if (parse_file(argv[1], game))
-		exit(EXIT_FAILURE);
+		read_content(fd, game);
+	close(fd);
 	return (EXIT_SUCCESS);
 }

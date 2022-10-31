@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/28 18:17:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 09:40:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ typedef struct s_mlx
 
 typedef struct s_game 
 {
+	int			err;
+	char		*path;
 	t_map		*map;
 	t_mlx		*mlx;
-	int			err;
 }				t_game;
 
 #endif
