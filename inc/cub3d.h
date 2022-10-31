@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 15:32:57 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:04:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,16 @@ char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*get_next_line(int fd);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_clean(t_game *game);
+void	display_map(t_map *map);
 /*
 ** PARSING
 */
 int		ft_parse_init(char **argv, t_game *game);
 int		ft_parse(t_game *game);
+int		check_identifier(char *str);
+int		add_color(int id, char *line, int *i, t_game *game);
+int		add_texture(int id, char *line, int *i, t_game *game);
+int		get_map_content(int fd, t_game *game);
+void	check_map_content(t_game *game, t_content *content);
 
 #endif

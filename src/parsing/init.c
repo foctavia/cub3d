@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 15:18:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:10:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ int	ft_parse_init(char **argv, t_game *game)
 	init_game(game, argv[1]);
 	if (ft_parse(game))
 		exit(EXIT_FAILURE);
-	printf("parsing was successful\n");
 	return (EXIT_SUCCESS);
 }

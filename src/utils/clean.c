@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 15:38:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 18:43:09 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,56 @@ void	free_tab(char **tab)
 
 	i = 0;
 	while (tab && tab[i])
-		free(tab[i++]);
+	{
+		if (tab[i])
+			free(tab[i++]);
+	}
 	free(tab);
+}
+
+void	free_content(t_content **content)
+{
+	t_content	*tmp;
+	t_content	*next;
+
+	if (*content)
+	{
+		tmp = *content;
+		while (tmp)
+		{
+			next = tmp->next;
+			if (tmp->line)
+				free(tmp->line);
+			free(tmp);
+			tmp = next;
+		}
+	}
+}
+
+void	free_map(t_map *map)
+{
+	if (map)
+	{
+		if (map->floor)
+			free(map->floor);
+		if (map->ceiling)
+			free(map->ceiling);
+		if (map->texture)
+		{
+			if (map->texture->south)
+				free(map->texture->south);
+			if (map->texture->north)
+				free(map->texture->north);
+			if (map->texture->west)
+				free(map->texture->west);
+			if (map->texture->east)
+				free(map->texture->east);
+			free(map->texture);
+		}
+		if (map->content)
+			free_content(&map->content);
+		free(map);
+	}
 }
 
 void	ft_clean(t_game *game)
@@ -27,27 +75,7 @@ void	ft_clean(t_game *game)
 	if (game)
 	{
 		if (game->map)
-		{
-			if (game->map->floor)
-				free(game->map->floor);
-			if (game->map->ceiling)
-				free(game->map->ceiling);
-			if (game->map->texture)
-			{
-				if (game->map->texture->south)
-					free(game->map->texture->south);
-				if (game->map->texture->north)
-					free(game->map->texture->north);
-				if (game->map->texture->west)
-					free(game->map->texture->west);
-				if (game->map->texture->east)
-					free(game->map->texture->east);
-				free(game->map->texture);
-			}
-			if (game->map->content)
-				free_tab(game->map->content);
-			free(game->map);
-		}
+			free_map(game->map);
 		if (game->mlx)
 			free(game->mlx);
 	}
