@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 09:01:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 15:16:37 by owalsh           ###   ########.fr       */
+/*   Created: 2022/10/31 12:15:22 by owalsh            #+#    #+#             */
+/*   Updated: 2022/10/31 15:21:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	open_file(char *path)
 {
-	t_game	game;
-	
-	if (argc != 2)
-		ft_error(ERR_ARGS_COUNT, 0, NULL, &game);
-	ft_parse_init(argv, &game);
-	ft_clean(&game);
-	return (EXIT_SUCCESS);
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	return (fd);
+}
+
+int	file_extension(char *file, char *extension)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(file) - 1;
+	j = ft_strlen(extension) - 1;
+	while (i && j && file[i] == extension[j])
+	{
+		i--;
+		j--;
+	}
+	if (j == 0 && file[i] == extension[j])
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
