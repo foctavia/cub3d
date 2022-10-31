@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 09:40:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/31 17:50:10 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ typedef struct s_color
 	int	blue;
 }				t_color;
 
+typedef struct	s_content
+{
+	int					start;
+	int					end;
+	char				*line;
+	struct s_content	*next;
+	struct s_content	*prev;
+}				t_content;
+
 typedef struct s_map
 {
 	int			no;
@@ -36,10 +45,12 @@ typedef struct s_map
 	int			ea;
 	int			f;
 	int			c;
+	int			height;
+	int			width;
 	t_color 	*floor;
 	t_color		*ceiling;
 	t_texture	*texture;
-	char		**content;	
+	t_content	*content;	
 }				t_map;
 
 typedef struct s_mlx
