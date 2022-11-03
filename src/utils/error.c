@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:29:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/03 09:26:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:01:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_error(int code, int err, char *arg, t_game *game)
 	{
 		write(STDERR_FILENO, strerror(errno), ft_strlen(strerror(errno)));
 		write(STDERR_FILENO, "\n", 1);
-		return (err);
+		exit (err);
 	}
 	ft_clean(game);
 	exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:12:22 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/03 09:27:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:01:55 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,21 @@ static void	assign_texture(t_game *game, int id, char *line, int n)
 	}
 }
 
+void	valid_texture_file(t_game *game)
+{
+	t_texture	*texture;
+
+	texture = game->map->texture;
+	if (texture->north && open_file(texture->north) == -1)
+		ft_error(0, errno, texture->north, game);
+	else if (texture->south && open_file(texture->south) == -1)
+		ft_error(0, errno, texture->south, game);
+	else if (texture->west && open_file(texture->west) == -1)
+		ft_error(0, errno, texture->west, game);
+	else if (texture->east && open_file(texture->east) == -1)
+		ft_error(0, errno, texture->east, game);
+}
+
 int	add_texture(int id, char *line, int *i, t_game *game)
 {
 	int	j;
@@ -70,6 +85,7 @@ int	add_texture(int id, char *line, int *i, t_game *game)
 	while (line && line[j] && !is_space(line[j]))
 		j++;
 	assign_texture(game, id, &line[*i], j - *i);
+	// valid_texture_file(game);
 	*i = j;
 	return (EXIT_SUCCESS);
 }
