@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   content.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:19:06 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/31 18:47:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 09:48:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,24 @@ static int	check_allowed_char(char c, t_game *game)
 	return (EXIT_FAILURE);
 }
 
+void check_end_map(char *line, int fd, t_game *game)
+{
+	int	i;
+
+	while (line)
+	{
+		i = 0;
+		while (line && line[i])
+		{
+			if (!is_space(line[i]))
+				ft_error(ERR_MAP_UNEXPECTED, 0, game->path, game);
+			i++;
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+}
+
 int	get_map_content(int fd, t_game *game)
 {
 	int		i;
@@ -97,6 +115,8 @@ int	get_map_content(int fd, t_game *game)
 	char	*line;
 
 	line = get_next_line(fd);
+	while (line && line[0] == '\n')
+		line = get_next_line(fd);
 	while (line)
 	{
 		i = 0;
@@ -113,9 +133,12 @@ int	get_map_content(int fd, t_game *game)
 			add_content(create_content(game, ft_strndup(line, i), j, i), \
 				&game->map->content);
 		}
+		else
+			break;
 		game->map->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	check_end_map(line, fd, game);
 	return (EXIT_SUCCESS);
 }
