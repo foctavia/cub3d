@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:52:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/31 19:07:29 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:26:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	display_map(t_map *map)
 			while (tmp)
 			{
 				if (tmp->line)
-					printf("%s\n", tmp->line);
+					printf("|%s|\n", tmp->line);
 				tmp = tmp->next;
 			}
 		}

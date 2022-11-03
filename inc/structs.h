@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 17:50:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:51:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,20 @@ typedef struct	s_content
 	struct s_content	*prev;
 }				t_content;
 
-typedef struct s_map
+typedef struct s_checker
 {
+	int		player;
 	int			no;
 	int			so;
 	int			we;
 	int			ea;
 	int			f;
 	int			c;
+}				t_checker;
+
+typedef struct s_map
+{
+	t_checker	*checker;
 	int			height;
 	int			width;
 	t_color 	*floor;

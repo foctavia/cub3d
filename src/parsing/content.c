@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:19:06 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/03 09:48:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/03 19:09:12 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_map_content(t_game *game, t_content *content)
 {
 	int		i;
 	char	*line;
-
+	display_map(game->map);
 	i = 0;
 	line = NULL;
 	if (content && content->line)
@@ -34,8 +34,26 @@ void	check_map_content(t_game *game, t_content *content)
 	}
 	else
 	{
-		if (line[i] != '1' || line[ft_strlen(line) - 1] != '1')
+		if (line[i] != '1')
 			ft_error(ERR_MAP_WALL, 0, game->path, game);
+		while (line && line[i])
+		{
+			if ((line[i] != '1' && line[i] != ' ')
+				&& ((line[i + 1] == ' ' || line[i + 1] == '\n')
+				|| (i && line[i - 1] == ' ')))
+				ft_error(ERR_MAP_WALL, 0, game->path, game);
+			else if ((line[i] != '1' && line[i] != ' ') &&
+				(content->prev && content->prev->line && content->prev->line[i] == ' '))
+			{
+				line[i] = 'X';
+				display_map(game->map);
+				ft_error(ERR_MAP_WALL, 0, game->path, game);
+			}
+			else if ((line[i] != '1' && line[i] != ' ') &&
+				(content->next && content->next->line && content->next->line[i] == ' '))
+				ft_error(ERR_MAP_WALL, 0, game->path, game);
+			i++;
+		}
 	}
 	if (content->next)
 		check_map_content(game, content->next);
@@ -108,6 +126,29 @@ void check_end_map(char *line, int fd, t_game *game)
 	}
 }
 
+char	*copy_line(char *line, int n, t_game *game)
+{
+	char	*copy;
+	int		i;
+
+	copy = malloc(sizeof(char) * (game->map->width + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (line && line[i] && i < n)
+	{
+		copy[i] = line[i];
+		i++;
+	}
+	while (i < game->map->width)
+	{
+		copy[i] = ' ';
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy); 
+}
+
 int	get_map_content(int fd, t_game *game)
 {
 	int		i;
@@ -130,7 +171,7 @@ int	get_map_content(int fd, t_game *game)
 				i++;
 			if (i > game->map->width)
 				game->map->width = i;
-			add_content(create_content(game, ft_strndup(line, i), j, i), \
+			add_content(create_content(game, copy_line(line, i, game), j, i), \
 				&game->map->content);
 		}
 		else
@@ -141,4 +182,35 @@ int	get_map_content(int fd, t_game *game)
 	}
 	check_end_map(line, fd, game);
 	return (EXIT_SUCCESS);
+}
+
+void	check_map(t_game *game, char **tab, int *line)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = *line;
+	while (tab && tab[i])
+	{
+		j = 0;
+		if (tab[i][0] != '\n')
+		{
+			while (tab[i][j] && is_space(tab[i][j]))
+				j++;
+			k = j;
+			while (tab && tab[i][j] && tab[i][j] != '\n' \
+				&& !check_allowed_char(tab[i][j][i], game))
+				j++;
+			if (i > game->map->width)
+				game->map->width = i;
+			add_content(create_content(game, copy_line(line, i, game), j, i), \
+				&game->map->content);
+		}
+		else
+			break;
+		game->map->height++;
+		free(line);
+		line = get_next_line(fd);
+	}
 }

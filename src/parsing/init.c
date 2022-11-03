@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 19:10:22 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:21:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static void	init_map(t_game *game)
 	if (!game->map->texture)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->map->texture, 0, sizeof(t_texture));
+	game->map->checker = malloc(sizeof(t_checker));
+	if (!game->map->checker)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	ft_memset(game->map->checker, 0, sizeof(t_checker));
 }
 
 static void	init_mlx(t_game *game)
