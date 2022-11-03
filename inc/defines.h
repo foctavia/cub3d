@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 16:28:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/03 09:26:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@
 # define ERR_MAP_UNEXPECTED -8
 # define ERR_MAP_WALL -9
 # define ERR_FORBIDDEN_CHAR -10
+# define ERR_RGB -11
 
 #endif

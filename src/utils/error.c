@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:29:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 18:09:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 09:26:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_error(int code, int err, char *arg, t_game *game)
 		write(STDERR_FILENO, "map should be surrounded by walls\n", 34);
 	else if (code == ERR_FORBIDDEN_CHAR)
 		write(STDERR_FILENO, "map contains a forbidden character\n", 35);
+	else if (code == ERR_RGB)
+		write(STDERR_FILENO, "rgb color range: 0-255\n", 23);
 	else if (err)
 	{
 		write(STDERR_FILENO, strerror(errno), ft_strlen(strerror(errno)));

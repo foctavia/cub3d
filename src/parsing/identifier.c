@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:12:22 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/31 18:29:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/03 09:27:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	add_texture(int id, char *line, int *i, t_game *game)
 static int	set_rgb(char *line, t_game *game, int *i, int color)
 {
 	int	j;
+	int	rgb;
 
 	j = *i;
 	while (line && line[*i] && is_digit(line[*i]))
@@ -89,7 +90,10 @@ static int	set_rgb(char *line, t_game *game, int *i, int color)
 	else
 		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
 	(*i)++;
-	return (atoi(&line[j]));
+	rgb = atoi(&line[j]);
+	if (rgb < 0 || rgb > 255)
+		ft_error(ERR_RGB, 0, game->path, game);
+	return (rgb);
 }
 
 int	add_color(int id, char *line, int *i, t_game *game)
