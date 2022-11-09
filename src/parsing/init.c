@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 19:10:22 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:24:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static void	init_map(t_game *game)
 	if (!game->map->texture)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->map->texture, 0, sizeof(t_texture));
+	game->map->checker = malloc(sizeof(t_checker));
+	if (!game->map->checker)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	ft_memset(game->map->checker, 0, sizeof(t_checker));
 }
 
 static void	init_mlx(t_game *game)
@@ -55,7 +59,7 @@ static void	check_arg(t_game *game, char **argv)
 	if (file_extension(argv[1], ".cub"))
 		ft_error(ERR_WRONG_FILE_EXTENSION, 0, argv[1], game);
 	if (open_file(argv[1]) == -1)
-		ft_error(ERR_MAP_PATH, 0, argv[1], game);
+		ft_error(0, errno, argv[1], game);
 }
 
 int	ft_parse_init(char **argv, t_game *game)

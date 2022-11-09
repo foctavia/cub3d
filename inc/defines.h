@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 16:28:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:53:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@
 
 // Errors
 # define ERR_ARGS_COUNT -1
-# define ERR_MAP_PATH -2
-# define ERR_MAP_WRONGID -3
-# define ERR_MAP_INCOMPLETEID -4
-# define ERR_WRONG_FILE_EXTENSION -5
-# define ERR_MALLOC -6
-# define ERR_TOOMANY_ID -7
-# define ERR_MAP_UNEXPECTED -8
-# define ERR_MAP_WALL -9
-# define ERR_FORBIDDEN_CHAR -10
+# define ERR_MAP_WRONGID -2
+# define ERR_MAP_INCOMPLETEID -3
+# define ERR_WRONG_FILE_EXTENSION -4
+# define ERR_MALLOC -5
+# define ERR_TOOMANY_ID -6
+# define ERR_MAP_UNEXPECTED -7
+# define ERR_MAP_WALL -8
+# define ERR_MAP_PLAYER -10
+# define ERR_FORBIDDEN_CHAR -11
+# define ERR_RGB -12
 
 #endif

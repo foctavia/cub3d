@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:12:22 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/31 18:29:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:38:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,89 +29,68 @@ int	check_identifier(char *str)
 	return (FALSE);
 }
 
-static void	assign_texture(t_game *game, int id, char *line, int n)
+int	complete_identifiers(t_game *game)
 {
-	if (id == NORTH_TEXTURE)
+	t_checker	*checker;
+
+	checker = game->map->checker;
+	if (checker->c == 1 && checker->f == 1 && checker->no == 1
+		&& checker->so == 1 && checker->we == 1 && checker->ea == 1)
+		return (TRUE);
+	else if (checker->c > 1 && checker->f > 1 && checker->no > 1
+		&& checker->so > 1 && checker->we > 1 && checker->ea > 1)
+		ft_error_map(ERR_TOOMANY_ID, game->path, game);
+	return (FALSE);
+}
+
+void	goto_map_content(char **file, int *j)
+{
+	int	i;
+
+	while (file && file[*j])
 	{
-		if (!game->map->texture->north)
-			game->map->texture->north = ft_strndup(line, n);
-		game->map->no++;
-	}
-	else if (id == SOUTH_TEXTURE)
-	{
-		if (!game->map->texture->south)
-			game->map->texture->south = ft_strndup(line, n);
-		game->map->so++;
-	}
-	else if (id == WEST_TEXTURE)
-	{
-		if (!game->map->texture->west)
-			game->map->texture->west = ft_strndup(line, n);
-		game->map->we++;
-	}
-	else if (id == EAST_TEXTURE)
-	{
-		if (!game->map->texture->east)
-			game->map->texture->east = ft_strndup(line, n);
-		game->map->ea++;
+		i = 0;
+		while (file[*j][i] && is_space(file[*j][i]))
+			i++;
+		if (file[*j][i])
+			break ;
+		(*j)++;
 	}
 }
 
-int	add_texture(int id, char *line, int *i, t_game *game)
+static void	check_endline(char *line, int i, t_game *game)
 {
-	int	j;
+	while (line[i] && is_space(line[i]))
+		i++;
+	if (line[i] != '\n' && line[i] != '\0')
+		ft_error_map(ERR_MAP_UNEXPECTED, game->path, game);
+}
 
-	*i += 2;
-	while (line && line[*i] && is_space(line[*i]))
-		(*i)++;
-	if (!line[*i])
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
-	j = *i;
-	while (line && line[j] && !is_space(line[j]))
+void	get_identifiers(t_game *game, char **file, int *line_index)
+{
+	int	i;
+	int	j;
+	int	id;
+
+	j = 0;
+	while (!complete_identifiers(game) && file && file[j])
+	{
+		i = 0;
+		while (file[j][i] && is_space(file[j][i]))
+			i++;
+		if (file[j][i])
+		{
+			id = check_identifier(&file[j][i]);
+			if (!id)
+				ft_error_map(ERR_MAP_WRONGID, game->path, game);
+			else if (id == FLOOR || id == CEILING)
+				add_color(id, file[j], &i, game);
+			else
+				add_texture(id, file[j], &i, game);
+			check_endline(file[j], i, game);
+		}
 		j++;
-	assign_texture(game, id, &line[*i], j - *i);
-	*i = j;
-	return (EXIT_SUCCESS);
-}
-
-static int	set_rgb(char *line, t_game *game, int *i, int color)
-{
-	int	j;
-
-	j = *i;
-	while (line && line[*i] && is_digit(line[*i]))
-		(*i)++;
-	if ((color == RED || color == GREEN)
-		&& line[*i] == ',')
-		line[*i] = '\0';
-	else if (color == BLUE)
-		line[*i] = '\0';
-	else
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
-	(*i)++;
-	return (atoi(&line[j]));
-}
-
-int	add_color(int id, char *line, int *i, t_game *game)
-{
-	(*i)++;
-	while (line && line[*i] && is_space(line[*i]))
-		(*i)++;
-	if (!line[*i])
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
-	if (id == FLOOR)
-	{
-		game->map->floor->red = set_rgb(line, game, i, RED);
-		game->map->floor->green = set_rgb(line, game, i, GREEN);
-		game->map->floor->blue = set_rgb(line, game, i, BLUE);
-		game->map->f = 1;
 	}
-	if (id == CEILING)
-	{
-		game->map->ceiling->red = set_rgb(line, game, i, RED);
-		game->map->ceiling->green = set_rgb(line, game, i, GREEN);
-		game->map->ceiling->blue = set_rgb(line, game, i, BLUE);
-		game->map->c = 1;
-	}
-	return (EXIT_SUCCESS);
+	goto_map_content(file, &j);
+	*line_index += j;
 }

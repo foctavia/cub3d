@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 19:04:40 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:36:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		is_digit(char c);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		ft_error(int code, int err, char *arg, t_game *game);
+int		ft_error_map(int code, char *arg, t_game *game);
 int		file_extension(char *file, char *extension);
 int		open_file(char *path);
 char	*ft_strndup(const char *s, int n);
@@ -50,6 +51,12 @@ int		check_identifier(char *str);
 int		add_color(int id, char *line, int *i, t_game *game);
 int		add_texture(int id, char *line, int *i, t_game *game);
 int		get_map_content(int fd, t_game *game);
-void	check_map_content(t_game *game, t_content *content);
+int		is_player(char c);
+char	**copy_file(t_game *game);
+void	get_identifiers(t_game *game, char **tab, int *line);
+void	parse_map(t_game *game, char **tab, int *line);
+void	copy_map(t_game *game, char **file, int *line_index);
+void	checker_map(t_game *game, int line_index);
+void	check_walls(t_game *game, char **content);
 
 #endif
