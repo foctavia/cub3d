@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:21:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/03 17:22:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:20:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static int	set_rgb(char *line, t_game *game, int *i, int color)
 	else if (color == BLUE)
 		line[*i] = '\0';
 	else
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	(*i)++;
 	rgb = atoi(&line[j]);
 	if (rgb < 0 || rgb > 255)
-		ft_error(ERR_RGB, 0, game->path, game);
+		ft_error_map(ERR_RGB, game->path, game);
 	return (rgb);
 }
 
@@ -40,7 +40,7 @@ int	add_color(int id, char *line, int *i, t_game *game)
 	while (line && line[*i] && is_space(line[*i]))
 		(*i)++;
 	if (!line[*i])
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	if (id == FLOOR)
 	{
 		game->map->floor->red = set_rgb(line, game, i, RED);

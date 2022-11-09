@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:17:38 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/03 17:19:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:43:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	add_texture(int id, char *line, int *i, t_game *game)
 	while (line && line[*i] && is_space(line[*i]))
 		(*i)++;
 	if (!line[*i])
-		ft_error(ERR_MAP_INCOMPLETEID, 0, game->path, game);
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	j = *i;
 	while (line && line[j] && !is_space(line[j]))
 		j++;

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/03 15:51:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:23:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ typedef struct s_color
 	int	blue;
 }				t_color;
 
-typedef struct	s_content
-{
-	int					start;
-	int					end;
-	char				*line;
-	struct s_content	*next;
-	struct s_content	*prev;
-}				t_content;
-
 typedef struct s_checker
 {
 	int		player;
@@ -50,13 +41,13 @@ typedef struct s_checker
 
 typedef struct s_map
 {
-	t_checker	*checker;
 	int			height;
 	int			width;
+	char		**content;
 	t_color 	*floor;
 	t_color		*ceiling;
 	t_texture	*texture;
-	t_content	*content;	
+	t_checker	*checker;
 }				t_map;
 
 typedef struct s_mlx
@@ -69,6 +60,7 @@ typedef struct s_game
 {
 	int			err;
 	char		*path;
+	char		**file;
 	t_map		*map;
 	t_mlx		*mlx;
 }				t_game;

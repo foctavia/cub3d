@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/03 16:21:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:24:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	check_arg(t_game *game, char **argv)
 	if (file_extension(argv[1], ".cub"))
 		ft_error(ERR_WRONG_FILE_EXTENSION, 0, argv[1], game);
 	if (open_file(argv[1]) == -1)
-		ft_error(ERR_MAP_PATH, 0, argv[1], game);
+		ft_error(0, errno, argv[1], game);
 }
 
 int	ft_parse_init(char **argv, t_game *game)

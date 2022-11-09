@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 18:43:09 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:15:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,6 @@ void	free_tab(char **tab)
 			free(tab[i++]);
 	}
 	free(tab);
-}
-
-void	free_content(t_content **content)
-{
-	t_content	*tmp;
-	t_content	*next;
-
-	if (*content)
-	{
-		tmp = *content;
-		while (tmp)
-		{
-			next = tmp->next;
-			if (tmp->line)
-				free(tmp->line);
-			free(tmp);
-			tmp = next;
-		}
-	}
 }
 
 void	free_map(t_map *map)
@@ -65,7 +46,9 @@ void	free_map(t_map *map)
 			free(map->texture);
 		}
 		if (map->content)
-			free_content(&map->content);
+			free_tab(map->content);
+		if (map->checker)
+			free(map->checker);
 		free(map);
 	}
 }
@@ -78,5 +61,7 @@ void	ft_clean(t_game *game)
 			free_map(game->map);
 		if (game->mlx)
 			free(game->mlx);
+		if (game->file)
+			free_tab(game->file);
 	}
 }
