@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:27:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:53:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 16:32:15 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ static void	check_player_position(t_game *game, char **content, int i, int j)
 	int		bottom;
 	int		left;
 	int		right;
-	char	*player;
 
 	top = i - 1;
 	bottom = i + 1;
 	left = j - 1;
 	right = j + 1;
-	player = "NSWE";
 	if (is_player(content[i][j])
 		&& ((content[i][right] == ' ') || (j && content[i][left] == ' ')))
 		ft_error_map(ERR_MAP_WALL, game->path, game);

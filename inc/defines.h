@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:53:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:11:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@
 # define ERR_MAP_PLAYER -10
 # define ERR_FORBIDDEN_CHAR -11
 # define ERR_RGB -12
+# define ERR_MLX_INIT -20
+# define ERR_MLX_WIN -21
 
 #endif

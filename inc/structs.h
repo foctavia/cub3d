@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 15:23:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 16:45:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ typedef struct s_map
 typedef struct s_mlx
 {
 	void	*mlx;
-	void	*mlx_win;
+	void	*window;
+	int		width;
+	int		height;
 }				t_mlx;
 
 typedef struct s_game 

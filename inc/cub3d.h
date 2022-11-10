@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:36:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:22:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		ft_error(int code, int err, char *arg, t_game *game);
 int		ft_error_map(int code, char *arg, t_game *game);
+int		ft_error_mlx(int code, t_game *game);
 int		file_extension(char *file, char *extension);
 int		open_file(char *path);
 char	*ft_strndup(const char *s, int n);
@@ -58,5 +59,9 @@ void	parse_map(t_game *game, char **tab, int *line);
 void	copy_map(t_game *game, char **file, int *line_index);
 void	checker_map(t_game *game, int line_index);
 void	check_walls(t_game *game, char **content);
+/*
+** RENDERING
+*/
+void	ft_play(t_game *game);
 
 #endif
