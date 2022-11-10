@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/10 15:11:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 18:05:07 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define EAST_TEXTURE 103
 # define FLOOR 104
 # define CEILING 105
+
+# define BIGGER(a, b) (a > b ? a : b)
+# define ABS(a) ((a < 0) ? -a : a)
 
 // Errors
 # define ERR_ARGS_COUNT -1

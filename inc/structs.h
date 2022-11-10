@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/10 16:45:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 18:13:27 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct s_color
 	int	green;
 	int	blue;
 }				t_color;
+
+typedef struct	s_img
+{
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	char	*addr;
+	void	*img;
+}				t_img;
 
 typedef struct s_checker
 {
@@ -65,6 +74,7 @@ typedef struct s_game
 	char		**file;
 	t_map		*map;
 	t_mlx		*mlx;
+	t_img		*img;
 }				t_game;
 
 #endif
