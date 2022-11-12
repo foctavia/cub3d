@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/10 18:15:37 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:01:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	check_walls(t_game *game, char **content);
 ** RENDERING
 */
 void	ft_play(t_game *game);
-void	draw(t_game *game, t_img *img, int x, int y);
+void	draw(t_game *game, t_img *img, int x, int y, int color);
+
 
 #endif

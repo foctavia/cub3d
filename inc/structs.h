@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/10 18:13:27 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:08:12 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ typedef struct s_map
 	t_texture	*texture;
 	t_checker	*checker;
 }				t_map;
+
+typedef struct	s_square
+{
+	int	x;
+	int	y;
+	int	side;
+	int	color;
+}				t_square;
 
 typedef struct s_mlx
 {
