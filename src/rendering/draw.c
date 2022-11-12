@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/10 18:18:26 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:52:07 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@ void	bresenham(t_game *game, t_img *img, float x1, float y1, float x2, float y2)
 	float	d_x;
 	float	d_y;
 	int		max;
+	int		big;
 
-	(void)game;
-	x1 *= 32;
-	x2 *= 32;
-	y1 *= 32;
-	y2 *= 32;
+	if (game->map->height > game->map->width)
+		big = game->mlx->height / game->map->height;
+	else
+		big = game->mlx->width / game->map->width;
+	x1 *= big;
+	x2 *= big;
+	y1 *= big;
+	y2 *= big;
+	// big = BIGGER(game->map->height, game->map->width);
+	// x1 *= game->mlx->height /big;
+	// x2 *= game->mlx->height /big;
+	// y1 *= game->mlx->height /big;
+	// y2 *= game->mlx->height /big;
 	d_x = x2 - x1;
 	d_y = y2 - y1;
 	max = BIGGER(ABS(d_x), ABS(d_y));
