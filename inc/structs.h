@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 11:55:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:34:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_checker
 	int			c;
 }				t_checker;
 
+typedef struct	s_coord
+{
+	int	x;
+	int	y;	
+}				t_coord;
+
 typedef struct s_map
 {
 	int			height;
@@ -57,6 +63,7 @@ typedef struct s_map
 	t_color		*ceiling;
 	t_texture	*texture;
 	t_checker	*checker;
+	t_coord		player;
 }				t_map;
 
 typedef struct	s_elem

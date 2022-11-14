@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 12:14:39 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:36:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int draw_square(t_game *game, t_elem elem, t_img *img)
 	return (0);
 }
 
+
 int	draw_player(t_game *game, t_elem elem, t_img *img)
 {
 	int		radius;
@@ -59,14 +60,16 @@ int	draw_player(t_game *game, t_elem elem, t_img *img)
 	double	y;
 	
 	radius = elem.side / 2;
+	game->map->player.x = elem.x + radius;
+	game->map->player.y = elem.y + radius;
 	elem.color = 0xFF0000;
 	i = 0;
 	while (i < 360)
 	{
-		x = radius * 0.6 * cos(i * M_PI / 180);
-        y = radius * 0.6 * sin(i * M_PI / 180);
+		x = radius * 0.3 * cos(i * M_PI / 180);
+        y = radius * 0.3 * sin(i * M_PI / 180);
 		my_mlx_pixel_put(game, img, elem.x + radius + x, elem.y + radius + y, elem.color);
-		i += 0.1;
+		i += 0.01;
 	}
 	return (EXIT_SUCCESS);
 }
