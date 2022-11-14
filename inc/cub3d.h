@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 12:08:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:45:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	check_walls(t_game *game, char **content);
 int		close_window(t_game *game);
 void	assign_win_size(t_game *game);
 void	ft_play(t_game *game);
-void	draw(t_game *game, t_img *img, int x, int y, int color);
+void	draw_line(t_game *game, t_img *img, t_elem elem, int x, int y, int color);
+void	my_mlx_pixel_put(t_game *game, t_img *data, int x, int y, int color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 12:36:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:44:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	render_map(t_game *game, t_map *map, t_img *img)
 				draw_player(game, elem, img);
 			if (map->content[y][x] != ' ' && !is_player(map->content[y][x]))
 				draw_square(game, elem, img);
+			draw_line(game, img, elem, x, y, 0x00FF00);
 			x++;
 		}
 		y++;
