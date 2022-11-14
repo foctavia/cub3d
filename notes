@@ -22,3 +22,11 @@ else error
 
 Texture, then floor then texture then C ?
 if i get random value in my file like s;kdjflsj;dkdlff
+
+/*
+	1. faire la map depuis vu d en haut
+	2. faire des lignes horizontales et verticales
+	3. faire un point rouge le player
+	4. calculer la diff entre la position du player et les plus petites et plus grandes lignes de mur 
+	5. raycasting en c avec un petit chat orange
+*/

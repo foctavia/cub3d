@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 12:34:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 15:46:42 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_mlx
 	void	*window;
 	int		width;
 	int		height;
+	int		elem_size;
+	t_img	*minimap;
 }				t_mlx;
 
 typedef struct s_game 
@@ -89,7 +91,6 @@ typedef struct s_game
 	char		**file;
 	t_map		*map;
 	t_mlx		*mlx;
-	t_img		*img;
 }				t_game;
 
 #endif

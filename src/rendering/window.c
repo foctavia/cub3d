@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 11:13:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 16:48:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	close_window(t_game *game)
 	if (game && game->mlx && game->mlx->mlx)
 	{
 		mlx_destroy_display(game->mlx->mlx);
-		free(game->mlx->mlx);	
+		free(game->mlx->mlx);
 	}
 	ft_clean(game);
 	exit (EXIT_SUCCESS);
 }
 
-void	assign_win_size(t_game *game)
+void	assign_mlx_size(t_game *game)
 {
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 	float	ratio;
 
 	mlx_get_screen_size(game->mlx->mlx, &width, &height);
@@ -46,4 +46,8 @@ void	assign_win_size(t_game *game)
 		ratio = (float)game->map->width / game->map->height;
 		game->mlx->width = ratio * game->mlx->height;
 	}
+	if (game->map->height > game->map->width)
+		game->mlx->elem_size = game->mlx->height / game->map->height;
+	else
+		game->mlx->elem_size = game->mlx->width / game->map->width;
 }

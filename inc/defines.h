@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/12 18:57:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:21:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)
+
+// Hex_color
+
+# define HEX_BLACK 0x000000
+# define HEX_WHITE 0xFFFFFF
+# define HEX_RED 0xFF0000
+# define HEX_GREEN 0x00FF00 
 
 // Errors
 # define ERR_ARGS_COUNT -1
