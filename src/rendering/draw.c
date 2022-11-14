@@ -6,13 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/12 19:17:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 11:08:14 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 // void	bresenham(t_game *game, t_img *img, float x1, float y1, float x2, float y2, int color)
 // {

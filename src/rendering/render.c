@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/12 19:17:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 11:28:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,12 @@
 	5. raycasting en c avec un petit chat orange
 */
 
-int	close_mlx(t_game *game)
-{
-	if (game && game->mlx && game->mlx->mlx)
-		mlx_loop_end(game->mlx->mlx);
-	if (game && game->mlx && game->mlx->window)
-		mlx_destroy_window(game->mlx->mlx, game->mlx->window);
-	if (game && game->mlx && game->mlx->mlx)
-	{
-		mlx_destroy_display(game->mlx->mlx);
-		free(game->mlx->mlx);	
-	}
-	ft_clean(game);
-	exit (EXIT_SUCCESS);
-}
-
-void	assign_win_size(t_game *game)
-{
-	int	width;
-	int	height;
-	float	ratio;
-
-	mlx_get_screen_size(game->mlx->mlx, &width, &height);
-	if (game->map->width > game->map->height)
-	{
-		game->mlx->width = width * 0.8;
-		ratio = (float)game->map->height / game->map->width;
-		game->mlx->height = ratio * game->mlx->width;
-	}
-	else
-	{
-		game->mlx->height = height * 0.8;
-		ratio = (float)game->map->width / game->map->height;
-		game->mlx->width = ratio * game->mlx->height;
-	}
-}
-
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_game *game, t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x > game->mlx->width || y > game->mlx->height)
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -67,17 +33,20 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 int draw_square(t_game *game, t_square square, t_img *img)
 {
 	int	i;
-	int j;
+	int	j;
 
 	if (game->mlx->window == NULL)
 		return (1);
-	i = square.y;
-	while (i < square.y * square.side)
+	i = square.x;
+	while (i < square.x + square.side)
 	{
-		j = square.x;
-		while (j < square.x * square.side)
-			my_mlx_pixel_put(img, j++, i, square.color);
-		++i;
+		j = square.y;
+		while (j < square.y + square.side)
+		{
+			my_mlx_pixel_put(game, img, i, j, square.color);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
@@ -98,8 +67,8 @@ void	render_map(t_game *game, t_map *map, t_img *img)
 		x = 0;
 		while (x < map->width)
 		{
-			square.x = x;
-			square.y = y;
+			square.x = x * square.side;
+			square.y = y * square.side;
 			if (map->content[y][x] == GROUND)
 				square.color = 0x000000;
 			else if (map->content[y][x] == WALL)
@@ -129,6 +98,6 @@ void	ft_play(t_game *game)
 	game->img = &img;
 	render_map(game, game->map, game->img);							
 	mlx_put_image_to_window(game->mlx->mlx, game->mlx->window, game->img->img, 0, 0);
-	mlx_hook(game->mlx->window, 33, 1L << 2, &close_mlx, game);
+	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
 	mlx_loop(game->mlx->mlx);
 }
