@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/12 19:08:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 11:55:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ typedef struct s_map
 	t_checker	*checker;
 }				t_map;
 
-typedef struct	s_square
+typedef struct	s_elem
 {
 	int	x;
 	int	y;
 	int	side;
 	int	color;
-}				t_square;
+}				t_elem;
 
 typedef struct s_mlx
 {

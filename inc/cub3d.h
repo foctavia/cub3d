@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 11:14:14 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:08:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <math.h>
 	
 /*
 ** UTILS

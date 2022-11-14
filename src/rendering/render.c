@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 11:28:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:14:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ void	my_mlx_pixel_put(t_game *game, t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int draw_square(t_game *game, t_square square, t_img *img)
+int draw_square(t_game *game, t_elem elem, t_img *img)
 {
 	int	i;
 	int	j;
 
 	if (game->mlx->window == NULL)
 		return (1);
-	i = square.x;
-	while (i < square.x + square.side)
+	i = elem.x;
+	while (i < elem.x + elem.side)
 	{
-		j = square.y;
-		while (j < square.y + square.side)
+		j = elem.y;
+		while (j < elem.y + elem.side)
 		{
-			my_mlx_pixel_put(game, img, i, j, square.color);
+			my_mlx_pixel_put(game, img, i, j, elem.color);
 			j++;
 		}
 		i++;
@@ -51,29 +51,52 @@ int draw_square(t_game *game, t_square square, t_img *img)
 	return (0);
 }
 
+int	draw_player(t_game *game, t_elem elem, t_img *img)
+{
+	int		radius;
+	double	i;
+	double	x;
+	double	y;
+	
+	radius = elem.side / 2;
+	elem.color = 0xFF0000;
+	i = 0;
+	while (i < 360)
+	{
+		x = radius * 0.6 * cos(i * M_PI / 180);
+        y = radius * 0.6 * sin(i * M_PI / 180);
+		my_mlx_pixel_put(game, img, elem.x + radius + x, elem.y + radius + y, elem.color);
+		i += 0.1;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	render_map(t_game *game, t_map *map, t_img *img)
 {
 	int	x;
 	int	y;
-	t_square	square;
+	t_elem	elem;
 
 	y = 0;
 	if (game->map->height > game->map->width)
-		square.side = game->mlx->height / game->map->height;
+		elem.side = game->mlx->height / game->map->height;
 	else
-		square.side = game->mlx->width / game->map->width;
+		elem.side = game->mlx->width / game->map->width;
 	while (y < map->height)
 	{
 		x = 0;
 		while (x < map->width)
 		{
-			square.x = x * square.side;
-			square.y = y * square.side;
+			elem.x = x * elem.side;
+			elem.y = y * elem.side;
 			if (map->content[y][x] == GROUND)
-				square.color = 0x000000;
+				elem.color = 0x000000;
 			else if (map->content[y][x] == WALL)
-				square.color = 0xFFFFFF;
-			draw_square(game, square, img);
+				elem.color = 0xFFFFFF;
+			else if (is_player(map->content[y][x]))
+				draw_player(game, elem, img);
+			if (map->content[y][x] != ' ' && !is_player(map->content[y][x]))
+				draw_square(game, elem, img);
 			x++;
 		}
 		y++;
