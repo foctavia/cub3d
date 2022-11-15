@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 17:06:28 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:42:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,38 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	return (FALSE);
 }
 
-int	move(t_game *game, t_player *player, int dir)
+void	change_direction(t_player *player, int key)
+{
+	if (key == KEY_RIGHT || key == KEY_D)
+	{
+		printf("in change direction with key right\n");
+		if (player->dir == 360)
+			player->dir = 0;
+		player->dir += 90;
+	}
+	else if (key == KEY_LEFT || key == KEY_A)
+	{
+		printf("in change direction with key left\n");
+		if (player->dir == 0)
+			player->dir = 360;
+		player->dir -= 90;
+	}
+	printf("player direction = %d\n", player->dir);
+}
+
+int	move(t_game *game, t_player *player)
 {
 	t_img	img;
 
-	if (dir == RIGHT && !is_wall(game, player->pos.x + 5, player->pos.y))
+	printf("in move with player direction = %d\n", player->dir);
+	if (player->dir == RIGHT && !is_wall(game, player->pos.x + 5, player->pos.y))
 		player->pos.x += 5;
-	else if (dir == LEFT && !is_wall(game, player->pos.x - 5, player->pos.y))
+	else if (player->dir == LEFT && !is_wall(game, player->pos.x - 5, player->pos.y))
 		player->pos.x -= 5;
-	else if (dir == UP && !is_wall(game, player->pos.x, player->pos.y - 5))
-		player->pos.y -= 5;
-	else if (dir == DOWN && !is_wall(game, player->pos.x, player->pos.y + 5))
+	else if (player->dir == DOWN && !is_wall(game, player->pos.x, player->pos.y + 5))
 		player->pos.y += 5;
+	else if (player->dir == UP && !is_wall(game, player->pos.x, player->pos.y - 5))
+		player->pos.y -= 5;
 	else
 		return (EXIT_FAILURE);
 	img.img = mlx_new_image(game->mlx->mlx, \
@@ -74,13 +94,13 @@ int	move(t_game *game, t_player *player, int dir)
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		return (move(game, game->player, RIGHT));
+		change_direction(game->player, keycode);
 	else if (keycode == KEY_LEFT || keycode == KEY_A)
-		return (move(game, game->player, LEFT));
+		change_direction(game->player, keycode);
 	else if (keycode == KEY_UP || keycode == KEY_W)
-		return (move(game, game->player, UP));
+		return (move(game, game->player));
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
-		return (move(game, game->player, DOWN));
+		return (move(game, game->player));
 	else if (keycode == KEY_ESC)
 		return (close_window(game));
 	return (EXIT_SUCCESS);

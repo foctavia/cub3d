@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 17:00:40 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:38:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@
 # define EAST_DIR 69
 
 // Direction
-# define RIGHT 12
-# define LEFT 13
-# define UP 14
-# define DOWN 15
+# define UP 0
+# define RIGHT 90
+# define DOWN 180
+# define LEFT 270
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)

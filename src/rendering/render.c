@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 14:57:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 18:38:55 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_render(t_game *game)
 {
 	t_img	img;
 
+	printf("game->player->dir = %d\n", game->player->dir);
 	game->mlx->mlx = mlx_init();
 	if (!game->mlx->mlx)
 		ft_error_mlx(ERR_MLX_INIT, game);
