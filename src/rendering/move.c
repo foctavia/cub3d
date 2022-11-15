@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 16:12:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:06:28 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	move(t_game *game, t_player *player, int dir)
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		return (move(game, game->player, RIGHT));
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT || keycode == KEY_A)
 		return (move(game, game->player, LEFT));
-	else if (keycode == KEY_UP)
+	else if (keycode == KEY_UP || keycode == KEY_W)
 		return (move(game, game->player, UP));
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN || keycode == KEY_S)
 		return (move(game, game->player, DOWN));
 	else if (keycode == KEY_ESC)
 		return (close_window(game));
