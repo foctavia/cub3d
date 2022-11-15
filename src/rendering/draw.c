@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/14 16:49:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:28:14 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_pixel(t_game *game, t_img *img, t_coord coord, int color)
 	if (coord.x > game->mlx->width || coord.y > game->mlx->height)
 		return ;
 	dst = img->addr + \
-		(coord.y * img->line_length + coord.x * (img->bits_per_pixel / 8));
+		((int)coord.y * img->line_length + (int)coord.x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -94,7 +94,7 @@ void	draw_square(t_game *game, t_elem elem, t_img *img)
 	}
 }
 
-void	draw_player(t_game *game, t_elem elem, t_img *img)
+void	put_player(t_game *game, t_elem elem, t_img *img)
 {
 	t_coord	center;
 	int		radius;
@@ -103,14 +103,14 @@ void	draw_player(t_game *game, t_elem elem, t_img *img)
 	double	y;
 
 	radius = game->mlx->elem_size / 2;
-	game->map->player.x = elem.x + radius;
-	game->map->player.y = elem.y + radius;
+	game->player->pos.x = elem.x + radius;
+	game->player->pos.y = elem.y + radius;
 	elem.color = HEX_RED;
 	i = 0;
 	while (i < 360)
 	{
-		x = radius * 0.3 * cos(i * M_PI / 180);
-		y = radius * 0.3 * sin(i * M_PI / 180);
+		x = radius * 0.1 * cos(i * M_PI / 180);
+		y = radius * 0.1 * sin(i * M_PI / 180);
 		center.x = elem.x + radius + x;
 		center.y = elem.y + radius + y;
 		put_pixel(game, img, center, elem.color);

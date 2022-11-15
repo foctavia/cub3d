@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:24:18 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:19:55 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,21 @@ static void	init_mlx(t_game *game)
 	ft_memset(game->mlx, 0, sizeof(t_mlx));
 }
 
+void	init_player(t_game *game)
+{
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	ft_memset(game->player, 0, sizeof(t_player));
+}
+
 static void	init_game(t_game *game, char *path)
 {
 	ft_memset(game, 0, sizeof(t_game));
 	game->path = path;
 	init_map(game);
 	init_mlx(game);
+	init_player(game);
 }
 
 static void	check_arg(t_game *game, char **argv)

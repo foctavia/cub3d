@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 17:54:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:57:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@
 
 # define GROUND 48
 # define WALL 49
+# define NORTH_DIR 78
+# define SOUTH_DIR 83
+# define WEST_DIR 87
+# define EAST_DIR 69
+
+// Direction
+# define RIGHT 12
+# define LEFT 13
+# define UP 14
+# define DOWN 15
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)
@@ -48,6 +58,7 @@
 # define KEY_LEFT 97
 # define KEY_UP 119
 # define KEY_DOWN 115
+# define KEY_ESC 65307
 
 // Errors
 # define ERR_ARGS_COUNT -1

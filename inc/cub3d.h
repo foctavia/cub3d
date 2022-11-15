@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 15:53:42 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:55:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ void	check_walls(t_game *game, char **content);
 /*
 ** RENDERING
 */
+int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
 void	assign_mlx_size(t_game *game);
 void	ft_render(t_game *game);
 void	draw_line(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
-void	draw_player(t_game *game, t_elem elem, t_img *img);
+void	put_player(t_game *game, t_elem elem, t_img *img);
+void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player);
+void	render_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
 
 #endif

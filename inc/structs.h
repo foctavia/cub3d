@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/14 18:06:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:12:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,11 @@ typedef struct s_checker
 	int			c;
 }				t_checker;
 
-typedef struct s_player
-{
-	t_coord		player;
-	t_elem		elem;
-}				t_player;
 
 typedef struct	s_coord
 {
-	int	x;
-	int	y;	
+	float	x;
+	float	y;	
 }				t_coord;
 
 typedef struct s_map
@@ -89,6 +84,12 @@ typedef struct s_mlx
 	t_img	*minimap;
 }				t_mlx;
 
+typedef struct s_player
+{
+	int			dir;
+	t_coord		pos;
+}				t_player;
+
 typedef struct s_game 
 {
 	int			err;
@@ -96,6 +97,8 @@ typedef struct s_game
 	char		**file;
 	t_map		*map;
 	t_mlx		*mlx;
+	t_player	*player;
 }				t_game;
+
 
 #endif
