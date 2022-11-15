@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 14:59:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:52:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,37 @@ void	render_player(t_game *game, t_img *img, t_coord dest, int color)
 	}
 }
 
+int	is_wall(t_game *game, int dest_x, int dest_y)
+{
+	int	square_x;
+	int	square_y;
+
+	square_y = dest_y * game->map->height / game->mlx->height;
+	square_x = dest_x * game->map->width / game->mlx->width;
+	if (game->map->content[square_y][square_x] == WALL)
+		return (TRUE);
+	return (FALSE);
+}
+
 int	move(t_game *game, t_player *player, int dir)
 {
 	t_img	img;
 
+	if (dir == RIGHT && !is_wall(game, player->pos.x + 5, player->pos.y))
+		player->pos.x += 5;
+	else if (dir == LEFT && !is_wall(game, player->pos.x - 5, player->pos.y))
+		player->pos.x -= 5;
+	else if (dir == UP && !is_wall(game, player->pos.x, player->pos.y - 5))
+		player->pos.y -= 5;
+	else if (dir == DOWN && !is_wall(game, player->pos.x, player->pos.y + 5))
+		player->pos.y += 5;
+	else
+		return (EXIT_FAILURE);
 	img.img = mlx_new_image(game->mlx->mlx, \
 		game->mlx->width, game->mlx->height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 		&img.line_length, &img.endian);
 	game->mlx->minimap = &img;
-	if (dir == RIGHT)
-		player->pos.x += 5;
-	else if (dir == LEFT)
-		player->pos.x -= 5;
-	else if (dir == UP)
-		player->pos.y -= 5;
-	else if (dir == DOWN)
-		player->pos.y += 5;
 	render_minimap(game, game->map, &img, player);
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->minimap->img, 0, 0);
@@ -60,27 +74,14 @@ int	move(t_game *game, t_player *player, int dir)
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_RIGHT)
-	{
-		printf("pressed right key\n");
 		return (move(game, game->player, RIGHT));
-	}
 	else if (keycode == KEY_LEFT)
-	{
-		printf("pressed left key\n");
 		return (move(game, game->player, LEFT));
-	}
 	else if (keycode == KEY_UP)
-	{
-		printf("pressed up key\n");
 		return (move(game, game->player, UP));
-	}
 	else if (keycode == KEY_DOWN)
-	{
-		printf("pressed down key\n");
 		return (move(game, game->player, DOWN));
-	}
 	else if (keycode == KEY_ESC)
 		return (close_window(game));
-	
-	return (0);
+	return (EXIT_SUCCESS);
 }
