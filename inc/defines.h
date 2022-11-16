@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:53:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:38:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,39 @@
 # define FLOOR 104
 # define CEILING 105
 
+# define GROUND 48
+# define WALL 49
+# define NORTH_DIR 78
+# define SOUTH_DIR 83
+# define WEST_DIR 87
+# define EAST_DIR 69
+
+// Direction
+# define UP 0
+# define RIGHT 90
+# define DOWN 180
+# define LEFT 270
+
+# define BIGGER(a, b) (a > b ? a : b)
+# define ABS(a) ((a < 0) ? -a : a)
+
+// Hex_color
+# define HEX_BLACK 0x000000
+# define HEX_WHITE 0xFFFFFF
+# define HEX_RED 0xFF0000
+# define HEX_GREEN 0x00FF00
+
+// Key codes
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_RIGHT 65363
+# define KEY_LEFT 65361
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_A 97
+# define KEY_ESC 65307
+
 // Errors
 # define ERR_ARGS_COUNT -1
 # define ERR_MAP_WRONGID -2
@@ -43,5 +76,7 @@
 # define ERR_MAP_PLAYER -10
 # define ERR_FORBIDDEN_CHAR -11
 # define ERR_RGB -12
+# define ERR_MLX_INIT -20
+# define ERR_MLX_WIN -21
 
 #endif

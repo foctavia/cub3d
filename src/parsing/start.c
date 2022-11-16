@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 09:01:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:37:16 by owalsh           ###   ########.fr       */
+/*   Created: 2022/11/16 17:31:57 by owalsh            #+#    #+#             */
+/*   Updated: 2022/11/16 17:32:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+static void	check_arg(t_game *game, char **argv)
 {
-	t_game	game;
+	if (!argv || !argv[0] || !argv[1])
+		exit(EXIT_FAILURE);
+	if (file_extension(argv[1], ".cub"))
+		ft_error(ERR_WRONG_FILE_EXTENSION, 0, argv[1], game);
+	if (open_file(argv[1]) == -1)
+		ft_error(0, errno, argv[1], game);
+}
 
-	if (argc != 2)
-		ft_error(ERR_ARGS_COUNT, 0, NULL, &game);
-	ft_start(argv, &game);
-	ft_mlx(&game);
-	ft_clean(&game);
+int	ft_start(char **argv, t_game *game)
+{
+	check_arg(game, argv);
+	init_game(game, argv[1]);
+	if (ft_parse(game))
+		exit(EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

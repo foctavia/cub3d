@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:29:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:53:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:12:25 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ int	ft_error(int code, int err, char *arg, t_game *game)
 		write(STDERR_FILENO, "\n", 1);
 		exit (err);
 	}
+	ft_clean(game);
+	exit(EXIT_FAILURE);
+}
+
+int	ft_error_mlx(int code, t_game *game)
+{
+	write(STDERR_FILENO, "Error\n", 6);
+	if (code == ERR_MLX_INIT)
+		write(STDERR_FILENO, "failed to initialize mlx\n", 25);
+	else if (code == ERR_MLX_WIN)
+		write(STDERR_FILENO, "failed to open mlx window\n", 26);
 	ft_clean(game);
 	exit(EXIT_FAILURE);
 }

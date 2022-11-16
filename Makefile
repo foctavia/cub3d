@@ -16,15 +16,17 @@ endif
 NAME 		= cub3d
 MINILIBX 	= $(INCDIR)minilibx-linux/libmlx_Linux.a
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 OBJDIR 		= objs/
 SRCDIR		= src/
 INCDIR		= inc/
 
 SRC			=	cub3d.c \
-				utils/error.c utils/gnl.c utils/is.c utils/mem.c utils/str.c utils/file.c utils/clean.c utils/display.c \
-				parsing/parsing.c parsing/init.c parsing/identifier.c parsing/content.c parsing/textures.c parsing/colors.c parsing/copy.c parsing/checker.c parsing/walls.c
+				parsing/start.c parsing/parsing.c parsing/init.c parsing/identifier.c parsing/content.c parsing/textures.c parsing/colors.c parsing/copy.c parsing/checker.c parsing/walls.c \
+				rendering/render.c rendering/draw.c rendering/window.c rendering/move.c rendering/player.c rendering/mlx.c \
+				raycasting/raycast.c \
+				utils/error.c utils/gnl.c utils/is.c utils/mem.c utils/str.c utils/file.c utils/clean.c utils/display.c
 
 OBJ 		= $(addprefix ${OBJDIR}, ${SRC:.c=.o})
 INC 		= -I./${INCDIR} -I./minilibx-linux

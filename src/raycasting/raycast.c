@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 09:01:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:37:16 by owalsh           ###   ########.fr       */
+/*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
+/*   Updated: 2022/11/16 17:43:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	ft_raycast(t_game *game, t_player *player)
 {
-	t_game	game;
-
-	if (argc != 2)
-		ft_error(ERR_ARGS_COUNT, 0, NULL, &game);
-	ft_start(argv, &game);
-	ft_mlx(&game);
-	ft_clean(&game);
-	return (EXIT_SUCCESS);
+	(void)player;
+	(void)game;
 }
