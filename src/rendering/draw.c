@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/15 13:28:14 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/16 17:42:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	put_pixel(t_game *game, t_img *img, t_coord coord, int color)
 
 	if (coord.x > game->mlx->width || coord.y > game->mlx->height)
 		return ;
-	dst = img->addr + \
-		((int)coord.y * img->line_length + (int)coord.x * (img->bits_per_pixel / 8));
+	dst = img->addr + ((int)coord.y * img->line_length \
+		+ (int)coord.x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -46,7 +46,7 @@ void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color)
 	}
 }
 
-void	draw_line(t_game *game)
+void	draw_lines(t_game *game)
 {
 	t_coord	coord1;
 	t_coord	coord2;

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 14:55:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/16 17:42:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	display_map(t_map *map);
 /*
 ** PARSING
 */
+int		ft_start(char **argv, t_game *game);
 int		ft_parse_init(char **argv, t_game *game);
 int		ft_parse(t_game *game);
 int		check_identifier(char *str);
@@ -55,6 +56,7 @@ int		add_texture(int id, char *line, int *i, t_game *game);
 int		get_map_content(int fd, t_game *game);
 int		is_player(char c);
 char	**copy_file(t_game *game);
+void	init_game(t_game *game, char *path);
 void	get_identifiers(t_game *game, char **tab, int *line);
 void	parse_map(t_game *game, char **tab, int *line);
 void	copy_map(t_game *game, char **file, int *line_index);
@@ -65,13 +67,20 @@ void	check_walls(t_game *game, char **content);
 */
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
+int		assign_player_pos(t_game *game, char c);
 void	assign_mlx_size(t_game *game);
 void	ft_render(t_game *game);
-void	draw_line(t_game *game);
+void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
 void	put_player(t_game *game, t_elem elem, t_img *img);
 void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player);
 void	render_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
+void	change_player_dir(t_player *player, int key);
+void	ft_mlx(t_game *game);
+/*
+** RAYCASTING
+*/
+void	ft_raycast(t_game *game, t_player *player);
 
 #endif
