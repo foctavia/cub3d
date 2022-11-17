@@ -3,37 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:43:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:40:41 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_player(t_game *game, t_img *img, t_coord dest, int color)
+void	render_player(t_game *game, t_map *map, t_img *img, t_player *player)
 {
-	t_coord	center;
-	int		radius;
-	double	i;
-	double	x;
-	double	y;
+	int		x;
+	int		y;
+	t_elem	elem;
 
-	radius = game->mlx->elem_size / 2;
-	i = 0;
-	while (i < 360)
+	y = 0;
+	while (y < map->height)
 	{
-		x = radius * 0.1 * cos(i * M_PI / 180);
-		y = radius * 0.1 * sin(i * M_PI / 180);
-		center.x = dest.x + x;
-		center.y = dest.y + y;
-		put_pixel(game, img, center, color);
-		i += 0.01;
+		x = 0;
+		while (x < map->width)
+		{
+			elem.x = x * game->mlx->elem_size;
+			elem.y = y * game->mlx->elem_size;
+			if (is_player(map->content[y][x]) && player && \
+				player->pos.x == 0 && player->pos.y == 0)
+				assign_player_pos(game, elem, map->content[y][x]);
+			if (is_player(map->content[y][x]) && player)
+				draw_player(game, img, player->pos, HEX_RED);
+			x++;
+		}
+		y++;
 	}
 }
 
-void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player)
+void	render_minimap(t_game *game, t_map *map, t_img *img)
 {
 	int		x;
 	int		y;
@@ -51,11 +55,6 @@ void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player)
 				elem.color = HEX_BLACK;
 			else if (map->content[y][x] == WALL)
 				elem.color = HEX_WHITE;
-			else if (!player && is_player(map->content[y][x])
-				&& assign_player_pos(game, map->content[y][x]))
-				put_player(game, elem, img);
-			else if (player)
-				render_player(game, game->mlx->minimap, player->pos, HEX_RED);
 			if (map->content[y][x] != ' ' && !is_player(map->content[y][x]))
 				draw_square(game, elem, img);
 			x++;
@@ -63,4 +62,13 @@ void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player)
 		y++;
 	}
 	draw_lines(game);
+}
+
+int	ft_render(t_game *game)
+{
+	render_minimap(game, game->map, game->mlx->minimap);
+	render_player(game, game->map, game->mlx->minimap, game->player);
+	mlx_put_image_to_window(game->mlx->mlx, \
+		game->mlx->window, game->mlx->minimap->img, 0, 0);
+	return (EXIT_SUCCESS);
 }
