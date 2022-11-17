@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 16:35:05 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:37:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ int	change_player_pos(t_game *game, t_player *player, int key)
 	ft_memset(dest, 0, sizeof(t_coord));
 	get_dest_coord(player, key, dest);
 	if (is_wall(game, dest->x, dest->y))
+	{
+		free(dest);
 		return (EXIT_FAILURE);
+	}
+	draw_player(game, game->mlx->minimap, player->pos, HEX_BLACK);
 	player->pos.x = dest->x;
 	player->pos.y = dest->y;
 	free(dest);
@@ -61,18 +65,8 @@ int	change_player_pos(t_game *game, t_player *player, int key)
 
 int	move_player(t_game *game, t_player *player, int key)
 {
-	t_img	img;
-
 	change_player_pos(game, player, key);
-	img.img = mlx_new_image(game->mlx->mlx, \
-		game->mlx->width, game->mlx->height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
-		&img.line_length, &img.endian);
-	game->mlx->minimap = &img;
-	render_minimap(game, game->map, &img, player);
-	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->minimap->img, 0, 0);
-	mlx_destroy_image(game->mlx->mlx, game->mlx->minimap->img);
+	ft_render(game);
 	return (EXIT_SUCCESS);
 }
 

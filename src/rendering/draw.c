@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/16 17:42:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:38:21 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	draw_square(t_game *game, t_elem elem, t_img *img)
 	}
 }
 
-void	put_player(t_game *game, t_elem elem, t_img *img)
+void	draw_player(t_game *game, t_img *img, t_coord dest, int color)
 {
 	t_coord	center;
 	int		radius;
@@ -103,17 +103,14 @@ void	put_player(t_game *game, t_elem elem, t_img *img)
 	double	y;
 
 	radius = game->mlx->elem_size / 2;
-	game->player->pos.x = elem.x + radius;
-	game->player->pos.y = elem.y + radius;
-	elem.color = HEX_RED;
 	i = 0;
 	while (i < 360)
 	{
 		x = radius * 0.1 * cos(i * M_PI / 180);
 		y = radius * 0.1 * sin(i * M_PI / 180);
-		center.x = elem.x + radius + x;
-		center.y = elem.y + radius + y;
-		put_pixel(game, img, center, elem.color);
+		center.x = dest.x + x;
+		center.y = dest.y + y;
+		put_pixel(game, img, center, color);
 		i += 0.01;
 	}
 }

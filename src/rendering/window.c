@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 16:11:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:30:35 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	close_window(t_game *game)
 {
+	if (game->mlx->minimap)
+		mlx_destroy_image(game->mlx->mlx, game->mlx->minimap->img);
 	if (game && game->mlx && game->mlx->mlx)
 		mlx_loop_end(game->mlx->mlx);
 	if (game && game->mlx && game->mlx->window)

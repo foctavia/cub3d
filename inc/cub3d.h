@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:42:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:40:03 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ void	check_walls(t_game *game, char **content);
 */
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
-int		assign_player_pos(t_game *game, char c);
+int		assign_player_pos(t_game *game, t_elem elem, char c);
+int		ft_render(t_game *game);
 void	assign_mlx_size(t_game *game);
-void	ft_render(t_game *game);
 void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
-void	put_player(t_game *game, t_elem elem, t_img *img);
-void	render_minimap(t_game *game, t_map *map, t_img *img, t_player *player);
-void	render_player(t_game *game, t_img *img, t_coord dest, int color);
+void	draw_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
 void	change_player_dir(t_player *player, int key);
 void	ft_mlx(t_game *game);

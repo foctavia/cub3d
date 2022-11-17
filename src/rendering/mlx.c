@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:41:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:20:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	ft_mlx(t_game *game)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 		&img.line_length, &img.endian);
 	game->mlx->minimap = &img;
-	render_minimap(game, game->map, game->mlx->minimap, NULL);
-	ft_raycast(game, game->player);
-	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->minimap->img, 0, 0);
+	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_hook, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
 	mlx_loop(game->mlx->mlx);
