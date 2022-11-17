@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 11:40:03 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:51:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	check_walls(t_game *game, char **content);
 /*
 ** RENDERING
 */
+int		is_wall(t_game *game, float dest_x, float dest_y);
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
 int		assign_player_pos(t_game *game, t_elem elem, char c);
@@ -75,10 +76,11 @@ void	draw_square(t_game *game, t_elem elem, t_img *img);
 void	draw_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
 void	change_player_dir(t_player *player, int key);
+void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	ft_mlx(t_game *game);
 /*
 ** RAYCASTING
 */
-void	ft_raycast(t_game *game, t_player *player);
+void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player);
 
 #endif

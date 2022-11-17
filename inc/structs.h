@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 16:13:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:57:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,19 @@ typedef struct s_mlx
 	t_img	*minimap;
 }				t_mlx;
 
+typedef struct s_camera
+{
+	int	width;
+	int	height;
+	int	fov;
+	int	distance;
+	t_coord	center;
+}				t_camera;
+
 typedef struct s_player
 {
 	int			dir;
+	float		angle;
 	t_coord		pos;
 }				t_player;
 
@@ -98,6 +108,7 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_camera	*camera;
 }				t_game;
 
 

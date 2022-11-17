@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 17:38:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:47:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define HEX_WHITE 0xFFFFFF
 # define HEX_RED 0xFF0000
 # define HEX_GREEN 0x00FF00
+# define HEX_YELLOW 0xFFFF00
+# define HEX_BLUE 0x00FFFF
 
 // Key codes
 # define KEY_UP 65362
