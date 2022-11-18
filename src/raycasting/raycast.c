@@ -3,50 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 19:05:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:25:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_camera(t_game *game)
-{
-	game->camera = malloc(sizeof(t_camera));
-	if (!game->camera)
-		ft_error(ERR_MALLOC, 0, NULL, game);
-	game->camera->width = 320;
-	game->camera->height = 200;
-	game->camera->fov = 60;
-	game->camera->center.x = game->camera->width / 2;
-	game->camera->center.y = game->camera->height / 2;
-	game->camera->distance = game->camera->center.x / tan(30);
-}
+// t_coord	get_grid_coord(t_game *game, t_coord *pixel)
+// {
+// 	t_coord	grid;
 
-void	get_first_intersect(t_game *game, t_player *player, t_coord pos, t_coord *first, int i)
-{
-	if (player->dir == UP)
-		first->y = floor(pos.y / game->mlx->elem_size) * game->mlx->elem_size - 1;
-	else if (player->dir == DOWN) 
-		first->y = floor(pos.y / game->mlx->elem_size) * game->mlx->elem_size + game->mlx->elem_size;
-	first->x = pos.x + (pos.y - first->y) / tan(game->camera->fov) + i ;
-}
+// 	grid.x = pixel->x * game->map->width / game->mlx->width;
+// 	grid.y = pixel->y * game->map->height / game->mlx->height;
+// 	return (grid);
+// }
 
-t_coord	get_grid_coord(t_game *game, t_coord *pixel)
+int	get_grid_coord(t_game *game, int pixel, int axis)
 {
-	t_coord	grid;
+	int	grid;
 
-	grid.x = pixel->x * game->map->width / game->mlx->width;
-	grid.y = pixel->y * game->map->height / game->mlx->height;
+	grid = 0;
+	if (axis == 'x')
+		grid = pixel * game->map->width / game->mlx->width;
+	else if (axis == 'y')
+		grid = pixel * game->map->height / game->mlx->height;
 	return (grid);
-}
-
-void	get_intersect(t_coord *first, t_coord A, t_coord *intersect)
-{
-	intersect->x = first->x + A.x;
-	intersect->y = first->y + A.y;	
 }
 
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
@@ -68,39 +52,32 @@ void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
 	}
 }
 
-void	draw_ray(t_game *game, t_player *player, int i)
+float	get_distance(t_coord coord1, t_coord coord2, float angle)
 {
-	t_coord	intersect;
-	t_coord	first;
-	t_coord	A;
+	float	res;
 
-	get_first_intersect(game, player, player->pos, &first, i);
-	if (is_wall(game, first.x, first.y))
-	{
-		bresenham_pixel(game, player->pos, first, HEX_BLUE);
-		return ;
-	}
-	if (player->dir == UP)
-		A.y = -1 * game->mlx->elem_size;
-	else
-		A.y = game->mlx->elem_size;
-	A.x = game->mlx->elem_size / tan(game->camera->fov);
-	get_intersect(&first, A, &intersect);
-	while(!is_wall(game, intersect.x, intersect.y))
-		get_intersect(&intersect, A, &intersect);
-	bresenham_pixel(game, player->pos, intersect, HEX_YELLOW);
+	(void)angle;
+	res = sqrt(((coord2.x - coord1.x) * (coord2.x - coord1.x)) + ((coord2.y - coord1.y) * (coord2.y - coord1.y)));
+	return (res);
 }
 
 void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
 {
-	int	i;
-
+	float	i;
+	float	hor_dist;
+	float	ver_dist;
+	t_coord	hor_ray;
+	t_coord	ver_ray;
+	
 	(void)mlx;
-	init_camera(game);
 	i = 0;
-	// while (i < game->camera->fov)
-	// {
-		draw_ray(game, player, i);
-	// 	i += game->camera->fov / game->camera->width;
-	// }
+	hor_ray = get_horizontal_ray(game, player, i);
+	ver_ray = get_vertical_ray(game, player, i);
+	hor_dist = get_distance(player->pos, hor_ray, player->dir);
+	ver_dist = get_distance(player->pos, ver_ray, player->dir);
+	// printf("hor_dist : %f && ver_dist : %f\n", hor_dist, ver_dist);
+	if ((hor_dist && hor_dist < ver_dist) || !ver_dist)
+		bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
+	else if ((ver_dist && ver_dist < hor_dist) || !hor_dist)
+		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
 }

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 11:30:53 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:55:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_clean(t_game *game)
 			free_map(game->map);
 		if (game->mlx)
 			free(game->mlx);
+		if (game->camera)
+			free(game->camera);
 		if (game->file)
 			free_tab(game->file);
 	}

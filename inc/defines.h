@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 18:47:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 15:59:53 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@
 
 # define GROUND 48
 # define WALL 49
-# define NORTH_DIR 78
-# define SOUTH_DIR 83
-# define WEST_DIR 87
-# define EAST_DIR 69
+# define NORTH_DIR 'N'
+# define SOUTH_DIR 'S'
+# define WEST_DIR 'W'
+# define EAST_DIR 'E'
 
 // Direction
-# define UP 0
-# define RIGHT 90
-# define DOWN 180
-# define LEFT 270
+# define UP M_PI / 2
+# define RIGHT 0
+# define RIGHT_MIN 0
+# define RIGHT_MAX 2 * M_PI
+# define DOWN 3 * M_PI / 2
+# define LEFT M_PI
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)

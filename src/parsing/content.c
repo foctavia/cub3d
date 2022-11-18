@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   content.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:19:06 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/09 17:43:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:03:33 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_allowed_char(char c, t_game *game)
 	char	*allowed;
 
 	i = 0;
-	allowed = "10NWSO ";
+	allowed = "10NWSE ";
 	while (allowed && allowed[i])
 	{
 		if (allowed[i] == c)

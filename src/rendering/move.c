@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 18:00:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:08:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	float	square_x;
 	float	square_y;
 
-	square_y = dest_y * game->map->height / game->mlx->height;
-	square_x = dest_x * game->map->width / game->mlx->width;
-	if ((int)square_y >= game->map->height || (int)square_x >= game->map->width)
+	square_y = floor(dest_y * game->map->height / game->mlx->height);
+	square_x = floor(dest_x * game->map->width / game->mlx->width);
+	// printf("x : %f && y : %f\n", square_x, square_y);
+	if ((int)square_y < 0 || (int)square_x < 0 || \
+		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
 		return (FALSE);
-	if (game->map->content[(int)square_y][(int)square_x] == WALL)
+	if ((int)square_y > 0 && (int)square_x > 0 && \
+		(int)square_y <= game->map->height && (int)square_x <= game->map->width && \
+		game->map->content[(int)square_y][(int)square_x] == WALL)
 		return (TRUE);
 	return (FALSE);
 }

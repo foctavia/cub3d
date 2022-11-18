@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 17:51:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 15:48:21 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void	ft_mlx(t_game *game);
 /*
 ** RAYCASTING
 */
+int		get_grid_coord(t_game *game, int pixel, int axis);
 void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player);
+void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
+t_coord	get_horizontal_ray(t_game *game, t_player *player, float i);
+t_coord	get_vertical_ray(t_game *game, t_player *player, float i);
 
 #endif

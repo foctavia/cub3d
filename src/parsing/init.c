@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:33:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 15:55:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ static void	init_map(t_game *game)
 	ft_memset(game->map->checker, 0, sizeof(t_checker));
 }
 
+void	init_camera(t_game *game)
+{
+	game->camera = malloc(sizeof(t_camera));
+	if (!game->camera)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	game->camera->width = 320;
+	game->camera->height = 200;
+	game->camera->fov = 60;
+	game->camera->center.x = game->camera->width / 2;
+	game->camera->center.y = game->camera->height / 2;
+	game->camera->distance = game->camera->center.x / tan(30);
+}
+
 static void	init_mlx(t_game *game)
 {
 	game->mlx = malloc(sizeof(t_mlx));
@@ -59,4 +72,5 @@ void	init_game(t_game *game, char *path)
 	init_map(game);
 	init_mlx(game);
 	init_player(game);
+	init_camera(game);
 }
