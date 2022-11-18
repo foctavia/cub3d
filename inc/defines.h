@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 18:47:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:06:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@
 # define EAST_DIR 69
 
 // Direction
-# define UP 0
-# define RIGHT 90
-# define DOWN 180
-# define LEFT 270
+# define UP M_PI / 2
+# define RIGHT 0
+# define DOWN 3 * M_PI / 2
+# define LEFT M_PI
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)

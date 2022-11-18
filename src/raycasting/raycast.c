@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 19:05:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:09:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	init_camera(t_game *game)
 
 void	get_first_intersect(t_game *game, t_player *player, t_coord pos, t_coord *first, int i)
 {
+	(void)i;
 	if (player->dir == UP)
 		first->y = floor(pos.y / game->mlx->elem_size) * game->mlx->elem_size - 1;
 	else if (player->dir == DOWN) 
 		first->y = floor(pos.y / game->mlx->elem_size) * game->mlx->elem_size + game->mlx->elem_size;
-	first->x = pos.x + (pos.y - first->y) / tan(game->camera->fov) + i ;
+	first->x = pos.x + (pos.y - first->y) / tan(M_PI / 2);
 }
 
 t_coord	get_grid_coord(t_game *game, t_coord *pixel)
@@ -74,6 +75,7 @@ void	draw_ray(t_game *game, t_player *player, int i)
 	t_coord	first;
 	t_coord	A;
 
+	(void)i;
 	get_first_intersect(game, player, player->pos, &first, i);
 	if (is_wall(game, first.x, first.y))
 	{
@@ -84,7 +86,7 @@ void	draw_ray(t_game *game, t_player *player, int i)
 		A.y = -1 * game->mlx->elem_size;
 	else
 		A.y = game->mlx->elem_size;
-	A.x = game->mlx->elem_size / tan(game->camera->fov);
+	A.x = game->mlx->elem_size / tan(M_PI / 2);
 	get_intersect(&first, A, &intersect);
 	while(!is_wall(game, intersect.x, intersect.y))
 		get_intersect(&intersect, A, &intersect);
@@ -103,4 +105,6 @@ void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
 		draw_ray(game, player, i);
 	// 	i += game->camera->fov / game->camera->width;
 	// }
+	if (game->camera)
+		free(game->camera);
 }
