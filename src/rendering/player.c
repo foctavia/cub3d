@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 11:31:28 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:16:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	change_player_dir(t_player *player, int key)
 {
 	if (key == KEY_RIGHT || key == KEY_D)
 	{
-		if (player->dir == LEFT)
-			player->dir = UP;
+		if (player->dir == RIGHT)
+			player->dir = DOWN;
 		else
-			player->dir += 90;
+			player->dir -= M_PI / 2;
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		if (player->dir == UP)
-			player->dir = LEFT;
+		if (player->dir == DOWN)
+			player->dir = RIGHT;
 		else
-			player->dir -= 90;
+			player->dir += M_PI / 2;
 	}
 }
