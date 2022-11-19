@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 11:24:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/19 12:06:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ float	get_distance(t_coord coord1, t_coord coord2, float angle)
 	float	res;
 
 	(void)angle;
-	res = sqrt(((coord2.x - coord1.x) * (coord2.x - coord1.x)) + ((coord2.y - coord1.y) * (coord2.y - coord1.y)));
+	res = sqrt(((coord2.x - coord1.x) * (coord2.x - coord1.x)) \
+		+ ((coord2.y - coord1.y) * (coord2.y - coord1.y)));
 	return (res);
 }
 

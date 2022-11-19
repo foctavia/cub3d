@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 11:24:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/19 23:18:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define EXIT_FAILURE 1
 # define TRUE 1
 # define FALSE 0
+
+# define PI 3.1415926535
 
 # define BUFFER_SIZE 1
 
@@ -39,11 +41,11 @@
 # define EAST_DIR 'E'
 
 // Direction
-# define UP M_PI / 2
+# define UP (3 * M_PI / 2)
 # define RIGHT 0
 # define RIGHT_MIN 0
 # define RIGHT_MAX 2 * M_PI
-# define DOWN 3 * M_PI / 2
+# define DOWN (M_PI / 2)
 # define LEFT M_PI
 
 # define BIGGER(a, b) (a > b ? a : b)

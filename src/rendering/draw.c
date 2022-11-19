@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/17 11:38:21 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:31:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,15 @@ void	draw_square(t_game *game, t_elem elem, t_img *img)
 	}
 }
 
+void	draw_player_view(t_game *game, t_player *player)
+{
+	t_coord	view;
+
+	view.x = player->pos.x + player->delta_x * 10;
+	view.y = player->pos.y + player->delta_y * 10;
+	bresenham_pixel(game, player->pos, view, HEX_RED);
+}
+
 void	draw_player(t_game *game, t_img *img, t_coord dest, int color)
 {
 	t_coord	center;
@@ -113,4 +122,5 @@ void	draw_player(t_game *game, t_img *img, t_coord dest, int color)
 		put_pixel(game, img, center, color);
 		i += 0.01;
 	}
+	// draw_player_view(game, game->player);
 }

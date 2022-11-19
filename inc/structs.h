@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 11:24:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/19 22:53:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ typedef struct s_camera
 typedef struct s_player
 {
 	float		dir;
-	float		angle;
+	double		delta_x;
+	double		delta_y;
 	t_coord		pos;
 }				t_player;
 

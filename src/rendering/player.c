@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/18 14:16:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/19 23:25:15 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,28 @@ int	assign_player_pos(t_game *game, t_elem elem, char c)
 		game->player->dir = LEFT;
 	else if (c == EAST_DIR)
 		game->player->dir = RIGHT;
+	game->player->delta_x = cos(game->player->dir) * 5;
+	game->player->delta_y = sin(game->player->dir) * 5;
 	return (TRUE);
 }
 
-void	change_player_dir(t_player *player, int key)
+int	change_player_dir(t_player *player, int key)
 {
-	if (key == KEY_RIGHT || key == KEY_D)
+	if (key == KEY_LEFT)
 	{
-		if (player->dir == RIGHT)
-			player->dir = DOWN;
-		else
-			player->dir -= M_PI / 2;
+		player->dir -= 0.5;
+		if (player->dir < 0)
+			player->dir += 2 * M_PI;
+		player->delta_x = cos(player->dir) * 5;
+		player->delta_y = sin(player->dir) * 5;
 	}
-	else if (key == KEY_LEFT || key == KEY_A)
+	else if (key == KEY_RIGHT)
 	{
-		if (player->dir == DOWN)
-			player->dir = RIGHT;
-		else
-			player->dir += M_PI / 2;
+		(player->dir) += 0.5;
+		if (player->dir > 2 * M_PI)
+			(player->dir) -= 2 * M_PI;
+		player->delta_x = cos(player->dir) * 5;
+		player->delta_y = sin(player->dir) * 5;
 	}
+	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/18 15:48:21 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:57:05 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
 int		assign_player_pos(t_game *game, t_elem elem, char c);
 int		ft_render(t_game *game);
+int		change_player_dir(t_player *player, int key);
 void	assign_mlx_size(t_game *game);
 void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
 void	draw_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
-void	change_player_dir(t_player *player, int key);
 void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	ft_mlx(t_game *game);
 /*

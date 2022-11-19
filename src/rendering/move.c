@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 11:24:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/19 23:20:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,45 +30,31 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	return (FALSE);
 }
 
-static void	get_dest_coord(t_player *player, int key, t_coord *dest, float *angle)
+static void	get_dest_coord(t_player *player, int key, t_coord *dest)
 {
 	dest->x = player->pos.x;
 	dest->y = player->pos.y;
-	if (key == KEY_LEFT)
+	
+	if (key == KEY_UP)
 	{
-		(*angle) -= 0.5;
-		if (*angle < 0)
-			(*angle) += 2 * M_PI;
-	}
-	else if (key == KEY_RIGHT)
-	{
-		(*angle) += 0.5;
-		if (*angle > 2 * M_PI)
-			(*angle) -= 2 * M_PI;
-	}
-	else if (key == KEY_UP)
-	{
-		dest->x += sin(*angle) * 1;
-		dest->y -= cos(*angle) * 1;
+		dest->x += player->delta_x;
+		dest->y += player->delta_y;
 	}
 	else if (key == KEY_DOWN)
 	{
-		dest->x -= sin(*angle) * 1;
-		dest->y += cos(*angle) * 1;
+		dest->x -= player->delta_x;
+		dest->y -= player->delta_y;
 	}
 }
 
 int	change_player_pos(t_game *game, t_player *player, int key)
 {
 	t_coord	dest;
-	float	dest_angle;
 
-	dest_angle = player->angle;
-	get_dest_coord(player, key, &dest, &dest_angle);
-	if (is_wall(game, dest.x, dest.x))
+	get_dest_coord(player, key, &dest);
+	if (is_wall(game, dest.x, dest.y))
 		return (EXIT_FAILURE);
 	draw_player(game, game->mlx->minimap, player->pos, HEX_BLACK);
-	player->angle = dest_angle;
 	player->pos.x = dest.x;
 	player->pos.y = dest.y;
 	return (EXIT_SUCCESS);
@@ -76,7 +62,10 @@ int	change_player_pos(t_game *game, t_player *player, int key)
 
 int	move_player(t_game *game, t_player *player, int key)
 {
-	change_player_pos(game, player, key);
+	if (key == KEY_LEFT || key == KEY_RIGHT)
+		change_player_dir(player, key);
+	else
+		change_player_pos(game, player, key);
 	ft_render(game);
 	return (EXIT_SUCCESS);
 }
