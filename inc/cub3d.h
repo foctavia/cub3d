@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 21:57:05 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/20 12:49:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*get_next_line(int fd);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_clean(t_game *game);
 void	display_map(t_map *map);
+void	display_player(t_game *game);
 /*
 ** PARSING
 */
@@ -81,6 +82,10 @@ void	ft_mlx(t_game *game);
 /*
 ** RAYCASTING
 */
+int		is_looking_right(t_player *player);
+int		is_looking_left(t_player *player);
+int		is_looking_up(t_player *player);
+int		is_looking_down(t_player *player);
 int		get_grid_coord(t_game *game, int pixel, int axis);
 void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player);
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);

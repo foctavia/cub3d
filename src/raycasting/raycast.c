@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 12:06:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/20 13:04:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,24 @@ int	get_grid_coord(t_game *game, int pixel, int axis)
 	return (grid);
 }
 
+int	is_pixel_in_window_range(t_game *game, t_coord coord)
+{
+	if (coord.x < 0 || coord.x > game->mlx->width)
+		return (FALSE);
+	if (coord.y < 0 || coord.y > game->mlx->height)
+		return (FALSE);
+	return (TRUE);	
+}
+
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
 {
 	float	d_x;
 	float	d_y;
 	int		max;
 
+	if (!is_pixel_in_window_range(game, coord1) ||
+		!is_pixel_in_window_range(game, coord2))
+			return ;
 	d_x = coord2.x - coord1.x;
 	d_y = coord2.y - coord1.y;
 	max = BIGGER(ABS(d_x), ABS(d_y));
@@ -81,4 +93,5 @@ void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
 		bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
 	else if ((ver_dist && ver_dist < hor_dist) || !hor_dist)
 		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
+	// if (ver_dist)
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 23:20:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/20 12:09:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	float	square_x;
 	float	square_y;
 
-	square_y = floor(dest_y * game->map->height / game->mlx->height);
-	square_x = floor(dest_x * game->map->width / game->mlx->width);
-	// printf("x : %f && y : %f\n", square_x, square_y);
+	square_y = dest_y / game->mlx->elem_size;
+	square_x = dest_x / game->mlx->elem_size;
 	if ((int)square_y < 0 || (int)square_x < 0 || \
 		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
 		return (FALSE);
-	if ((int)square_y > 0 && (int)square_x > 0 && \
-		(int)square_y <= game->map->height && (int)square_x <= game->map->width && \
-		game->map->content[(int)square_y][(int)square_x] == WALL)
+	if (game->map->content[(int)square_y][(int)square_x] == WALL)
 		return (TRUE);
 	return (FALSE);
 }

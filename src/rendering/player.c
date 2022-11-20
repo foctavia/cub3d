@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 23:25:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/20 13:06:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	change_player_dir(t_player *player, int key)
 {
 	if (key == KEY_LEFT)
 	{
-		player->dir -= 0.5;
+		player->dir -= 0.1;
 		if (player->dir < 0)
 			player->dir += 2 * M_PI;
 		player->delta_x = cos(player->dir) * 5;
@@ -44,7 +44,7 @@ int	change_player_dir(t_player *player, int key)
 	}
 	else if (key == KEY_RIGHT)
 	{
-		(player->dir) += 0.5;
+		(player->dir) += 0.1;
 		if (player->dir > 2 * M_PI)
 			(player->dir) -= 2 * M_PI;
 		player->delta_x = cos(player->dir) * 5;
