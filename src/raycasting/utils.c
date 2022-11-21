@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:44:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 13:55:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:21:42 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	is_pixel_in_window_range(t_game *game, t_coord coord)
 {
-	if (coord.x < 0 || coord.x > game->mlx->width)
+	if (coord.x < 0 || coord.x > game->mlx->minimap->width)
 		return (FALSE);
-	if (coord.y < 0 || coord.y > game->mlx->height)
+	if (coord.y < 0 || coord.y > game->mlx->minimap->height)
 		return (FALSE);
 	return (TRUE);
 }

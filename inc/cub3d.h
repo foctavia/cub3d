@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 13:55:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:39:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		close_window(t_game *game);
 int		assign_player_pos(t_game *game, t_elem elem, char c);
 int		ft_render(t_game *game);
 int		change_player_dir(t_player *player, int key);
-void	assign_mlx_size(t_game *game);
+void	assign_minimap_size(t_game *game, t_minimap *minimap);
 void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
 void	draw_player(t_game *game, t_img *img, t_coord dest, int color);

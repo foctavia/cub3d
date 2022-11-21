@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/19 22:53:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:47:17 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ typedef struct	s_img
 	char	*addr;
 	void	*img;
 }				t_img;
+
+typedef struct	s_minimap
+{
+	float	width;
+	float	height;
+	float	elem_size;
+}				t_minimap;
 
 typedef struct s_checker
 {
@@ -76,12 +83,13 @@ typedef struct	s_elem
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*window;
-	float	width;
-	float	height;
-	float	elem_size;
-	t_img	*minimap;
+	void		*mlx;
+	void		*window;
+	float		width;
+	float		height;
+	t_img		*img_3d;
+	t_img		*img_minimap;
+	t_minimap	*minimap;
 }				t_mlx;
 
 typedef struct s_camera
