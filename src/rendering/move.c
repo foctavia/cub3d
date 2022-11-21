@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 11:37:11 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:09:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_wall(t_game *game, float dest_x, float dest_y)
+int	is_wall(t_game *game, float dest_x, float dest_y)
 {
 	float	square_x;
 	float	square_y;
 
-	square_y = dest_y * game->map->height / game->mlx->height;
-	square_x = dest_x * game->map->width / game->mlx->width;
+	square_y = dest_y / game->mlx->elem_size;
+	square_x = dest_x / game->mlx->elem_size;
+	if ((int)square_y < 0 || (int)square_x < 0 || \
+		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
+		return (FALSE);
 	if (game->map->content[(int)square_y][(int)square_x] == WALL)
 		return (TRUE);
 	return (FALSE);
@@ -28,44 +31,38 @@ static void	get_dest_coord(t_player *player, int key, t_coord *dest)
 {
 	dest->x = player->pos.x;
 	dest->y = player->pos.y;
-	if ((player->dir == RIGHT && key == UP) \
-		|| (player->dir == LEFT && key == DOWN))
-		dest->x += 5;
-	else if ((player->dir == LEFT && key == UP) \
-		|| (player->dir == RIGHT && key == DOWN))
-		dest->x -= 5;
-	else if ((player->dir == DOWN && key == UP) \
-		|| (player->dir == UP && key == DOWN))
-		dest->y += 5;
-	else if ((player->dir == UP && key == UP) \
-		|| (player->dir == DOWN && key == DOWN))
-		dest->y -= 5;
+	
+	if (key == KEY_UP)
+	{
+		dest->x += player->delta_x;
+		dest->y += player->delta_y;
+	}
+	else if (key == KEY_DOWN)
+	{
+		dest->x -= player->delta_x;
+		dest->y -= player->delta_y;
+	}
 }
 
 int	change_player_pos(t_game *game, t_player *player, int key)
 {
-	t_coord	*dest;
+	t_coord	dest;
 
-	dest = malloc(sizeof(t_coord));
-	if (!dest)
-		ft_error(ERR_MALLOC, 0, NULL, game);
-	ft_memset(dest, 0, sizeof(t_coord));
-	get_dest_coord(player, key, dest);
-	if (is_wall(game, dest->x, dest->y))
-	{
-		free(dest);
+	get_dest_coord(player, key, &dest);
+	if (is_wall(game, dest.x, dest.y))
 		return (EXIT_FAILURE);
-	}
 	draw_player(game, game->mlx->minimap, player->pos, HEX_BLACK);
-	player->pos.x = dest->x;
-	player->pos.y = dest->y;
-	free(dest);
+	player->pos.x = dest.x;
+	player->pos.y = dest.y;
 	return (EXIT_SUCCESS);
 }
 
 int	move_player(t_game *game, t_player *player, int key)
 {
-	change_player_pos(game, player, key);
+	if (key == KEY_LEFT || key == KEY_RIGHT)
+		change_player_dir(player, key);
+	else
+		change_player_pos(game, player, key);
 	ft_render(game);
 	return (EXIT_SUCCESS);
 }
@@ -73,13 +70,13 @@ int	move_player(t_game *game, t_player *player, int key)
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		change_player_dir(game->player, keycode);
+		return (move_player(game, game->player, KEY_RIGHT));
 	else if (keycode == KEY_LEFT || keycode == KEY_A)
-		change_player_dir(game->player, keycode);
+		return (move_player(game, game->player, KEY_LEFT));
 	else if (keycode == KEY_UP || keycode == KEY_W)
-		return (move_player(game, game->player, UP));
+		return (move_player(game, game->player, KEY_UP));
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
-		return (move_player(game, game->player, DOWN));
+		return (move_player(game, game->player, KEY_DOWN));
 	else if (keycode == KEY_ESC)
 		return (close_window(game));
 	return (EXIT_SUCCESS);

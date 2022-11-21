@@ -6,12 +6,14 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/15 17:38:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/20 12:41:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# define PI 3.141593
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -33,16 +35,18 @@
 
 # define GROUND 48
 # define WALL 49
-# define NORTH_DIR 78
-# define SOUTH_DIR 83
-# define WEST_DIR 87
-# define EAST_DIR 69
+# define NORTH_DIR 'N'
+# define SOUTH_DIR 'S'
+# define WEST_DIR 'W'
+# define EAST_DIR 'E'
 
 // Direction
-# define UP 0
-# define RIGHT 90
-# define DOWN 180
-# define LEFT 270
+# define UP (3 * PI / 2)
+# define RIGHT 0
+# define RIGHT_MIN 0
+# define RIGHT_MAX 2 * PI
+# define DOWN (PI / 2)
+# define LEFT (PI)
 
 # define BIGGER(a, b) (a > b ? a : b)
 # define ABS(a) ((a < 0) ? -a : a)
@@ -52,6 +56,8 @@
 # define HEX_WHITE 0xFFFFFF
 # define HEX_RED 0xFF0000
 # define HEX_GREEN 0x00FF00
+# define HEX_YELLOW 0xFFFF00
+# define HEX_BLUE 0x00FFFF
 
 // Key codes
 # define KEY_UP 65362
