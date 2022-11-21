@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 12:02:35 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:55:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,15 @@ void	ft_mlx(t_game *game);
 /*
 ** RAYCASTING
 */
-int		is_looking_right(t_player *player);
-int		is_looking_left(t_player *player);
-int		is_looking_up(t_player *player);
-int		is_looking_down(t_player *player);
+int		is_looking_right(float angle);
+int		is_looking_left(float angle);
+int		is_looking_up(float angle);
+int		is_looking_down(float angle);
+int		is_pixel_in_window_range(t_game *game, t_coord coord);
 int		get_grid_coord(t_game *game, int pixel, int axis);
-void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player);
+void	ft_raycast(t_game *game, t_player *player);
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
-t_coord	get_horizontal_ray(t_game *game, t_player *player, float i, float ray_dir);
-t_coord	get_vertical_ray(t_game *game, t_player *player, float i, float ray_dir);
+t_coord	get_horizontal_ray(t_game *game, t_player *player, float ray_dir);
+t_coord	get_vertical_ray(t_game *game, t_player *player, float ray_dir);
 
 #endif

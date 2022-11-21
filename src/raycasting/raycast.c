@@ -6,20 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 12:19:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:55:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// t_coord	get_grid_coord(t_game *game, t_coord *pixel)
-// {
-// 	t_coord	grid;
-
-// 	grid.x = pixel->x * game->map->width / game->mlx->width;
-// 	grid.y = pixel->y * game->map->height / game->mlx->height;
-// 	return (grid);
-// }
 
 int	get_grid_coord(t_game *game, int pixel, int axis)
 {
@@ -33,24 +24,15 @@ int	get_grid_coord(t_game *game, int pixel, int axis)
 	return (grid);
 }
 
-int	is_pixel_in_window_range(t_game *game, t_coord coord)
-{
-	if (coord.x < 0 || coord.x > game->mlx->width)
-		return (FALSE);
-	if (coord.y < 0 || coord.y > game->mlx->height)
-		return (FALSE);
-	return (TRUE);	
-}
-
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
 {
 	float	d_x;
 	float	d_y;
 	int		max;
 
-	if (!is_pixel_in_window_range(game, coord1) ||
+	if (!is_pixel_in_window_range(game, coord1) || \
 		!is_pixel_in_window_range(game, coord2))
-			return ;
+		return ;
 	d_x = coord2.x - coord1.x;
 	d_y = coord2.y - coord1.y;
 	max = BIGGER(ABS(d_x), ABS(d_y));
@@ -74,15 +56,15 @@ float	get_distance(t_coord coord1, t_coord coord2, float angle)
 	return (res);
 }
 
-void	draw_ray(t_game *game, t_player *player, float i, float ray_dir)
+void	draw_ray(t_game *game, t_player *player, float ray_dir)
 {
 	float	hor_dist;
 	float	ver_dist;
 	t_coord	hor_ray;
 	t_coord	ver_ray;
 
-	hor_ray = get_horizontal_ray(game, player, i, ray_dir);
-	ver_ray = get_vertical_ray(game, player, i, ray_dir);
+	hor_ray = get_horizontal_ray(game, player, ray_dir);
+	ver_ray = get_vertical_ray(game, player, ray_dir);
 	hor_dist = get_distance(player->pos, hor_ray, player->dir);
 	ver_dist = get_distance(player->pos, ver_ray, player->dir);
 	if ((hor_dist && hor_dist < ver_dist) || !ver_dist)
@@ -91,12 +73,11 @@ void	draw_ray(t_game *game, t_player *player, float i, float ray_dir)
 		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
 }
 
-void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
+void	ft_raycast(t_game *game, t_player *player)
 {
 	float	i;
 	float	ray_dir;
 
-	(void)mlx;
 	i = 0;
 	ray_dir = player->dir - DEGREE_RADIAN * 30;
 	if (ray_dir < 0)
@@ -105,7 +86,7 @@ void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
 		ray_dir -= 2 * PI;
 	while (i < 60)
 	{
-		draw_ray(game, player, i, ray_dir);
+		draw_ray(game, player, ray_dir);
 		ray_dir += DEGREE_RADIAN;
 		i++;
 	}

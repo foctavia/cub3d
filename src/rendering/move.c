@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 11:26:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:49:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	get_dest_coord(t_player *player, int key, t_coord *dest)
 {
 	dest->x = player->pos.x;
 	dest->y = player->pos.y;
-	
 	if (key == KEY_UP)
 	{
 		dest->x += player->delta_x;
