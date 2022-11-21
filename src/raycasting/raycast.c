@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/20 13:04:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 12:19:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,39 @@ float	get_distance(t_coord coord1, t_coord coord2, float angle)
 	return (res);
 }
 
-void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
+void	draw_ray(t_game *game, t_player *player, float i, float ray_dir)
 {
-	float	i;
 	float	hor_dist;
 	float	ver_dist;
 	t_coord	hor_ray;
 	t_coord	ver_ray;
-	
-	(void)mlx;
-	i = 0;
-	hor_ray = get_horizontal_ray(game, player, i);
-	ver_ray = get_vertical_ray(game, player, i);
+
+	hor_ray = get_horizontal_ray(game, player, i, ray_dir);
+	ver_ray = get_vertical_ray(game, player, i, ray_dir);
 	hor_dist = get_distance(player->pos, hor_ray, player->dir);
 	ver_dist = get_distance(player->pos, ver_ray, player->dir);
-	// printf("hor_dist : %f && ver_dist : %f\n", hor_dist, ver_dist);
 	if ((hor_dist && hor_dist < ver_dist) || !ver_dist)
 		bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
 	else if ((ver_dist && ver_dist < hor_dist) || !hor_dist)
 		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
-	// if (ver_dist)
+}
+
+void	ft_raycast(t_game *game, t_mlx *mlx, t_player *player)
+{
+	float	i;
+	float	ray_dir;
+
+	(void)mlx;
+	i = 0;
+	ray_dir = player->dir - DEGREE_RADIAN * 30;
+	if (ray_dir < 0)
+		ray_dir += 2 * PI;
+	else if (ray_dir > 2 * PI)
+		ray_dir -= 2 * PI;
+	while (i < 60)
+	{
+		draw_ray(game, player, i, ray_dir);
+		ray_dir += DEGREE_RADIAN;
+		i++;
+	}
 }

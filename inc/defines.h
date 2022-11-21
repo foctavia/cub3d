@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/20 12:41:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:51:05 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEFINES_H
 
 # define PI 3.141593
+# define DEGREE_RADIAN 0.0174533
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
