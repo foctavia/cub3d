@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 16:30:41 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:37:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	render_minimap(t_game *game, t_map *map, t_img *img)
 		}
 		y++;
 	}
-	// draw_lines(game);
+	draw_lines(game);
 }
 
 int	ft_render(t_game *game)
@@ -72,6 +72,7 @@ int	ft_render(t_game *game)
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_3d->img, 0, 0);
 	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->img_minimap->img, 0, 0);
+		game->mlx->window, game->mlx->img_minimap->img, \
+		game->mlx->width - game->mlx->minimap->width, 0);
 	return (EXIT_SUCCESS);
 }

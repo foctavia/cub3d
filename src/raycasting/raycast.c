@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 12:33:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:37:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,8 @@ void	draw_walls(t_game *game, t_camera *camera, float ray_length, float pos, int
 	{
 		// start.x = i;
 		// end.x = i;
-		start.x = i * 8 + 530 + j;
-		end.x = i * 8 + 530 + j;
+		start.x = i * 18 + j;
+		end.x = i * 18 + j;
 		bresenham_wall(game, start, end, HEX_RED);
 		// bresenham_wall(game, start, end, HEX_RED);
 		j++;
