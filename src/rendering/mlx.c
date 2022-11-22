@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 15:47:36 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:01:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 // 	if (!game->mlx->mlx)
 // 		ft_error_mlx(ERR_MLX_INIT, game);
 // 	assign_mlx_size(game);
-// 	game->mlx->window = mlx_new_window(game->mlx->mlx, \
+// 	game->mlx->window = mlx_new_window(game->mlx->mlx, 
 // 		game->mlx->width, game->mlx->height, "CUB3D");
 // 	if (!game->mlx->window)
 // 		ft_error_mlx(ERR_MLX_WIN, game);
-// 	img.img = mlx_new_image(game->mlx->mlx, \
+// 	img.img = mlx_new_image(game->mlx->mlx, 
 // 		game->mlx->width, game->mlx->height);
-// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, 
 // 		&img.line_length, &img.endian);
 // 	game->mlx->img_minimap = &img;
 // 	mlx_loop_hook(game->mlx->mlx, ft_render, game);
@@ -44,7 +44,7 @@ void	ft_mlx(t_game *game)
 	if (!game->mlx->mlx)
 		ft_error_mlx(ERR_MLX_INIT, game);
 	game->mlx->width = game->camera->width;
-	game->mlx->height = game->camera->width;
+	game->mlx->height = game->camera->height;
 	game->mlx->window = mlx_new_window(game->mlx->mlx, \
 		game->mlx->width, game->mlx->height, "CUB3D");
 	if (!game->mlx->window)

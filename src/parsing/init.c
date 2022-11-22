@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 15:40:51 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:18:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_camera(t_game *game)
 	if (!game->camera)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	game->camera->width = 1080;
-	game->camera->height = 1080;
+	game->camera->height = 900;
 	game->camera->fov = 60;
 	game->camera->center.x = game->camera->width / 2;
 	game->camera->center.y = game->camera->height / 2;

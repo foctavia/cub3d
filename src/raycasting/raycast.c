@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 16:38:22 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:33:17 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ float	draw_ray(t_game *game, t_player *player, float ray_dir)
 	ver_dist = get_distance(player->pos, ver_ray, player->dir);
 	if ((hor_dist && hor_dist < ver_dist) || !ver_dist)
 	{
-		// bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
+		bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
 		return (hor_dist);
 	}
 	else if ((ver_dist && ver_dist < hor_dist) || !hor_dist)
 	{
-		// bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
+		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
 		return (ver_dist);
 	}
 	return (ver_dist);
@@ -111,27 +111,55 @@ void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color)
 	}
 }
 
-void	draw_walls(t_game *game, t_camera *camera, float ray_length, float pos)
+void	reset_wall3d(t_game *game, t_img *img_3d)
 {
-	float	i;
+	t_coord	coord;
+	int	x;
+	int y;
+
+	y = 0;
+	while (y < game->mlx->height)
+	{
+		coord.y = y;
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			coord.x = x;
+			put_pixel_wall(game, img_3d, coord, HEX_BLACK);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_walls(t_game *game, t_camera *camera, float ray_length, float pos, int i)
+{
+	// float	i;
 	float	line_offset;
 	float	line_height;
 	t_coord	start;
 	t_coord	end;
+	int		j = 0;
 	
-	i = pos;
-	line_height = (game->mlx->minimap->elem_size * game->mlx->minimap->height) / ray_length;
+	(void)pos;
+	// i = pos;
+	line_height = (game->mlx->minimap->elem_size * game->mlx->minimap->width) / ray_length;
 	if (line_height > camera->height)
 		line_height = camera->height;
 	line_offset = camera->center.y - (line_height / 2);
 	start.y = line_offset;
+	// start.y = 0;
+	// end.y = line_height;
 	end.y = line_offset + line_height;
-	while (i < game->mlx->width / game->camera->fov)
+	while (j < game->mlx->width / game->camera->fov)
 	{
-		start.x = i;
-		end.x = i;
+		// start.x = i;
+		// end.x = i;
+		start.x = i * 8 + 530 + j;
+		end.x = i * 8 + 530 + j;
 		bresenham_wall(game, start, end, HEX_RED);
-		i++;
+		// bresenham_wall(game, start, end, HEX_RED);
+		j++;
 	}
 }
 
@@ -143,6 +171,7 @@ void	ft_raycast(t_game *game, t_player *player)
 	int		i;
 
 	i = 0;
+	reset_wall3d(game, game->mlx->img_3d);
 	pos = 0;
 	ray_dir = player->dir - DEGREE_RADIAN * 30;
 	if (ray_dir < 0)
@@ -152,7 +181,7 @@ void	ft_raycast(t_game *game, t_player *player)
 	while (i < game->camera->fov)
 	{
 		ray_length = draw_ray(game, player, ray_dir);
-		draw_walls(game, game->camera, ray_length, pos);
+		draw_walls(game, game->camera, ray_length, pos, i);
 		pos += game->mlx->width / game->camera->fov;
 		ray_dir += DEGREE_RADIAN;
 		i++;
