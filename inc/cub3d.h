@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 15:01:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:59:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,12 @@ void	draw_player(t_game *game, t_img *img, t_coord dest, int color);
 void	put_pixel(t_game *game, t_img *img, t_coord coord, int color);
 void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	assign_mlx_size(t_game *game);
+void	draw_floor_and_ceiling(t_game *game, t_img *img_3d);
+void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
+void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
+void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	ft_mlx(t_game *game);
+
 /*
 ** RAYCASTING
 */
@@ -89,6 +94,7 @@ int		is_looking_up(float angle);
 int		is_looking_down(float angle);
 int		is_pixel_in_window_range(t_game *game, t_coord coord);
 int		get_grid_coord(t_game *game, int pixel, int axis);
+void	put_angle_in_range(float *angle);
 void	ft_raycast(t_game *game, t_player *player);
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
 t_coord	get_horizontal_ray(t_game *game, t_player *player, float ray_dir);

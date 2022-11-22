@@ -1,7 +1,7 @@
-           NO       ./path_to_the_north_texture          
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO	maps/textures/wall42-2-64x64.xpm
+SO	maps/textures/wall42-3-64x64.xpm
+WE	maps/textures/wall42-64x64.xpm
+EA	maps/textures/wall42-4-64x64.xpm
 
 F 164,225,155
 C 70,83,136

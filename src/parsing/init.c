@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 11:18:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:15:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ static void	init_map(t_game *game)
 	ft_memset(game->map->checker, 0, sizeof(t_checker));
 }
 
-void	init_minimap(t_game *game)
-{
-	game->mlx->minimap = malloc(sizeof(t_minimap));
-	if (!game->mlx->minimap)
-		ft_error(ERR_MALLOC, 0, NULL, game);
-	ft_memset(game->mlx->minimap, 0, sizeof(t_minimap));
-}
-
 void	init_camera(t_game *game)
 {
 	game->camera = malloc(sizeof(t_camera));
@@ -63,7 +55,10 @@ static void	init_mlx(t_game *game)
 	if (!game->mlx)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->mlx, 0, sizeof(t_mlx));
-	init_minimap(game);
+	game->mlx->minimap = malloc(sizeof(t_minimap));
+	if (!game->mlx->minimap)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	ft_memset(game->mlx->minimap, 0, sizeof(t_minimap));
 }
 
 void	init_player(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 14:37:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:25:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_render(t_game *game)
 {
 	render_minimap(game, game->map, game->mlx->img_minimap);
 	render_player(game, game->map, game->mlx->img_minimap, game->player);
+	draw_floor_and_ceiling(game, game->mlx->img_3d);
 	ft_raycast(game, game->player);
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_3d->img, 0, 0);

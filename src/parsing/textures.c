@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:17:38 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:43:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 16:07:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	add_texture(int id, char *line, int *i, t_game *game)
 	while (line && line[j] && !is_space(line[j]))
 		j++;
 	assign_texture(game, id, &line[*i], j - *i);
-	// valid_texture_file(game);
+	valid_texture_file(game);
 	*i = j;
 	return (EXIT_SUCCESS);
 }

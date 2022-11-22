@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 09:01:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:59:50 by owalsh           ###   ########.fr       */
+/*   Created: 2022/11/22 17:19:43 by owalsh            #+#    #+#             */
+/*   Updated: 2022/11/22 17:41:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
 {
-	t_game	game;
+	t_coord	coord;
+	int		x;
+	int		y;
 
-	if (argc != 2)
-		ft_error(ERR_ARGS_COUNT, 0, NULL, &game);
-	ft_start(argv, &game);
-	ft_mlx(&game);
-	ft_clean(&game);
-	return (EXIT_SUCCESS);
+	y = 0;
+	while (y < game->mlx->height)
+	{
+		coord.y = y;
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			coord.x = x;
+			if (y < game->mlx->height / 2)
+				put_pixel(game, img_3d, coord, game->map->ceiling->hex);
+			else
+				put_pixel(game, img_3d, coord, game->map->floor->hex);
+			x++;
+		}
+		y++;
+	}
 }

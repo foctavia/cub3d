@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 15:06:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 18:00:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_mlx(t_game *game)
 		ft_error_mlx(ERR_MLX_INIT, game);
 	assign_mlx_size(game);
 	game->mlx->window = mlx_new_window(game->mlx->mlx, \
-		game->mlx->width, game->mlx->height, "CUB3D");
+		game->mlx->width, game->mlx->height, "cub3D");
 	if (!game->mlx->window)
 		ft_error_mlx(ERR_MLX_WIN, game);
 	img_3d.img = mlx_new_image(game->mlx->mlx, \
