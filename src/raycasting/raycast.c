@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 14:37:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:45:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,33 +132,26 @@ void	reset_wall3d(t_game *game, t_img *img_3d)
 	}
 }
 
-void	draw_walls(t_game *game, t_camera *camera, float ray_length, float pos, int i)
+void	draw_walls(t_game *game, t_camera *camera, float ray_length, int i)
 {
-	// float	i;
-	float	line_offset;
-	float	line_height;
 	t_coord	start;
 	t_coord	end;
-	int		j = 0;
-	
-	(void)pos;
-	// i = pos;
+	float	line_offset;
+	float	line_height;
+	int		j;
+
 	line_height = (game->mlx->minimap->elem_size * game->mlx->minimap->width) / ray_length;
 	if (line_height > camera->height)
 		line_height = camera->height;
 	line_offset = camera->center.y - (line_height / 2);
 	start.y = line_offset;
-	// start.y = 0;
-	// end.y = line_height;
 	end.y = line_offset + line_height;
+	j = 0;
 	while (j < game->mlx->width / game->camera->fov)
 	{
-		// start.x = i;
-		// end.x = i;
 		start.x = i * 18 + j;
 		end.x = i * 18 + j;
 		bresenham_wall(game, start, end, HEX_RED);
-		// bresenham_wall(game, start, end, HEX_RED);
 		j++;
 	}
 }
@@ -167,6 +160,7 @@ void	ft_raycast(t_game *game, t_player *player)
 {
 	float	ray_dir;
 	float	ray_length;
+	float	dist_ra_pa;
 	float	pos;
 	int		i;
 
@@ -180,8 +174,14 @@ void	ft_raycast(t_game *game, t_player *player)
 		ray_dir -= 2 * PI;
 	while (i < game->camera->fov)
 	{
+		dist_ra_pa = player->dir - ray_dir;
+		if (dist_ra_pa < 0)
+			dist_ra_pa += 2 * PI;
+		else if (dist_ra_pa > 2 * PI)
+			dist_ra_pa -= 2 * PI;
 		ray_length = draw_ray(game, player, ray_dir);
-		draw_walls(game, game->camera, ray_length, pos, i);
+		ray_length *= cos(dist_ra_pa);
+		draw_walls(game, game->camera, ray_length, i);
 		pos += game->mlx->width / game->camera->fov;
 		ray_dir += DEGREE_RADIAN;
 		i++;
