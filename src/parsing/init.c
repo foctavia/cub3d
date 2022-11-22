@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/18 15:55:23 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:15:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_camera(t_game *game)
 	game->camera = malloc(sizeof(t_camera));
 	if (!game->camera)
 		ft_error(ERR_MALLOC, 0, NULL, game);
-	game->camera->width = 320;
-	game->camera->height = 200;
+	game->camera->width = 1080;
+	game->camera->height = 900;
 	game->camera->fov = 60;
 	game->camera->center.x = game->camera->width / 2;
 	game->camera->center.y = game->camera->height / 2;
@@ -55,6 +55,10 @@ static void	init_mlx(t_game *game)
 	if (!game->mlx)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->mlx, 0, sizeof(t_mlx));
+	game->mlx->minimap = malloc(sizeof(t_minimap));
+	if (!game->mlx->minimap)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	ft_memset(game->mlx->minimap, 0, sizeof(t_minimap));
 }
 
 void	init_player(t_game *game)

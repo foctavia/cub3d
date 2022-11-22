@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/21 13:59:00 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:37:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,12 @@ void	put_pixel(t_game *game, t_img *img, t_coord coord, int color)
 {
 	char	*dst;
 
-	if (coord.x > game->mlx->width || coord.y > game->mlx->height)
+	if (coord.x > game->mlx->width || \
+		coord.y > game->mlx->height)
 		return ;
 	dst = img->addr + ((int)coord.y * img->line_length \
 		+ (int)coord.x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color)
-{
-	float	d_x;
-	float	d_y;
-	int		max;
-
-	coord1.x = (float)(coord1.x * game->mlx->elem_size);
-	coord1.y = (float)(coord1.y * game->mlx->elem_size);
-	coord2.x = (float)(coord2.x * game->mlx->elem_size);
-	coord2.y = (float)(coord2.y * game->mlx->elem_size);
-	d_x = coord2.x - coord1.x;
-	d_y = coord2.y - coord1.y;
-	max = BIGGER(ABS(d_x), ABS(d_y));
-	d_x /= max;
-	d_y /= max;
-	while ((int)(coord1.x - coord2.x) || (int)(coord1.y - coord2.y))
-	{
-		put_pixel(game, game->mlx->minimap, coord1, color);
-		coord1.x += d_x;
-		coord1.y += d_y;
-	}
 }
 
 void	draw_lines(t_game *game)
@@ -82,10 +60,10 @@ void	draw_square(t_game *game, t_elem elem, t_img *img)
 	if (game->mlx->window == NULL)
 		return ;
 	index.x = elem.x;
-	while (index.x < elem.x + game->mlx->elem_size)
+	while (index.x < elem.x + game->mlx->minimap->elem_size)
 	{
 		index.y = elem.y;
-		while (index.y < elem.y + game->mlx->elem_size)
+		while (index.y < elem.y + game->mlx->minimap->elem_size)
 		{
 			put_pixel(game, img, index, elem.color);
 			index.y++;
@@ -102,7 +80,7 @@ void	draw_player(t_game *game, t_img *img, t_coord dest, int color)
 	double	x;
 	double	y;
 
-	radius = game->mlx->elem_size / 2;
+	radius = game->mlx->minimap->elem_size / 2;
 	i = 0;
 	while (i < 360)
 	{

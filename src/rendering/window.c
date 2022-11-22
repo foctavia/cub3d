@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/17 11:30:35 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:01:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	close_window(t_game *game)
 {
-	if (game->mlx->minimap)
-		mlx_destroy_image(game->mlx->mlx, game->mlx->minimap->img);
+	if (game->mlx->img_minimap)
+		mlx_destroy_image(game->mlx->mlx, game->mlx->img_minimap->img);
 	if (game && game->mlx && game->mlx->mlx)
 		mlx_loop_end(game->mlx->mlx);
 	if (game && game->mlx && game->mlx->window)
@@ -33,23 +33,30 @@ void	assign_mlx_size(t_game *game)
 {
 	int		width;
 	int		height;
-	float	ratio;
 
 	mlx_get_screen_size(game->mlx->mlx, &width, &height);
+	game->mlx->width = width * 0.8;
+	game->mlx->height = height * 0.8;
+}
+
+void	assign_minimap_size(t_game *game, t_minimap *minimap)
+{
+	float	ratio;
+
 	if (game->map->width > game->map->height)
 	{
-		game->mlx->width = width * 0.8;
+		minimap->width = game->mlx->width * 0.5;
 		ratio = (float)game->map->height / game->map->width;
-		game->mlx->height = ratio * game->mlx->width;
+		minimap->height = ratio * minimap->width;
 	}
 	else
 	{
-		game->mlx->height = height * 0.8;
+		minimap->height = game->mlx->height * 0.5;
 		ratio = (float)game->map->width / game->map->height;
-		game->mlx->width = ratio * game->mlx->height;
+		minimap->width = ratio * minimap->height;
 	}
 	if (game->map->height > game->map->width)
-		game->mlx->elem_size = game->mlx->height / game->map->height;
+		minimap->elem_size = minimap->height / game->map->height;
 	else
-		game->mlx->elem_size = game->mlx->width / game->map->width;
+		minimap->elem_size = minimap->width / game->map->width;
 }

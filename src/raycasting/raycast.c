@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 13:55:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:39:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,10 @@ int	get_grid_coord(t_game *game, int pixel, int axis)
 
 	grid = 0;
 	if (axis == 'x')
-		grid = pixel * game->map->width / game->mlx->width;
+		grid = pixel * game->map->width / game->mlx->minimap->width;
 	else if (axis == 'y')
-		grid = pixel * game->map->height / game->mlx->height;
+		grid = pixel * game->map->height / game->mlx->minimap->height;
 	return (grid);
-}
-
-void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
-{
-	float	d_x;
-	float	d_y;
-	int		max;
-
-	if (!is_pixel_in_window_range(game, coord1) || \
-		!is_pixel_in_window_range(game, coord2))
-		return ;
-	d_x = coord2.x - coord1.x;
-	d_y = coord2.y - coord1.y;
-	max = BIGGER(ABS(d_x), ABS(d_y));
-	d_x /= max;
-	d_y /= max;
-	while ((int)(coord1.x - coord2.x) || (int)(coord1.y - coord2.y))
-	{
-		put_pixel(game, game->mlx->minimap, coord1, color);
-		coord1.x += d_x;
-		coord1.y += d_y;
-	}
 }
 
 float	get_distance(t_coord coord1, t_coord coord2, float angle)
@@ -56,7 +34,7 @@ float	get_distance(t_coord coord1, t_coord coord2, float angle)
 	return (res);
 }
 
-void	draw_ray(t_game *game, t_player *player, float ray_dir)
+float	draw_ray(t_game *game, t_player *player, float ray_dir)
 {
 	float	hor_dist;
 	float	ver_dist;
@@ -68,26 +46,61 @@ void	draw_ray(t_game *game, t_player *player, float ray_dir)
 	hor_dist = get_distance(player->pos, hor_ray, player->dir);
 	ver_dist = get_distance(player->pos, ver_ray, player->dir);
 	if ((hor_dist && hor_dist < ver_dist) || !ver_dist)
+	{
 		bresenham_pixel(game, player->pos, hor_ray, HEX_RED);
+		return (hor_dist);
+	}
 	else if ((ver_dist && ver_dist < hor_dist) || !hor_dist)
+	{
 		bresenham_pixel(game, player->pos, ver_ray, HEX_RED);
+		return (ver_dist);
+	}
+	return (ver_dist);
+}
+
+void	draw_walls(t_game *game, t_camera *camera, float ray_length, float i)
+{
+	t_coord	start;
+	t_coord	end;
+	float	line_offset;
+	float	line_height;
+	int		j;
+
+	line_height = (game->mlx->minimap->elem_size * \
+		game->mlx->minimap->width) / ray_length;
+	if (line_height > camera->height)
+		line_height = camera->height;
+	line_offset = camera->center.y - (line_height / 2);
+	start.y = line_offset;
+	end.y = line_offset + line_height;
+	j = 0;
+	while (j < game->mlx->width / game->camera->fov)
+	{
+		start.x = i + j;
+		end.x = i + j;
+		bresenham_wall(game, start, end, HEX_WALLS);
+		j++;
+	}
 }
 
 void	ft_raycast(t_game *game, t_player *player)
 {
-	float	i;
 	float	ray_dir;
+	float	ray_length;
+	float	ray_offset;
+	float	i;
 
-	i = 0;
 	ray_dir = player->dir - DEGREE_RADIAN * 30;
-	if (ray_dir < 0)
-		ray_dir += 2 * PI;
-	else if (ray_dir > 2 * PI)
-		ray_dir -= 2 * PI;
-	while (i < 60)
+	put_angle_in_range(&ray_dir);
+	i = 0;
+	while (i < game->mlx->width)
 	{
-		draw_ray(game, player, ray_dir);
+		ray_offset = player->dir - ray_dir;
+		put_angle_in_range(&ray_offset);
+		ray_length = draw_ray(game, player, ray_dir);
+		ray_length *= cos(ray_offset);
+		draw_walls(game, game->camera, ray_length, i);
 		ray_dir += DEGREE_RADIAN;
-		i++;
+		i += game->mlx->width / game->camera->fov;
 	}
 }

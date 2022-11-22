@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/20 13:06:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:15:02 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	assign_player_pos(t_game *game, t_elem elem, char c)
 {
 	int		radius;
 
-	radius = game->mlx->elem_size / 2;
+	radius = game->mlx->minimap->elem_size / 2;
 	game->player->pos.x = elem.x + radius;
 	game->player->pos.y = elem.y + radius;
 	if (c == NORTH_DIR)

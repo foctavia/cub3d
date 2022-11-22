@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 13:54:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:33:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ void	ft_clean(t_game *game)
 		if (game->map)
 			free_map(game->map);
 		if (game->mlx)
+		{
+			if (game->mlx->minimap)
+				free(game->mlx->minimap);
 			free(game->mlx);
+		}
 		if (game->camera)
 			free(game->camera);
 		if (game->file)

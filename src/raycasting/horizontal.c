@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:58:06 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/21 13:58:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:15:02 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	get_first_x_intersect(t_game *game, t_coord pos, \
 
 	player_tan = -1 / tan(ray_dir);
 	if (is_looking_down(ray_dir))
-		first->y = (floor(pos.y / game->mlx->elem_size) + 1) * \
-			game->mlx->elem_size;
+		first->y = (floor(pos.y / game->mlx->minimap->elem_size) + 1) * \
+			game->mlx->minimap->elem_size;
 	else if (is_looking_up(ray_dir))
-		first->y = (floor(pos.y / game->mlx->elem_size) - 0.0001) * \
-			game->mlx->elem_size;
+		first->y = (floor(pos.y / game->mlx->minimap->elem_size) - 0.0001) * \
+			game->mlx->minimap->elem_size;
 	first->x = (pos.y - first->y) * player_tan + pos.x;
 }
 
@@ -48,9 +48,9 @@ t_coord	get_horizontal_ray(t_game *game, t_player *player, float ray_dir)
 		get_grid_coord(game, intersect.x, 'x') <= game->map->width)
 		return (first);
 	if (is_looking_up(ray_dir))
-		range.y = -1 * game->mlx->elem_size;
+		range.y = -1 * game->mlx->minimap->elem_size;
 	else if (is_looking_down(ray_dir))
-		range.y = game->mlx->elem_size;
+		range.y = game->mlx->minimap->elem_size;
 	range.x = -1 * range.y * player_tan;
 	get_x_intersect(&first, range, &intersect);
 	while (!is_wall(game, intersect.x, intersect.y)

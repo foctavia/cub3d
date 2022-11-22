@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 13:49:39 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:36:42 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	float	square_x;
 	float	square_y;
 
-	square_y = dest_y / game->mlx->elem_size;
-	square_x = dest_x / game->mlx->elem_size;
+	square_y = dest_y / game->mlx->minimap->elem_size;
+	square_x = dest_x / game->mlx->minimap->elem_size;
 	if ((int)square_y < 0 || (int)square_x < 0 || \
 		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
 		return (FALSE);
@@ -50,7 +50,7 @@ int	change_player_pos(t_game *game, t_player *player, int key)
 	get_dest_coord(player, key, &dest);
 	if (is_wall(game, dest.x, dest.y))
 		return (EXIT_FAILURE);
-	draw_player(game, game->mlx->minimap, player->pos, HEX_BLACK);
+	draw_player(game, game->mlx->img_minimap, player->pos, HEX_BLACK);
 	player->pos.x = dest.x;
 	player->pos.y = dest.y;
 	return (EXIT_SUCCESS);
