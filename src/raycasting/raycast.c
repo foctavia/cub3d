@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 14:45:39 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/22 15:49:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,18 @@ void	reset_wall3d(t_game *game, t_img *img_3d)
 	int y;
 
 	y = 0;
+	while (y < game->mlx->height / 2)
+	{
+		coord.y = y;
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			coord.x = x;
+			put_pixel_wall(game, img_3d, coord, game->map->ceiling->hex);
+			x++;
+		}
+		y++;
+	}
 	while (y < game->mlx->height)
 	{
 		coord.y = y;
@@ -125,14 +137,14 @@ void	reset_wall3d(t_game *game, t_img *img_3d)
 		while (x < game->mlx->width)
 		{
 			coord.x = x;
-			put_pixel_wall(game, img_3d, coord, HEX_BLACK);
+			put_pixel_wall(game, img_3d, coord, game->map->floor->hex);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_walls(t_game *game, t_camera *camera, float ray_length, int i)
+void	draw_walls(t_game *game, t_camera *camera, float ray_length, float i)
 {
 	t_coord	start;
 	t_coord	end;
@@ -149,41 +161,40 @@ void	draw_walls(t_game *game, t_camera *camera, float ray_length, int i)
 	j = 0;
 	while (j < game->mlx->width / game->camera->fov)
 	{
-		start.x = i * 18 + j;
-		end.x = i * 18 + j;
-		bresenham_wall(game, start, end, HEX_RED);
+		start.x = i + j;
+		end.x = i + j;
+		bresenham_wall(game, start, end, HEX_WALLS);
 		j++;
 	}
+}
+
+void	put_angle_in_range(float *angle)
+{
+	if (*angle < 0)
+		*angle += 2 * PI;
+	else if (*angle > 2 * PI)
+		*angle -= 2 * PI;
 }
 
 void	ft_raycast(t_game *game, t_player *player)
 {
 	float	ray_dir;
 	float	ray_length;
-	float	dist_ra_pa;
-	float	pos;
-	int		i;
+	float	ray_offset;
+	float	i;
 
 	i = 0;
 	reset_wall3d(game, game->mlx->img_3d);
-	pos = 0;
 	ray_dir = player->dir - DEGREE_RADIAN * 30;
-	if (ray_dir < 0)
-		ray_dir += 2 * PI;
-	else if (ray_dir > 2 * PI)
-		ray_dir -= 2 * PI;
-	while (i < game->camera->fov)
+	put_angle_in_range(&ray_dir);
+	while (i < game->mlx->width)
 	{
-		dist_ra_pa = player->dir - ray_dir;
-		if (dist_ra_pa < 0)
-			dist_ra_pa += 2 * PI;
-		else if (dist_ra_pa > 2 * PI)
-			dist_ra_pa -= 2 * PI;
+		ray_offset = player->dir - ray_dir;
+		put_angle_in_range(&ray_offset);
 		ray_length = draw_ray(game, player, ray_dir);
-		ray_length *= cos(dist_ra_pa);
+		ray_length *= cos(ray_offset);
 		draw_walls(game, game->camera, ray_length, i);
-		pos += game->mlx->width / game->camera->fov;
 		ray_dir += DEGREE_RADIAN;
-		i++;
+		i += game->mlx->width / game->camera->fov;
 	}
 }

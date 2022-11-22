@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 16:04:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:01:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ int	close_window(t_game *game)
 	}
 	ft_clean(game);
 	exit (EXIT_SUCCESS);
+}
+
+void	assign_mlx_size(t_game *game)
+{
+	int		width;
+	int		height;
+
+	mlx_get_screen_size(game->mlx->mlx, &width, &height);
+	game->mlx->width = width * 0.8;
+	game->mlx->height = height * 0.8;
 }
 
 void	assign_minimap_size(t_game *game, t_minimap *minimap)
