@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:39:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/23 14:01:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	draw_walls(t_game *game, t_camera *camera, float ray_length, float i)
 	{
 		start.x = i + j;
 		end.x = i + j;
-		bresenham_wall(game, start, end, HEX_WALLS);
+		draw_texture(game, start, end, HEX_WALLS);
 		j++;
 	}
 }
