@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 15:40:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:46:57 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define SOUTH_DIR 'S'
 # define WEST_DIR 'W'
 # define EAST_DIR 'E'
+
+# define SCREEN_WIDTH 1080
+# define SCREEN_HEIGHT 900
+# define FOV 60
 
 // Direction
 # define UP (3 * PI / 2)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:39:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:52:14 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ float	draw_ray(t_game *game, t_player *player, float ray_dir)
 	return (ver_dist);
 }
 
-void	draw_walls(t_game *game, t_camera *camera, float ray_length, float i)
+void	draw_walls(t_game *game, float ray_length, float i)
 {
 	t_coord	start;
 	t_coord	end;
@@ -68,13 +68,13 @@ void	draw_walls(t_game *game, t_camera *camera, float ray_length, float i)
 
 	line_height = (game->mlx->minimap->elem_size * \
 		game->mlx->minimap->width) / ray_length;
-	if (line_height > camera->height)
-		line_height = camera->height;
-	line_offset = camera->center.y - (line_height / 2);
+	if (line_height > game->mlx->height)
+		line_height = game->mlx->height;
+	line_offset = (game->mlx->height / 2) - (line_height / 2);
 	start.y = line_offset;
 	end.y = line_offset + line_height;
 	j = 0;
-	while (j < game->mlx->width / game->camera->fov)
+	while (j < game->mlx->width / FOV)
 	{
 		start.x = i + j;
 		end.x = i + j;
@@ -99,8 +99,8 @@ void	ft_raycast(t_game *game, t_player *player)
 		put_angle_in_range(&ray_offset);
 		ray_length = draw_ray(game, player, ray_dir);
 		ray_length *= cos(ray_offset);
-		draw_walls(game, game->camera, ray_length, i);
+		draw_walls(game, ray_length, i);
 		ray_dir += DEGREE_RADIAN;
-		i += game->mlx->width / game->camera->fov;
+		i += game->mlx->width / FOV;
 	}
 }
