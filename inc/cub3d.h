@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/23 14:00:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:07:05 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	ft_mlx(t_game *game);
-void	draw_texture(t_game *game, t_coord coord1, t_coord coord2, int color);
 
 /*
 ** RAYCASTING
