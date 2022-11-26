@@ -6,11 +6,41 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 18:00:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/26 17:34:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_buffer(t_game *game)
+{
+	int	y;
+	int	x;
+
+	game->mlx->buffer = malloc(sizeof(char *) * (game->mlx->height + 1));
+	if (!game->mlx->buffer)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	y = 0;
+	while (y < game->mlx->height)
+	{
+		game->mlx->buffer[y] = malloc(sizeof(char) * (game->mlx->width + 1));
+		if (!game->mlx->buffer[y])
+			ft_error(ERR_MALLOC, 0, NULL, game);
+		y++;
+	}
+	y = 0;
+	while (y < game->mlx->height)
+	{
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			game->mlx->buffer[y][x] = 0;
+			x++;			
+		}
+		game->mlx->buffer[y][x] = '\0';
+	}
+	game->mlx->buffer[y] = NULL;
+}
 
 void	ft_mlx(t_game *game)
 {
@@ -37,6 +67,7 @@ void	ft_mlx(t_game *game)
 		&img_minimap.bits_per_pixel, &img_minimap.line_length, \
 		&img_minimap.endian);
 	game->mlx->img_minimap = &img_minimap;
+	init_buffer(game);
 	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_hook, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
