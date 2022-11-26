@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/26 18:28:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:17:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct	s_ray
 	float	dir;
 	float	length;
 	float	offset;
+	t_coord	intersect;
 }				t_ray;
 
 typedef struct s_camera
