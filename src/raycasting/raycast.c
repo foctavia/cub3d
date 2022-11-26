@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 18:53:45 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:39:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ void	draw_texture(t_game *game, t_coord coord1, t_coord coord2, float line_heigh
 	img.addr = mlx_get_data_addr(img.img, \
 		&img.bits_per_pixel, &img.line_length, &img.endian);
 	game->mlx->texture = &img;
+	printf("coord1.c = %f\n", coord1.x);
 	texture_x = (int)(coord1.x * (double)width);
+	printf("texture_x = %d\n", texture_x);
 	step = 1 * height / line_height;
 	texture_pos = (start_y - game->mlx->height / 2 + line_height / 2) \
 		* step;
@@ -94,14 +96,6 @@ void	draw_texture(t_game *game, t_coord coord1, t_coord coord2, float line_heigh
 	// {
 		texture_y = (int)texture_pos & (height - 1);
 		texture_pos += step;
-		// if ((texture_x * 4 + texture_y * img.line_length + 3 > width * 4 + height * img.line_length) || \
-		// 	(coord1.x * 4 + coord1.y * game->mlx->img_3d->line_length > game->mlx->width * 4 + game->mlx->height * game->mlx->img_3d->line_length) || \
-		// 	(coord1.x < 0 || coord1.y < 0 || texture_x < 0 || texture_y < 0))
-		// 	return ;
-		
-		// if (coord1.y > height || coord1.x > width)
-		// 	return ;
-		// int color = *(unsigned int *)(img.addr + (texture_y * height + texture_x));
 		game->mlx->img_3d->addr[(int)coord1.y * game->mlx->img_3d->line_length + (int)coord1.x * 4] = \
 			img.addr[(texture_y * height) + (texture_x * 4)];
 		game->mlx->img_3d->addr[((int)coord1.y * game->mlx->img_3d->line_length + (int)coord1.x * 4) + 1] = \
@@ -110,7 +104,6 @@ void	draw_texture(t_game *game, t_coord coord1, t_coord coord2, float line_heigh
 			img.addr[((texture_y * height) + (texture_x * 4)) + 2];
 		game->mlx->img_3d->addr[((int)coord1.y * game->mlx->img_3d->line_length + (int)coord1.x * 4) + 3] = \
 			img.addr[((texture_y * height) + (texture_x * 4)) + 3];
-		// put_pixel(game, game->mlx->img_3d, coord1, whatev);
 		coord1.x += d_x;
 		coord1.y += d_y;
 		
