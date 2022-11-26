@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 12:10:09 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/26 18:23:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define SOUTH_DIR 'S'
 # define WEST_DIR 'W'
 # define EAST_DIR 'E'
+
+# define SIDE_X 0
+# define SIDE_Y 1
 
 // Direction
 # define UP (3 * PI / 2)

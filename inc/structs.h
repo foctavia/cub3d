@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 15:28:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/26 18:28:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,14 @@ typedef struct s_mlx
 	t_img		*texture;
 	t_minimap	*minimap;
 }				t_mlx;
+
+typedef struct	s_ray
+{
+	int		side;
+	float	dir;
+	float	length;
+	float	offset;
+}				t_ray;
 
 typedef struct s_camera
 {
