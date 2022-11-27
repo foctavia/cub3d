@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:17:38 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 16:07:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 16:58:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	valid_texture_file(t_game *game)
 {
-	t_texture	*texture;
+	t_tex	*texture;
 
 	texture = game->map->texture;
 	if (texture->north && open_file(texture->north) == -1)

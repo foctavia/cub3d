@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:19:43 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:41:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 18:31:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,28 @@ void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
 	int		y;
 
 	y = 0;
-	while (y < game->mlx->height)
+	while (y < game->mlx->height / 2)
 	{
-		coord.y = y;
 		x = 0;
 		while (x < game->mlx->width)
 		{
 			coord.x = x;
-			if (y < game->mlx->height / 2)
-				put_pixel(game, img_3d, coord, game->map->ceiling->hex);
-			else
-				put_pixel(game, img_3d, coord, game->map->floor->hex);
+			coord.y = y;
+			// game->mlx->buffer[y][x] = game->map->ceiling->color;
+			put_pixel(game, img_3d, coord, game->map->ceiling->color);
+			x++;
+		}
+		y++;
+	}
+	while (y < game->mlx->height)
+	{
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			coord.x = x;
+			coord.y = y;
+			// game->mlx->buffer[y][x] = game->map->floor->color;
+			put_pixel(game, img_3d, coord, game->map->floor->color);
 			x++;
 		}
 		y++;

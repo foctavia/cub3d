@@ -6,27 +6,27 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/26 19:17:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 18:18:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_texture
+typedef struct s_tex
 {
 	char	*south;
 	char	*north;
 	char	*west;
 	char	*east;
-}				t_texture;
+}				t_tex;
 
 typedef struct s_color
 {
 	int	red;
 	int	green;
 	int	blue;
-	int	hex;
+	int	color;
 }				t_color;
 
 typedef struct	s_img
@@ -68,9 +68,9 @@ typedef struct s_map
 	int			height;
 	int			width;
 	char		**content;
+	t_tex		*texture;
 	t_color 	*floor;
 	t_color		*ceiling;
-	t_texture	*texture;
 	t_checker	*checker;
 }				t_map;
 
@@ -84,6 +84,7 @@ typedef struct	s_elem
 
 typedef struct s_mlx
 {
+	int			**buffer;
 	void		*mlx;
 	void		*window;
 	float		width;
@@ -100,8 +101,19 @@ typedef struct	s_ray
 	float	dir;
 	float	length;
 	float	offset;
+	float	perp_wall_dist;
 	t_coord	intersect;
 }				t_ray;
+
+typedef struct s_texture
+{
+	t_coord	pos;
+	t_img	*img;
+	float	step;
+	float	offset;
+	int		width;
+	int		height;
+}				t_texture;
 
 typedef struct s_camera
 {

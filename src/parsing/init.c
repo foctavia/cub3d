@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:15:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 16:58:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	init_map(t_game *game)
 	if (!game->map->ceiling)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->map->ceiling, 0, sizeof(t_color));
-	game->map->texture = malloc(sizeof(t_texture));
+	game->map->texture = malloc(sizeof(t_tex));
 	if (!game->map->texture)
 		ft_error(ERR_MALLOC, 0, NULL, game);
-	ft_memset(game->map->texture, 0, sizeof(t_texture));
+	ft_memset(game->map->texture, 0, sizeof(t_tex));
 	game->map->checker = malloc(sizeof(t_checker));
 	if (!game->map->checker)
 		ft_error(ERR_MALLOC, 0, NULL, game);

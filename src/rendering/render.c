@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:25:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 18:29:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,35 @@ void	render_minimap(t_game *game, t_map *map, t_img *img)
 	draw_lines(game);
 }
 
+void	cub_draw(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->mlx->height)
+	{
+		x = 0;
+		while (x < game->mlx->width)
+		{
+			game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length \
+				+ (int)x * (game->mlx->img_3d->bits_per_pixel / 8)]
+				= game->mlx->buffer[y][x];
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(game->mlx->mlx, \
+		game->mlx->window, game->mlx->img_3d->img, 0, 0);
+}
+
 int	ft_render(t_game *game)
 {
 	render_minimap(game, game->map, game->mlx->img_minimap);
 	render_player(game, game->map, game->mlx->img_minimap, game->player);
 	draw_floor_and_ceiling(game, game->mlx->img_3d);
 	ft_raycast(game, game->player);
+	// cub_draw(game);
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_3d->img, 0, 0);
 	mlx_put_image_to_window(game->mlx->mlx, \

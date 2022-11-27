@@ -6,11 +6,40 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 18:00:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/27 17:32:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_mlx_buffer(t_game *game, t_mlx *mlx)
+{
+	int		i;
+	int		j;
+
+	mlx->buffer = (int **)malloc(sizeof(int *) * mlx->height);
+	if (!mlx->buffer)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	i = 0;
+	while (i < mlx->height)
+	{
+		mlx->buffer[i] = (int *)malloc(sizeof(int) * mlx->width);
+		if (!mlx->buffer[i])
+			ft_error(ERR_MALLOC, 0, NULL, game);
+		i++;
+	}
+	i = 0;
+	while (i < mlx->height)
+	{
+		j = 0;
+		while (j < mlx->width)
+		{
+			mlx->buffer[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
 
 void	ft_mlx(t_game *game)
 {
@@ -21,6 +50,7 @@ void	ft_mlx(t_game *game)
 	if (!game->mlx->mlx)
 		ft_error_mlx(ERR_MLX_INIT, game);
 	assign_mlx_size(game);
+	init_mlx_buffer(game, game->mlx);
 	game->mlx->window = mlx_new_window(game->mlx->mlx, \
 		game->mlx->width, game->mlx->height, "cub3D");
 	if (!game->mlx->window)
