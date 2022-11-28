@@ -35,12 +35,8 @@ int	close_window(t_game *game)
 
 void	assign_mlx_size(t_game *game)
 {
-	int		width;
-	int		height;
-
-	mlx_get_screen_size(game->mlx->mlx, &width, &height);
-	game->mlx->width = width * 0.8;
-	game->mlx->height = height * 0.8;
+	game->mlx->width = WINDOW_W;
+	game->mlx->height = WINDOW_H;
 }
 
 void	assign_minimap_size(t_game *game, t_minimap *minimap)

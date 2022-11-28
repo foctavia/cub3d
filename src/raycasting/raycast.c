@@ -88,7 +88,7 @@ void	compute_texture_data(t_texture *texture, t_ray ray)
 	}
 }
 
-void	draw_walls(t_game *game, t_camera *camera, float i, t_ray ray)
+void	draw_walls(t_game *game, float i, t_ray ray)
 {
 	t_texture	texture;
 	t_coord		coord;
@@ -99,25 +99,25 @@ void	draw_walls(t_game *game, t_camera *camera, float i, t_ray ray)
 	int			width;
 	int			height;
 
-	img.img = mlx_xpm_file_to_image(game->mlx->mlx, "purplestone.xpm", \
+	img.img = mlx_xpm_file_to_image(game->mlx->mlx, "eagle.xpm", \
 		&width, &height);
 	img.addr = mlx_get_data_addr(img.img, \
 		&img.bits_per_pixel, &img.line_length, &img.endian);
 
 	line_height = (game->mlx->minimap->elem_size * \
 		game->mlx->minimap->width) / ray.length;
-	line_offset = camera->center.y - (line_height / 2);
+	line_offset = (WINDOW_H / 2) - (line_height / 2);
 	
 	texture.step = 64 / (float)line_height;
 	texture.offset = 0;
-	if (line_height > camera->height)
+	if (line_height > WINDOW_H)
 	{
 		texture.offset = (line_height - game->mlx->height) / 2;
-		line_height = camera->height;
+		line_height = WINDOW_H;
 	}
 
 	j = 0;
-	while (j < game->mlx->width / game->camera->fov)
+	while (j < game->mlx->width / FOV)
 	{
 		compute_texture_data(&texture, ray);
 		coord.x = i + j;
@@ -150,7 +150,7 @@ void	ft_raycast(t_game *game, t_player *player)
 	t_ray	ray;
 	float	i;
 
-	ray.dir = player->dir - DEGREE_RADIAN * 30;
+	ray.dir = player->dir - (DEGREE_RADIAN * 30);
 	put_angle_in_range(&ray.dir);
 	i = 0;
 	while (i < game->mlx->width)
@@ -159,8 +159,8 @@ void	ft_raycast(t_game *game, t_player *player)
 		put_angle_in_range(&ray.offset);
 		ray.length = draw_ray(game, player, &ray);
 		ray.length *= cos(ray.offset);
-		draw_walls(game, game->camera, i, ray);
+		draw_walls(game, i, ray);
 		ray.dir += DEGREE_RADIAN;
-		i += game->mlx->width / game->camera->fov;
+		i += game->mlx->width / FOV;
 	}
 }

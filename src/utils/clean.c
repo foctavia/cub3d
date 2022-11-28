@@ -79,8 +79,6 @@ void	ft_clean(t_game *game)
 				free(game->mlx->minimap);
 			free(game->mlx);
 		}
-		if (game->camera)
-			free(game->camera);
 		if (game->file)
 			free_tab(game->file);
 	}

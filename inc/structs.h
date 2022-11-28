@@ -115,15 +115,6 @@ typedef struct s_texture
 	int		height;
 }				t_texture;
 
-typedef struct s_camera
-{
-	int	width;
-	int	height;
-	int	fov;
-	int	distance;
-	t_coord	center;
-}				t_camera;
-
 typedef struct s_player
 {
 	float		dir;
@@ -140,7 +131,6 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
-	t_camera	*camera;
 }				t_game;
 
 

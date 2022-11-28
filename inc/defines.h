@@ -41,6 +41,10 @@
 # define WEST_DIR 'W'
 # define EAST_DIR 'E'
 
+# define FOV 60
+# define WINDOW_H 1000
+# define WINDOW_W 1600
+
 # define SIDE_X 0
 # define SIDE_Y 1
 
