@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 15:36:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	move_player(t_game *game, t_player *player, int key)
 	ft_render(game);
 	return (EXIT_SUCCESS);
 }
+
+// void	move_up(t_game *game, t_player *player)
+// {
+	
+// }
 
 int	key_hook(int keycode, t_game *game)
 {
