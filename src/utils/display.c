@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:52:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/20 12:34:03 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:42:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	display_player(t_game *game)
 {
 	printf("game->player: %p\n", game->player);
-	if (game->player->dir == UP)
-		printf("player->dir == UP\n");
-	else if (game->player->dir == DOWN)
-		printf("player->dir == DOWN\n");
-	else if (game->player->dir == LEFT)
-		printf("player->dir == LEFT\n");
-	else if (game->player->dir == RIGHT)
-		printf("player->dir == RIGHT\n");
-	else
-		printf("player->dir = %f\n", game->player->dir);
+	// if (game->player->dir == UP)
+	// 	printf("player->dir == UP\n");
+	// else if (game->player->dir == DOWN)
+	// 	printf("player->dir == DOWN\n");
+	// else if (game->player->dir == LEFT)
+	// 	printf("player->dir == LEFT\n");
+	// else if (game->player->dir == RIGHT)
+	// 	printf("player->dir == RIGHT\n");
+	// else
+	// 	printf("player->dir = %f\n", game->player->dir);
 }
 
 void	display_map(t_map *map)

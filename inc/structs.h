@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/28 17:33:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:24:55 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,30 @@ typedef struct s_mlx
 	t_minimap	*minimap;
 }				t_mlx;
 
+typedef struct	s_ray
+{
+	t_coord		map;
+	t_coord		dir;
+	t_coord		side_dist;
+	t_coord		delta_dist;
+	t_coord		step;
+	double		perpwall_dist;
+	double		camera_x;
+	double		time;
+	double		old_time;
+	int			side;
+	int			line_height;
+	
+}				t_ray;
+
 typedef struct s_player
 {
-	float		dir;
 	double		delta_x;
 	double		delta_y;
 	t_coord		pos;
+	t_coord		square;
+	t_coord		plane;
+	t_coord		dir;
 }				t_player;
 
 typedef struct s_game 

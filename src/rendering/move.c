@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/28 18:05:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 19:23:00 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,61 +27,67 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 	return (FALSE);
 }
 
-static void	get_dest_coord(t_player *player, int key, t_coord *dest)
+void	move_up(t_game *game, t_player *player)
 {
-	dest->x = player->pos.x;
-	dest->y = player->pos.y;
-	if (key == KEY_UP)
+	if (!is_wall(game, player->pos.y + player->dir.y, player->pos.x + player->dir.x))
 	{
-		dest->x += player->delta_x;
-		dest->y += player->delta_y;
-	}
-	else if (key == KEY_DOWN)
-	{
-		dest->x -= player->delta_x;
-		dest->y -= player->delta_y;
+		player->pos.y += player->dir.y;
+		player->pos.x += player->dir.x;
+		player->square.y = player->pos.y / game->mlx->minimap->elem_size;
+		player->square.x = player->pos.x / game->mlx->minimap->elem_size;
 	}
 }
 
-int	change_player_pos(t_game *game, t_player *player, int key)
+void	move_down(t_game *game, t_player *player)
 {
-	t_coord	dest;
-
-	get_dest_coord(player, key, &dest);
-	if (is_wall(game, dest.x, dest.y))
-		return (EXIT_FAILURE);
-	draw_player(game, game->mlx->img_minimap, player->pos, HEX_BLACK);
-	player->pos.x = dest.x;
-	player->pos.y = dest.y;
-	return (EXIT_SUCCESS);
+	if (!is_wall(game, player->pos.y - player->dir.y, player->pos.x - player->dir.x))
+	{
+		player->pos.y -= player->dir.y;
+		player->pos.x -= player->dir.x;
+		player->square.y = player->pos.y / game->mlx->minimap->elem_size;
+		player->square.x = player->pos.x / game->mlx->minimap->elem_size;
+	}
 }
 
-int	move_player(t_game *game, t_player *player, int key)
+void	move_left(t_game *game, t_player *player)
 {
-	if (key == KEY_LEFT || key == KEY_RIGHT)
-		change_player_dir(player, key);
-	else
-		change_player_pos(game, player, key);
-	ft_render(game);
-	return (EXIT_SUCCESS);
+	double	old_dir_x;
+	double	old_plane_x;
+
+	(void)game;
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x - player->dir.y;
+	player->dir.y = old_dir_x + player->dir.y;
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x - player->plane.y;
+	player->plane.y = old_plane_x + player->plane.y;
 }
 
-// void	move_up(t_game *game, t_player *player)
-// {
-	
-// }
+void	move_right(t_game *game, t_player *player)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	(void)game;
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x - player->dir.y;
+	player->dir.y = old_dir_x + player->dir.y;
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x - player->plane.y;
+	player->plane.y = old_plane_x + player->plane.y;
+}
 
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		return (move_player(game, game->player, KEY_RIGHT));
+		move_right(game, game->player);
 	else if (keycode == KEY_LEFT || keycode == KEY_A)
-		return (move_player(game, game->player, KEY_LEFT));
+		move_left(game, game->player);
 	else if (keycode == KEY_UP || keycode == KEY_W)
-		return (move_player(game, game->player, KEY_UP));
+		move_up(game, game->player);
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
-		return (move_player(game, game->player, KEY_DOWN));
+		move_down(game, game->player);
 	else if (keycode == KEY_ESC)
-		return (close_window(game));
+		close_window(game);
 	return (EXIT_SUCCESS);
 }

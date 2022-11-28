@@ -3,52 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 15:15:02 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:03:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	assign_player_pos(t_game *game, t_elem elem, char c)
+void	assign_player_pos(t_game *game, t_elem elem, char c)
 {
 	int		radius;
 
 	radius = game->mlx->minimap->elem_size / 2;
 	game->player->pos.x = elem.x + radius;
 	game->player->pos.y = elem.y + radius;
+	game->player->square.x = elem.x / game->mlx->minimap->elem_size;
+	game->player->square.y = elem.y / game->mlx->minimap->elem_size;
 	if (c == NORTH_DIR)
-		game->player->dir = UP;
+	{
+		game->player->dir.x = 0;
+		game->player->dir.y = -1;
+		game->player->plane.x = 0.0;
+		game->player->plane.y = 0.66;
+	}
 	else if (c == SOUTH_DIR)
-		game->player->dir = DOWN;
+	{
+		game->player->dir.x = 0;
+		game->player->dir.y = 1;
+		game->player->plane.x = 0.0;
+		game->player->plane.y = -0.66;
+	}
 	else if (c == WEST_DIR)
-		game->player->dir = LEFT;
+	{
+		game->player->dir.x = -1;
+		game->player->dir.y = 0;
+		game->player->plane.x = -0.66;
+		game->player->plane.y = 0.00;
+	}
 	else if (c == EAST_DIR)
-		game->player->dir = RIGHT;
-	game->player->delta_x = cos(game->player->dir) * 5;
-	game->player->delta_y = sin(game->player->dir) * 5;
-	return (TRUE);
-}
-
-int	change_player_dir(t_player *player, int key)
-{
-	if (key == KEY_LEFT)
 	{
-		player->dir -= 0.1;
-		if (player->dir < 0)
-			player->dir += 2 * M_PI;
-		player->delta_x = cos(player->dir) * 5;
-		player->delta_y = sin(player->dir) * 5;
+		game->player->dir.x = 1;
+		game->player->dir.y = 0;
+		game->player->plane.x = 0.66;
+		game->player->plane.y = 0.00;
 	}
-	else if (key == KEY_RIGHT)
-	{
-		(player->dir) += 0.1;
-		if (player->dir > 2 * M_PI)
-			(player->dir) -= 2 * M_PI;
-		player->delta_x = cos(player->dir) * 5;
-		player->delta_y = sin(player->dir) * 5;
-	}
-	return (EXIT_SUCCESS);
 }

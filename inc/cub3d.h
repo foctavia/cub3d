@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:59:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:41:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	check_walls(t_game *game, char **content);
 int		is_wall(t_game *game, float dest_x, float dest_y);
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
-int		assign_player_pos(t_game *game, t_elem elem, char c);
 int		ft_render(t_game *game);
 int		change_player_dir(t_player *player, int key);
+void	assign_player_pos(t_game *game, t_elem elem, char c);
 void	assign_minimap_size(t_game *game, t_minimap *minimap);
 void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);

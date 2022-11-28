@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 11:46:57 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:38:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 # define FOV 60
+
+# define SIDE_X 0
+# define SIDE_Y 1
 
 // Direction
 # define UP (3 * PI / 2)
