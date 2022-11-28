@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/27 18:57:42 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 14:50:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,35 @@ void	draw_walls(t_game *game, float i, t_ray ray)
 		coord.y = line_offset;
 		while (coord.y < line_offset + line_height)
 		{
-			game->mlx->img_3d->addr[(int)coord.y * game->mlx->img_3d->line_length 
-				+ (int)coord.x * 4] 
-				= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)];
-			game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length
-				+ (int)coord.x * 4) + 1]
-				= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)) + 1];
-			game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length 
-				+ (int)coord.x * 4) + 2]
-				= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)) + 2];
-			game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length
-				+ (int)coord.x * 4) + 3]
-				= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.y * 4)) + 3];
+			// game->mlx->img_3d->addr[(int)coord.y * game->mlx->img_3d->line_length 
+			// 	+ (int)coord.x * 4] 
+			// 	= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)];
+			// game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length
+			// 	+ (int)coord.x * 4) + 1]
+			// 	= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)) + 1];
+			// game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length 
+			// 	+ (int)coord.x * 4) + 2]
+			// 	= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)) + 2];
+			// game->mlx->img_3d->addr[((int)coord.y * game->mlx->img_3d->line_length
+			// 	+ (int)coord.x * 4) + 3]
+			// 	= img.addr[(((int)texture.pos.y * 64) + ((int)texture.pos.y * 4)) + 3];
+			
+			if (coord.x >= 0 && coord.x < game->mlx->width
+				&& coord.y >= 0 && coord.y < game->mlx->height)
+				game->mlx->buffer[(int)coord.y][(int)coord.x]
+					= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4)];
+			if (coord.x + 1 >= 0 && coord.x + 1 < game->mlx->width
+				&& coord.y >= 0 && coord.y < game->mlx->height)
+				game->mlx->buffer[(int)coord.y][(int)coord.x + 1]
+					= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4) + 1];
+			if (coord.x + 2 >= 0 && coord.x + 2 < game->mlx->width
+				&& coord.y >= 0 && coord.y < game->mlx->height)
+				game->mlx->buffer[(int)coord.y][(int)coord.x + 2]
+					= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4) + 2];
+			if (coord.x + 3 >= 0 && coord.x + 3 < game->mlx->width
+				&& coord.y >= 0 && coord.y < game->mlx->height)
+				game->mlx->buffer[(int)coord.y][(int)coord.x + 3]
+					= img.addr[((int)texture.pos.y * 64) + ((int)texture.pos.x * 4) + 3];
 
 			coord.y += 1;
 			texture.pos.y += texture.step;

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/27 18:29:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 14:33:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,22 @@ void	render_minimap(t_game *game, t_map *map, t_img *img)
 
 void	cub_draw(t_game *game)
 {
-	int	x;
-	int	y;
+	t_coord	coord;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < game->mlx->height)
 	{
+		coord.y = y;
 		x = 0;
 		while (x < game->mlx->width)
 		{
-			game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length \
-				+ (int)x * (game->mlx->img_3d->bits_per_pixel / 8)]
-				= game->mlx->buffer[y][x];
+			coord.x = x;
+			put_pixel(game, game->mlx->img_3d, coord, game->mlx->buffer[y][x]);
+			// game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length \
+			// 	+ (int)x * (game->mlx->img_3d->bits_per_pixel / 8)]
+			// 	= *(unsigned int *)game->mlx->buffer[y][x];
 			x++;
 		}
 		y++;
@@ -92,9 +96,9 @@ int	ft_render(t_game *game)
 	render_player(game, game->map, game->mlx->img_minimap, game->player);
 	draw_floor_and_ceiling(game, game->mlx->img_3d);
 	ft_raycast(game, game->player);
-	// cub_draw(game);
-	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->img_3d->img, 0, 0);
+	cub_draw(game);
+	// mlx_put_image_to_window(game->mlx->mlx, \
+	// 	game->mlx->window, game->mlx->img_3d->img, 0, 0);
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_minimap->img, \
 		game->mlx->width - game->mlx->minimap->width, 0);

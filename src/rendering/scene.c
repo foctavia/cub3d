@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:19:43 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/27 18:31:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/28 14:21:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
 	int		y;
 
 	y = 0;
+	(void)img_3d;
 	while (y < game->mlx->height / 2)
 	{
 		x = 0;
@@ -26,8 +27,8 @@ void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
 		{
 			coord.x = x;
 			coord.y = y;
-			// game->mlx->buffer[y][x] = game->map->ceiling->color;
-			put_pixel(game, img_3d, coord, game->map->ceiling->color);
+			game->mlx->buffer[y][x] = game->map->ceiling->color;
+			// put_pixel(game, img_3d, coord, game->map->ceiling->color);
 			x++;
 		}
 		y++;
@@ -39,8 +40,8 @@ void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
 		{
 			coord.x = x;
 			coord.y = y;
-			// game->mlx->buffer[y][x] = game->map->floor->color;
-			put_pixel(game, img_3d, coord, game->map->floor->color);
+			game->mlx->buffer[y][x] = game->map->floor->color;
+			// put_pixel(game, img_3d, coord, game->map->floor->color);
 			x++;
 		}
 		y++;
