@@ -91,6 +91,7 @@ void	ft_raycast(t_game *game, t_player *player)
 	t_coord	map;
 	t_coord	side_dist;
 	t_coord	delta_dist;
+	t_coord step;
 	double	perpwalldist;
 	double	camera_x;
 	double	time;
@@ -108,9 +109,25 @@ void	ft_raycast(t_game *game, t_player *player)
 	plane.x = 0;
 	plane.y = 0.66;
 	x = 0;
-	while (x < game->map->width)
+	while (!done())
 	{
-		camera_x = 2 * x / 0
+		while (x < game->mlx->width)
+		{
+			camera_x = 2 * x / game->mlx->width - 1;
+			raydir.x = dir.x + plane.x * camera_x;
+			raydir.y = dir.y + plane.y * camera_x;
+
+			delta_dist.x = fabs(1 / raydir.x);
+			delta_dist.y = fabs(1 / raydir.y);
+
+			hit = 0;
+
+			if (ray_dir.x < 0)
+			{
+				step.x = -1;
+				side_dist.x = (pos.x )
+			}
+		}
 
 	}
 }
