@@ -85,22 +85,32 @@ void	draw_walls(t_game *game, float ray_length, float i)
 
 void	ft_raycast(t_game *game, t_player *player)
 {
-	float	ray_dir;
-	float	ray_length;
-	float	ray_offset;
-	float	i;
+	t_coord dir;
+	t_coord	plane;
+	t_coord	raydir;
+	t_coord	map;
+	t_coord	side_dist;
+	t_coord	delta_dist;
+	double	perpwalldist;
+	double	camera_x;
+	double	time;
+	double	old_time;
+	int		hit;
+	int		side;
+	int		x;
 
-	ray_dir = player->dir - DEGREE_RADIAN * 30;
-	put_angle_in_range(&ray_dir);
-	i = 0;
-	while (i < game->mlx->width)
+	time = 0;
+	old_time = 0;
+	map.x = player->pos.x;
+	map.y = player->pos.y;
+	dir.x = -1;
+	dir.y = 0;
+	plane.x = 0;
+	plane.y = 0.66;
+	x = 0;
+	while (x < game->map->width)
 	{
-		ray_offset = player->dir - ray_dir;
-		put_angle_in_range(&ray_offset);
-		ray_length = draw_ray(game, player, ray_dir);
-		ray_length *= cos(ray_offset);
-		draw_walls(game, ray_length, i);
-		ray_dir += DEGREE_RADIAN;
-		i += game->mlx->width / FOV;
+		camera_x = 2 * x / 0
+
 	}
 }
