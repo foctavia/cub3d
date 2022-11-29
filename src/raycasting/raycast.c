@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 17:17:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:09:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ void	ft_raycast(t_game *game, t_player *player)
 
 	int		hit;
 	int		x;
+	int		pitch;
+	double	wall_x;
+	t_coord	texture_coord;
+	double	texture_step;
+	double	texture_pos;
+	t_img		img;
+	int			width;
+	int			height;
+
+	img.img = mlx_xpm_file_to_image(game->mlx->mlx, "eagle.xpm", \
+		&width, &height);
+	img.addr = mlx_get_data_addr(img.img, \
+		&img.bits_per_pixel, &img.line_length, &img.endian);
 
 
 	time = 0;
@@ -112,18 +125,101 @@ void	ft_raycast(t_game *game, t_player *player)
 		else
 			ray.perpwall_dist = (ray.side_dist.y - ray.delta_dist.y);
 
-	
-		ray.line_height = (int)(game->mlx->height / ray.perpwall_dist) * 0.8;
+		// pitch = 100;
+		(void)pitch;
+		
+		ray.line_height = (int)(game->mlx->height / ray.perpwall_dist);
 		start.x = x;
 		end.x = x;
-		start.y = -1 * ray.line_height / 2 + game->mlx->height / 2;
+		
+		start.y = -1 * ray.line_height / 2 + game->mlx->height / 2 ;
 		if (start.y < 0)
 			start.y = 0;
-		end.y = ray.line_height / 2 + game->mlx->height / 2;
+		end.y = ray.line_height / 2 + game->mlx->height / 2 ;
 		if (end.y >= game->mlx->height)
 			end.y = game->mlx->height - 1;
+			
+		if (ray.side == SIDE_X)
+			wall_x = player->square.y + ray.perpwall_dist * ray.dir.y;
+		else
+			wall_x = player->square.x + ray.perpwall_dist * ray.dir.x;
+		wall_x -= floor(wall_x);
 
-		bresenham_wall(game, start, end, HEX_RED);
+		texture_coord.x = (int)(wall_x * (double)64);
+		if (ray.side == SIDE_X && ray.dir.x > 0)
+			texture_coord.x = 64 - texture_coord.x - 1;
+		if (ray.side == SIDE_Y && ray.dir.y < 0)
+			texture_coord.x = 64 - texture_coord.x - 1;
+
+		texture_step = 1.0 * 64 / ray.line_height;
+		texture_pos = (start.y - game->mlx->height / 2 + ray.line_height / 2) * texture_step;
+		double y = start.y;
+		while (y < end.y)
+		{
+			texture_coord.y = (int)texture_pos & (64 - 1);
+			texture_pos += texture_step;
+
+
+			if (start.x >= 0 && start.x < game->mlx->width
+				&& y >= 0 && y < game->mlx->height)
+			{
+				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
+					+ (int)(start.x * (game->mlx->img_3d->bits_per_pixel / 8)))]
+					= img.addr[(((int)texture_coord.y * img.line_length) 
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8))];
+				
+			}
+
+			if (start.x >= 0 && start.x < game->mlx->width
+				&& y >= 0 && y < game->mlx->height)
+			{
+				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
+					+ (int)(start.x * (game->mlx->img_3d->bits_per_pixel / 8))) + 1]
+					= img.addr[(((int)texture_coord.y * img.line_length) 
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 1];
+				
+			}
+
+			if (start.x >= 0 && start.x < game->mlx->width
+				&& y >= 0 && y < game->mlx->height)
+			{
+				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
+					+ (int)(start.x * (game->mlx->img_3d->bits_per_pixel / 8))) + 2]
+					= img.addr[(((int)texture_coord.y * img.line_length) 
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 2];
+				
+			}
+
+			if (start.x >= 0 && start.x < game->mlx->width
+				&& y >= 0 && y < game->mlx->height)
+			{
+				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
+					+ (int)(start.x * (game->mlx->img_3d->bits_per_pixel / 8))) + 3]
+					= img.addr[(((int)texture_coord.y * img.line_length) 
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 3];
+				
+			}
+			// if (start.x >= 0 && start.x < game->mlx->width
+			// 	&& y >= 0 && y < game->mlx->height)
+			// 	game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length
+			// 		+ (int)(start.x * 4) + 1]
+			// 		= img.addr[((int)texture_coord.y * 64) + ((int)texture_coord.x * 4) + 1];
+			
+			// if (start.x >= 0 && start.x < game->mlx->width
+			// 	&& y >= 0 && y < game->mlx->height)
+			// 	game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length
+			// 		+ (int)(start.x * 4) + 2]
+			// 		= img.addr[((int)texture_coord.y * 64) + ((int)texture_coord.x * 4) + 2];
+
+			// if (start.x >= 0 && start.x < game->mlx->width
+			// 	&& y >= 0 && y < game->mlx->height)
+			// 	game->mlx->img_3d->addr[(int)y * game->mlx->img_3d->line_length
+			// 		+ (int)(start.x * 4) + 3]
+			// 		= img.addr[((int)texture_coord.y * 64) + ((int)texture_coord.x * 4) + 3];
+			
+			y++;
+		}
+		// bresenham_wall(game, start, end, HEX_RED);
 		x++;
 
 	}
