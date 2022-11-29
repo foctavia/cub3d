@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/28 18:42:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:22:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,21 @@ void	ft_raycast(t_game *game, t_player *player)
 		ray.dir.x = player->dir.x + player->plane.x * ray.camera_x;
 		ray.dir.y = player->dir.y + player->plane.y * ray.camera_x;
 
-		ray.delta_dist.x = fabs(1 / ray.dir.x);
-		ray.delta_dist.y = fabs(1 / ray.dir.y);
+		if (ray.dir.x == 0)
+			ray.delta_dist.x = 1e30;
+		else
+			ray.delta_dist.x = fabs(1 / ray.dir.x);
+		if (ray.dir.y == 0)
+			ray.delta_dist.y = 1e30;
+		else
+			ray.delta_dist.y = fabs(1 / ray.dir.y);
 
 		hit = 0;
 		
 		if (ray.dir.x < 0)
 		{
 			ray.step.x = -1;
-			ray.side_dist.x = (player->square.x - ray.map.x) * ray.delta_dist.x;
+			ray.side_dist.x = (player->square.x - (ray.map.x)) * ray.delta_dist.x;
 		}
 		else
 		{
@@ -106,15 +112,17 @@ void	ft_raycast(t_game *game, t_player *player)
 				ray.side = SIDE_Y;
 			}
 			if (is_wall_hihi(game, ray.map.x, ray.map.y))
+			{
 				hit = 1;
+				bresenham(game, player->square, ray.map, HEX_RED);	
+			}
 		}
 		if (ray.side == SIDE_X)
 			ray.perpwall_dist = (ray.side_dist.x - ray.delta_dist.x);
 		else
 			ray.perpwall_dist = (ray.side_dist.y - ray.delta_dist.y);
 		
-		ray.line_height = (int)(game->mlx->height / ray.perpwall_dist);
-		
+		ray.line_height = (int)(game->mlx->height / ray.perpwall_dist) * 0.8;
 		start.x = x;
 		end.x = x;
 		start.y = -1 * ray.line_height / 2 + game->mlx->height / 2;

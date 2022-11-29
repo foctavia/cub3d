@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/28 18:24:55 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 13:29:06 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,21 @@ typedef struct	s_ray
 	
 }				t_ray;
 
+typedef struct	s_time
+{
+	double		current;
+	double		old;
+	double		frame;
+	double		move_speed;
+	double		rot_speed;
+}				t_time;
+
+typedef struct	s_speed
+{
+	double		move_speed;
+	double		rot_speed;
+}				t_speed;
+
 typedef struct s_player
 {
 	double		delta_x;
@@ -117,6 +132,7 @@ typedef struct s_player
 	t_coord		square;
 	t_coord		plane;
 	t_coord		dir;
+	t_speed		speed;
 }				t_player;
 
 typedef struct s_game 
