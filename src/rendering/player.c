@@ -23,29 +23,29 @@ void	assign_player_pos(t_game *game, t_elem elem, char c)
 	game->player->square.y = elem.y / game->mlx->minimap->elem_size;
 	if (c == NORTH_DIR)
 	{
-		game->player->dir.x = 0;
-		game->player->dir.y = -1;
+		game->player->dir.x = -1;
+		game->player->dir.y = 0;
 		game->player->plane.x = 0.0;
 		game->player->plane.y = 0.66;
 	}
 	else if (c == SOUTH_DIR)
 	{
-		game->player->dir.x = 0;
-		game->player->dir.y = 1;
+		game->player->dir.x = 1;
+		game->player->dir.y = 0;
 		game->player->plane.x = 0.0;
 		game->player->plane.y = -0.66;
 	}
 	else if (c == WEST_DIR)
 	{
-		game->player->dir.x = -1;
-		game->player->dir.y = 0;
+		game->player->dir.x = 0;
+		game->player->dir.y = -1;
 		game->player->plane.x = -0.66;
 		game->player->plane.y = 0.00;
 	}
 	else if (c == EAST_DIR)
 	{
-		game->player->dir.x = 1;
-		game->player->dir.y = 0;
+		game->player->dir.x = 0;
+		game->player->dir.y = 1;
 		game->player->plane.x = 0.66;
 		game->player->plane.y = 0.00;
 	}

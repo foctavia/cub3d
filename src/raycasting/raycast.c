@@ -24,8 +24,6 @@ int	get_grid_coord(t_game *game, int pixel, int axis)
 	return (grid);
 }
 
-
-
 int	is_wall_hihi(t_game *game, float dest_x, float dest_y)
 {
 	float	square_x;
@@ -44,14 +42,15 @@ int	is_wall_hihi(t_game *game, float dest_x, float dest_y)
 void	ft_raycast(t_game *game, t_player *player)
 {
 	t_ray	ray;
+	t_coord	start;
+	t_coord	end;
 	
 	double	time;
 	double	old_time;
-	int		hit;
 
+	int		hit;
 	int		x;
-	int		draw_start;
-	int		draw_end;
+
 
 	time = 0;
 	old_time = 0;
@@ -79,7 +78,7 @@ void	ft_raycast(t_game *game, t_player *player)
 		else
 		{
 			ray.step.x = 1;
-			ray.side_dist.x = (ray.map.x + 1 - (player->square.x)) * ray.delta_dist.x;
+			ray.side_dist.x = (ray.map.x + 1 - player->square.x) * ray.delta_dist.x;
 		}
 		if (ray.dir.y < 0)
 		{
@@ -109,7 +108,6 @@ void	ft_raycast(t_game *game, t_player *player)
 			if (is_wall_hihi(game, ray.map.x, ray.map.y))
 				hit = 1;
 		}
-		
 		if (ray.side == SIDE_X)
 			ray.perpwall_dist = (ray.side_dist.x - ray.delta_dist.x);
 		else
@@ -117,24 +115,16 @@ void	ft_raycast(t_game *game, t_player *player)
 		
 		ray.line_height = (int)(game->mlx->height / ray.perpwall_dist);
 		
-		draw_start = -1 * ray.line_height / 2 + game->mlx->height / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = ray.line_height / 2 + game->mlx->height / 2;
-		if (draw_end >= game->mlx->height)
-			draw_end = game->mlx->height - 1;
-		
-		t_coord coord1;
-		t_coord coord2;
+		start.x = x;
+		end.x = x;
+		start.y = -1 * ray.line_height / 2 + game->mlx->height / 2;
+		if (start.y < 0)
+			start.y = 0;
+		end.y = ray.line_height / 2 + game->mlx->height / 2;
+		if (end.y >= game->mlx->height)
+			end.y = game->mlx->height - 1;
 
-		coord1.x = x ;
-		coord1.y = draw_start;
-
-		coord2.x = x;
-		coord2.y = draw_end;
-
-
-		bresenham_wall(game, coord1, coord2, HEX_RED);
+		bresenham_wall(game, start, end, HEX_RED);
 		x++;
 
 	}
