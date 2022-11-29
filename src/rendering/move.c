@@ -6,26 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 16:32:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:30:03 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	is_wall_pixel(t_game *game, float dest_x, float dest_y)
-{
-	float	square_x;
-	float	square_y;
-
-	square_y = dest_y / game->mlx->minimap->elem_size;
-	square_x = dest_x / game->mlx->minimap->elem_size;
-	if ((int)square_y < 0 || (int)square_x < 0 || \
-		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
-		return (FALSE);
-	if (game->map->content[(int)square_y][(int)square_x] == WALL)
-		return (TRUE);
-	return (FALSE);
-}
 
 void	move_up(t_game *game, t_player *player)
 {

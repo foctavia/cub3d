@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 11:56:23 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:44:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	free_map(t_map *map)
 			free(map->floor);
 		if (map->ceiling)
 			free(map->ceiling);
-		if (map->texture)
-		{
-			if (map->texture->south)
-				free(map->texture->south);
-			if (map->texture->north)
-				free(map->texture->north);
-			if (map->texture->west)
-				free(map->texture->west);
-			if (map->texture->east)
-				free(map->texture->east);
-			free(map->texture);
-		}
+		// if (map->texture)
+		// {
+		// 	if (map->texture->south)
+		// 		free(map->texture->south);
+		// 	if (map->texture->north)
+		// 		free(map->texture->north);
+		// 	if (map->texture->west)
+		// 		free(map->texture->west);
+		// 	if (map->texture->east)
+		// 		free(map->texture->east);
+		// 	free(map->texture);
+		// }
 		if (map->content)
 			free_tab(map->content);
 		if (map->checker)

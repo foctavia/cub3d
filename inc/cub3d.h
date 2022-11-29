@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 16:32:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:30:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	check_walls(t_game *game, char **content);
 /*
 ** RENDERING
 */
-int		is_wall_pixel(t_game *game, float dest_x, float dest_y);
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
 int		ft_render(t_game *game);

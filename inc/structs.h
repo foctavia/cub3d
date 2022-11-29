@@ -6,20 +6,12 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 15:52:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:58:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef struct s_texture
-{
-	char	*south;
-	char	*north;
-	char	*west;
-	char	*east;
-}				t_texture;
 
 typedef struct s_color
 {
@@ -70,7 +62,6 @@ typedef struct s_map
 	char		**content;
 	t_color 	*floor;
 	t_color		*ceiling;
-	t_texture	*texture;
 	t_checker	*checker;
 }				t_map;
 
@@ -81,6 +72,18 @@ typedef struct	s_elem
 	int	side;
 	int	color;
 }				t_elem;
+
+typedef struct	s_texture
+{
+	t_coord	pos;
+	t_img	*img;
+	char	*path;
+	float	step;
+	float	offset;
+	int		width;
+	int		height;
+	int		id;
+}				t_texture;
 
 typedef struct s_mlx
 {
@@ -93,6 +96,13 @@ typedef struct s_mlx
 	t_minimap	*minimap;
 }				t_mlx;
 
+typedef struct	s_line
+{
+	int			height;
+	int			start;
+	int			end;
+}				t_line;
+
 typedef struct	s_ray
 {
 	t_coord		map;
@@ -102,10 +112,8 @@ typedef struct	s_ray
 	t_coord		step;
 	double		perpwall_dist;
 	double		camera_x;
-	double		time;
-	double		old_time;
 	int			side;
-	int			line_height;
+	int			hit;
 	
 }				t_ray;
 
@@ -143,6 +151,7 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_texture	*texture;
 }				t_game;
 
 

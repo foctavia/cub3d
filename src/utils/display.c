@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:52:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/28 18:42:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:42:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ void	display_map(t_map *map)
 	printf("====================MAP====================\n\n");
 	if (map)
 	{
-		if (map->texture)
-		{
-			if (map->texture->north)
-				printf("NO : |%s|\n", map->texture->north);
-			if (map->texture->south)
-				printf("SO : |%s|\n", map->texture->south);
-			if (map->texture->north)
-				printf("WE : |%s|\n", map->texture->west);
-			if (map->texture->north)
-				printf("EA : |%s|\n", map->texture->east);
-			printf("\n");
-		}
+		// if (map->texture)
+		// {
+		// 	if (map->texture->north)
+		// 		printf("NO : |%s|\n", map->texture->north);
+		// 	if (map->texture->south)
+		// 		printf("SO : |%s|\n", map->texture->south);
+		// 	if (map->texture->north)
+		// 		printf("WE : |%s|\n", map->texture->west);
+		// 	if (map->texture->north)
+		// 		printf("EA : |%s|\n", map->texture->east);
+		// 	printf("\n");
+		// }
 		if (map->floor)
 			printf("F : %d,%d,%d\n", map->floor->red, map->floor->green, map->floor->blue);
 		if (map->ceiling)
