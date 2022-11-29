@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 13:29:06 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:52:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ typedef struct	s_time
 
 typedef struct	s_speed
 {
-	double		move_speed;
-	double		rot_speed;
+	double		move;
+	double		rotation;
 }				t_speed;
 
 typedef struct s_player

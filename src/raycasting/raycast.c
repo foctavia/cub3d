@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 14:22:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:08:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ void	ft_raycast(t_game *game, t_player *player)
 
 	time = 0;
 	old_time = 0;
-	
 	x = 0;
 	while (x < game->mlx->width )
 	{
-
+		hit = 0;
+		ray.perpwall_dist = 0;
 		ray.map.x = player->square.x;
 		ray.map.y = player->square.y;
 		ray.camera_x = 2 * x / (double)game->mlx->width - 1;
 		ray.dir.x = player->dir.x + player->plane.x * ray.camera_x;
 		ray.dir.y = player->dir.y + player->plane.y * ray.camera_x;
-
+		
 		if (ray.dir.x == 0)
 			ray.delta_dist.x = 1e30;
 		else

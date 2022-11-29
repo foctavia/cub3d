@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 14:14:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:03:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	assign_player_pos(t_game *game, t_elem elem, char c)
 		/ game->mlx->minimap->elem_size;
 	game->player->square.y = game->player->pos.y
 		/ game->mlx->minimap->elem_size;
+	game->player->speed.move = 0.1;
+	game->player->speed.rotation = 0.033 * 1.8;
 	if (c == NORTH_DIR)
 	{
 		game->player->dir.x = 0;

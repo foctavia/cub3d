@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 13:44:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:09:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,6 @@ void	move_down(t_game *game, t_player *player)
 	}
 }
 
-void	move_left(t_game *game, t_player *player)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	(void)game;
-	old_dir_x = player->dir.x;
-	player->dir.x = player->dir.x - player->dir.y;
-	player->dir.y = old_dir_x + player->dir.y;
-	old_plane_x = player->plane.x;
-	player->plane.x = player->plane.x - player->plane.y;
-	player->plane.y = old_plane_x + player->plane.y;
-}
-
 void	move_right(t_game *game, t_player *player)
 {
 	double	old_dir_x;
@@ -70,11 +56,25 @@ void	move_right(t_game *game, t_player *player)
 
 	(void)game;
 	old_dir_x = player->dir.x;
-	player->dir.x = player->dir.x - player->dir.y;
-	player->dir.y = old_dir_x + player->dir.y;
+	player->dir.x = player->dir.x  * cos(player->speed.rotation) - player->dir.y * sin(player->speed.rotation);
+	player->dir.y = old_dir_x * sin(player->speed.rotation) + player->dir.y * cos(player->speed.rotation);
 	old_plane_x = player->plane.x;
-	player->plane.x = player->plane.x - player->plane.y;
-	player->plane.y = old_plane_x + player->plane.y;
+	player->plane.x = player->plane.x * cos(player->speed.rotation) - player->plane.y * sin(player->speed.rotation);
+	player->plane.y = old_plane_x * sin(player->speed.rotation) + player->plane.y * cos(player->speed.rotation);
+}
+
+void	move_left(t_game *game, t_player *player)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	(void)game;
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x  * cos(-player->speed.rotation) - player->dir.y * sin(-player->speed.rotation);
+	player->dir.y = old_dir_x * sin(-player->speed.rotation) + player->dir.y * cos(-player->speed.rotation);
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x * cos(-player->speed.rotation) - player->plane.y * sin(-player->speed.rotation);
+	player->plane.y = old_plane_x * sin(-player->speed.rotation) + player->plane.y * cos(-player->speed.rotation);
 }
 
 int	key_hook(int keycode, t_game *game)
