@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 16:09:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:32:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall(t_game *game, float dest_x, float dest_y)
+int	is_wall_pixel(t_game *game, float dest_x, float dest_y)
 {
 	float	square_x;
 	float	square_y;
@@ -29,23 +29,33 @@ int	is_wall(t_game *game, float dest_x, float dest_y)
 
 void	move_up(t_game *game, t_player *player)
 {
-	if (!is_wall(game, player->pos.y + player->dir.y, player->pos.x + player->dir.x))
+	double	x;
+	double	y;
+
+	x = player->square.x + player->dir.x * player->speed.move;
+	y = player->square.y + player->dir.y * player->speed.move;
+	if (game->map->content[(int)y][(int)x] != '1')
 	{
-		player->pos.y += player->dir.y;
-		player->pos.x += player->dir.x;
-		player->square.y = player->pos.y / game->mlx->minimap->elem_size;
-		player->square.x = player->pos.x / game->mlx->minimap->elem_size;
+		player->square.y += player->dir.y * player->speed.move;
+		player->square.x += player->dir.x * player->speed.move;
+		player->pos.y = player->square.y * game->mlx->minimap->elem_size;
+		player->pos.x = player->square.x * game->mlx->minimap->elem_size;
 	}
 }
 
 void	move_down(t_game *game, t_player *player)
 {
-	if (!is_wall(game, player->pos.y - player->dir.y, player->pos.x - player->dir.x))
+	double	x;
+	double	y;
+
+	x = player->square.x - player->dir.x * player->speed.move;
+	y = player->square.y - player->dir.y * player->speed.move;
+	if (game->map->content[(int)y][(int)x] != '1')
 	{
-		player->pos.y -= player->dir.y;
-		player->pos.x -= player->dir.x;
-		player->square.y = player->pos.y / game->mlx->minimap->elem_size;
-		player->square.x = player->pos.x / game->mlx->minimap->elem_size;
+		player->square.y -= player->dir.y * player->speed.move;
+		player->square.x -= player->dir.x * player->speed.move;
+		player->pos.y = player->square.y * game->mlx->minimap->elem_size;
+		player->pos.x = player->square.x * game->mlx->minimap->elem_size;
 	}
 }
 
