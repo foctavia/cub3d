@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:22:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 12:29:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	set_texture_id(t_ray ray, t_player *player, int *id)
 
 void	set_texture_data(t_texture *texture, t_ray ray, t_game *game, t_line line)
 {
-	int	wall_x;
+	double	wall_x;
 
 	if (ray.side == SIDE_Y)
 		wall_x = game->player->square.y + ray.perpwall_dist * ray.dir.y;
