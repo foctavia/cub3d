@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:33:46 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:53:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:04:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ static void	set_texture_data(t_game *game, t_texture *texture,
 	texture->step = 1.0 * 64 / line.height;
 	texture->pos = (line.start - game->mlx->height / 2 + line.height / 2)
 		* texture->step;
+}
+
+void	add_cool_line(t_game *game, int x, int y)
+{
+	t_coord coord;
+
+	coord.x = x;
+	coord.y = y;
+	put_pixel(game, game->mlx->img_3d, coord, HEX_GREEN);
 }
 
 void	draw_texture(t_game *game, t_ray ray, t_line line, int x)
@@ -89,4 +98,6 @@ void	draw_texture(t_game *game, t_ray ray, t_line line, int x)
 					+ ((int)texture.coord.x * img.bits_per_pixel / 8)) + 3];
 		y++;
 	}
+	if (!ft_strncmp(game->path, "maps/cool.cub", 14))
+		add_cool_line(game, x, y);	
 }
