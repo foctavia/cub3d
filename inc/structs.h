@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 10:46:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 11:56:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ typedef struct	s_texture
 	char	*path;
 	float	offset;
 	float	step;
+	float	pos;
 	t_img	img;
-	t_coord	pos;
+	t_coord	coord;
 }				t_texture;
 
 typedef struct s_mlx
