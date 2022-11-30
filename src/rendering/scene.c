@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:19:43 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:41:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:55:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_floor_and_ceiling(t_game *game, t_img *img_3d)
+void	draw_floor_and_ceiling(t_game *game, t_img img_3d)
 {
 	t_coord	coord;
 	int		x;

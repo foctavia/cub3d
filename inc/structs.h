@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 11:56:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:52:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ typedef struct s_mlx
 	void		*window;
 	float		width;
 	float		height;
-	t_img		*img_3d;
-	t_img		*img_minimap;
+	t_img		img_3d;
+	t_img		img_minimap;
 	t_minimap	*minimap;
 }				t_mlx;
 

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 10:47:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:53:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,21 @@ void	load_texture(t_game *game, t_texture **texture)
 	}
 }
 
+void	load_img(t_game	*game)
+{
+	game->mlx->img_3d.img = mlx_new_image(game->mlx->mlx, \
+		game->mlx->width, game->mlx->height);
+	game->mlx->img_3d.addr = mlx_get_data_addr(game->mlx->img_3d.img, \
+		&game->mlx->img_3d.bits_per_pixel, &game->mlx->img_3d.line_length, &game->mlx->img_3d.endian);
+	game->mlx->img_minimap.img = mlx_new_image(game->mlx->mlx, \
+		game->mlx->minimap->width, game->mlx->minimap->height);
+	game->mlx->img_minimap.addr = mlx_get_data_addr(game->mlx->img_minimap.img, \
+		&game->mlx->img_minimap.bits_per_pixel, &game->mlx->img_minimap.line_length, \
+		&game->mlx->img_minimap.endian);
+}
+
 void	ft_mlx(t_game *game)
 {
-	t_img	img_minimap;
-	t_img	img_3d;
-
 	game->mlx->mlx = mlx_init();
 	if (!game->mlx->mlx)
 		ft_error_mlx(ERR_MLX_INIT, game);
@@ -40,18 +50,8 @@ void	ft_mlx(t_game *game)
 		game->mlx->width, game->mlx->height, "cub3D");
 	if (!game->mlx->window)
 		ft_error_mlx(ERR_MLX_WIN, game);
-	img_3d.img = mlx_new_image(game->mlx->mlx, \
-		game->mlx->width, game->mlx->height);
-	img_3d.addr = mlx_get_data_addr(img_3d.img, \
-		&img_3d.bits_per_pixel, &img_3d.line_length, &img_3d.endian);
-	game->mlx->img_3d = &img_3d;
 	assign_minimap_size(game, game->mlx->minimap);
-	img_minimap.img = mlx_new_image(game->mlx->mlx, \
-		game->mlx->minimap->width, game->mlx->minimap->height);
-	img_minimap.addr = mlx_get_data_addr(img_minimap.img, \
-		&img_minimap.bits_per_pixel, &img_minimap.line_length, \
-		&img_minimap.endian);
-	game->mlx->img_minimap = &img_minimap;
+	load_img(game);
 	load_texture(game, game->texture);
 	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_hook, game);

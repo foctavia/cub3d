@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:33:46 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 18:08:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:59:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	add_cool_line(t_game *game, int x, int y)
 void	draw_texture(t_game *game, t_ray ray, t_line line, int x)
 {
 	t_texture	texture;
-	t_img		*img_3d;
+	t_img		img_3d;
 	t_img		img;
 	int			tex_id;
 	int			y;
@@ -73,23 +73,23 @@ void	draw_texture(t_game *game, t_ray ray, t_line line, int x)
 		texture.coord.y = (int)texture.pos & (64 - 1);
 		texture.pos += texture.step;
 		if (is_in_range(game, x, y))
-			img_3d->addr[((int)y * img_3d->line_length
-					+ (int)(x * (img_3d->bits_per_pixel / 8)))]
+			img_3d.addr[((int)y * img_3d.line_length
+					+ (int)(x * (img_3d.bits_per_pixel / 8)))]
 				= img.addr[(((int)texture.coord.y * img.line_length)
 					+ ((int)texture.coord.x * img.bits_per_pixel / 8))];
 		if (is_in_range(game, x, y))
-			img_3d->addr[((int)y * img_3d->line_length
-					+ (int)(x * (img_3d->bits_per_pixel / 8))) + 1]
+			img_3d.addr[((int)y * img_3d.line_length
+					+ (int)(x * (img_3d.bits_per_pixel / 8))) + 1]
 				= img.addr[(((int)texture.coord.y * img.line_length)
 					+ ((int)texture.coord.x * img.bits_per_pixel / 8)) + 1];
 		if (is_in_range(game, x, y))
-			img_3d->addr[((int)y * img_3d->line_length
-					+ (int)(x * (img_3d->bits_per_pixel / 8))) + 2]
+			img_3d.addr[((int)y * img_3d.line_length
+					+ (int)(x * (img_3d.bits_per_pixel / 8))) + 2]
 				= img.addr[(((int)texture.coord.y * img.line_length)
 					+ ((int)texture.coord.x * img.bits_per_pixel / 8)) + 2];
 		if (is_in_range(game, x, y))
-			img_3d->addr[((int)y * img_3d->line_length
-					+ (int)(x * (img_3d->bits_per_pixel / 8))) + 3]
+			img_3d.addr[((int)y * img_3d.line_length
+					+ (int)(x * (img_3d.bits_per_pixel / 8))) + 3]
 				= img.addr[(((int)texture.coord.y * img.line_length)
 					+ ((int)texture.coord.x * img.bits_per_pixel / 8)) + 3];
 		y++;

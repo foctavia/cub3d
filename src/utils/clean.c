@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 17:45:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:01:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	destroy_mlx(t_game *game)
 			mlx_destroy_image(game->mlx->mlx, game->texture[i]->img.img);
 		i++;
 	}
-	if (game->mlx->img_minimap)
-		mlx_destroy_image(game->mlx->mlx, game->mlx->img_minimap->img);
-	if (game->mlx->img_3d)
-		mlx_destroy_image(game->mlx->mlx, game->mlx->img_3d->img);
+	if (&game->mlx->img_minimap)
+		mlx_destroy_image(game->mlx->mlx, game->mlx->img_minimap.img);
+	if (&game->mlx->img_3d)
+		mlx_destroy_image(game->mlx->mlx, game->mlx->img_3d.img);
 	if (game->mlx->mlx)
 		mlx_loop_end(game->mlx->mlx);
 	if (game->mlx->window)
