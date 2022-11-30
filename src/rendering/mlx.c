@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 19:10:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:37:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	ft_mlx(t_game *game)
 	assign_minimap_size(game, game->mlx->minimap);
 	load_img(game->mlx);
 	load_texture(game, game->texture);
-	mlx_loop_hook(game->mlx->mlx, ft_render, game);
-	mlx_hook(game->mlx->window, 2, 1L << 0, &key_hook, game);
+	mlx_hook(game->mlx->window, 2, 1L << 0, &key_press, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
+	mlx_loop_hook(game->mlx->mlx, ft_render, game);
+	mlx_hook(game->mlx->window, 3, 1L << 1, &key_release, game);
 	mlx_loop(game->mlx->mlx);
 }
