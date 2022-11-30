@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/28 18:38:11 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 11:05:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define BLUE 257
 
 # define NORTH_TEXTURE 100
-# define SOUTH_TEXTURE 101
-# define WEST_TEXTURE 102
-# define EAST_TEXTURE 103
+# define SOUTH_TEXTURE 1
+# define WEST_TEXTURE 2
+# define EAST_TEXTURE 3
 # define FLOOR 104
 # define CEILING 105
 

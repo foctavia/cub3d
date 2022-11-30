@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 18:44:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 11:43:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,18 @@ void	run_dda(t_ray *ray, t_game *game)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->map.x += ray->step.x;
-			ray->side = SIDE_X;
+			ray->side = SIDE_Y;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map.y += ray->step.y;
-			ray->side = SIDE_Y;
+			ray->side = SIDE_X;
 		}
 		if (is_wall(game, ray->map.x, ray->map.y))
 			ray->hit = 1;
 	}
-	if (ray->side == SIDE_X)
+	if (ray->side == SIDE_Y)
 		ray->perpwall_dist = (ray->side_dist.x - ray->delta_dist.x);
 	else
 		ray->perpwall_dist = (ray->side_dist.y - ray->delta_dist.y);
@@ -98,12 +98,25 @@ void	run_dda(t_ray *ray, t_game *game)
 void	init_line(t_line *line, t_game *game, t_ray *ray)
 {
 	line->height = (int)(game->mlx->height / ray->perpwall_dist);
-	line->start = -1 * line->height / 2 + game->mlx->height / 2 ;
+	line->start = -1 * line->height / 2 + game->mlx->height / 2;
 	if (line->start < 0)
 		line->start = 0;
 	line->end = line->height / 2 + game->mlx->height / 2 ;
 	if (line->end >= game->mlx->height)
 		line->end = game->mlx->height - 1;
+}
+
+void	set_texture_id(t_ray ray, t_player *player, int *id)
+{
+	(void)player;
+	if (ray.side == SIDE_X && ray.dir.y >= 0)
+		*id = 0;
+	if (ray.side == SIDE_X && ray.dir.y < 0)
+		*id = SOUTH_TEXTURE;
+	if (ray.side == SIDE_Y && ray.dir.x >= 0)
+		*id = WEST_TEXTURE;
+	if (ray.side == SIDE_Y && ray.dir.x < 0)
+		*id = EAST_TEXTURE;
 }
 
 void	ft_raycast(t_game *game, t_player *player)
@@ -116,14 +129,10 @@ void	ft_raycast(t_game *game, t_player *player)
 	t_coord	texture_coord;
 	double	texture_step;
 	double	texture_pos;
-	t_img		img;
-	int			width;
-	int			height;
+	t_img	img;
+	int		tex_id;
+	
 
-	img.img = mlx_xpm_file_to_image(game->mlx->mlx, "eagle.xpm", \
-		&width, &height);
-	img.addr = mlx_get_data_addr(img.img, \
-		&img.bits_per_pixel, &img.line_length, &img.endian);
 	x = 0;
 	ray.perpwall_dist = 0;
 	while (x < game->mlx->width )
@@ -136,17 +145,22 @@ void	ft_raycast(t_game *game, t_player *player)
 		
 		
 		
-		if (ray.side == SIDE_X)
+		if (ray.side == SIDE_Y)
 			wall_x = player->square.y + ray.perpwall_dist * ray.dir.y;
 		else
 			wall_x = player->square.x + ray.perpwall_dist * ray.dir.x;
 		wall_x -= floor(wall_x);
 
 		texture_coord.x = (int)(wall_x * (double)64);
-		if (ray.side == SIDE_X && ray.dir.x > 0)
+		if (ray.side == SIDE_Y && ray.dir.x < 0)
 			texture_coord.x = 64 - texture_coord.x - 1;
-		if (ray.side == SIDE_Y && ray.dir.y < 0)
+		if (ray.side == SIDE_X && ray.dir.y > 0)
 			texture_coord.x = 64 - texture_coord.x - 1;
+		
+
+		set_texture_id(ray, player, &tex_id);
+		img = game->texture[tex_id]->img;
+		
 
 		texture_step = 1.0 * 64 / line.height;
 		texture_pos = (line.start - game->mlx->height / 2 + line.height / 2) * texture_step;
@@ -164,7 +178,6 @@ void	ft_raycast(t_game *game, t_player *player)
 					+ (int)(x * (game->mlx->img_3d->bits_per_pixel / 8)))]
 					= img.addr[(((int)texture_coord.y * img.line_length) 
 						+ ((int)texture_coord.x * img.bits_per_pixel / 8))];
-				
 			}
 
 			if (x >= 0 && x < game->mlx->width
@@ -174,7 +187,6 @@ void	ft_raycast(t_game *game, t_player *player)
 					+ (int)(x * (game->mlx->img_3d->bits_per_pixel / 8))) + 1]
 					= img.addr[(((int)texture_coord.y * img.line_length) 
 						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 1];
-				
 			}
 
 			if (x >= 0 && x < game->mlx->width
@@ -183,8 +195,7 @@ void	ft_raycast(t_game *game, t_player *player)
 				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
 					+ (int)(x * (game->mlx->img_3d->bits_per_pixel / 8))) + 2]
 					= img.addr[(((int)texture_coord.y * img.line_length) 
-						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 2];
-				
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 2];				
 			}
 
 			if (x >= 0 && x < game->mlx->width
@@ -193,8 +204,7 @@ void	ft_raycast(t_game *game, t_player *player)
 				game->mlx->img_3d->addr[((int)y * game->mlx->img_3d->line_length
 					+ (int)(x * (game->mlx->img_3d->bits_per_pixel / 8))) + 3]
 					= img.addr[(((int)texture_coord.y * img.line_length) 
-						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 3];
-				
+						+ ((int)texture_coord.x * img.bits_per_pixel / 8)) + 3];				
 			}
 			y++;
 		}

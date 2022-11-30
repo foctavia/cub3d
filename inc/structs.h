@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 18:58:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 10:46:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ typedef struct	s_elem
 
 typedef struct	s_texture
 {
-	t_coord	pos;
-	t_img	*img;
-	char	*path;
-	float	step;
-	float	offset;
+	int		id;
 	int		width;
 	int		height;
-	int		id;
+	char	*path;
+	float	offset;
+	float	step;
+	t_img	img;
+	t_coord	pos;
 }				t_texture;
 
 typedef struct s_mlx
@@ -151,7 +151,7 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
-	t_texture	*texture;
+	t_texture	**texture;
 }				t_game;
 
 

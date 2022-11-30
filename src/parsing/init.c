@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 18:57:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 10:34:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,20 @@ void	init_player(t_game *game)
 
 void	init_texture(t_game *game)
 {
-	game->texture = malloc(sizeof(t_texture) * 4);
+	int	i;
+
+	game->texture = malloc(sizeof(t_texture *) * 4);
 	if (!game->texture)
 		ft_error(ERR_MALLOC, 0, NULL, game);
-	ft_memset(game->texture, 0, sizeof(t_texture));
+	i = 0;
+	while (i < 4)
+	{
+		game->texture[i] = malloc(sizeof(t_texture));
+		if (!game->texture[i])
+			ft_error(ERR_MALLOC, 0, NULL, game);
+		ft_memset(game->texture[i], 0, sizeof(t_texture));
+		i++;
+	}
 }
 
 void	init_game(t_game *game, char *path)
