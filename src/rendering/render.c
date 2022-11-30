@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 10:48:14 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:02:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	render_player(t_game *game, t_map *map, t_img *img, t_player *player)
 			elem.y = y * game->mlx->minimap->elem_size;
 			if (is_player(map->content[y][x]) && player && \
 				player->pos.x == 0 && player->pos.y == 0)
-				assign_player_pos(game, elem, map->content[y][x]);
+				set_player_data(game, game->player, elem, map->content[y][x]);
 			if (is_player(map->content[y][x]) && player)
 				draw_player(game, img, player->pos, HEX_RED);
 			x++;
@@ -64,20 +64,12 @@ void	render_minimap(t_game *game, t_map *map, t_img *img)
 	draw_lines(game);
 }
 
-// void	ft_speed(t_game *game, t_player *player)
-// {
-// 	t_time	time;
-	
-// 	time.current = 
-// }
-
 int	ft_render(t_game *game)
 {
 	render_minimap(game, game->map, game->mlx->img_minimap);
 	render_player(game, game->map, game->mlx->img_minimap, game->player);
 	draw_floor_and_ceiling(game, game->mlx->img_3d);
 	ft_raycast(game, game->player);
-	// ft_speed(game, game->player);
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_3d->img, 0, 0);
 	mlx_put_image_to_window(game->mlx->mlx, \

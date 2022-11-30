@@ -22,11 +22,24 @@ OBJDIR 		= objs/
 SRCDIR		= src/
 INCDIR		= inc/
 
+SRC_PARSING	= parsing/
+SRC_UTILS	= utils/
+SRC_RENDER	= rendering/
+SRC_RAYCAST = raycasting/
+
 SRC			=	cub3d.c \
-				parsing/start.c parsing/parsing.c parsing/init.c parsing/identifier.c parsing/content.c parsing/textures.c parsing/colors.c parsing/copy.c parsing/checker.c parsing/walls.c \
-				rendering/render.c rendering/draw.c rendering/window.c rendering/move.c rendering/player.c rendering/mlx.c rendering/scene.c rendering/bresenham.c \
-				raycasting/raycast.c raycasting/utils.c raycasting/math.c \
-				utils/error.c utils/gnl.c utils/is.c utils/mem.c utils/str.c utils/file.c utils/clean.c utils/display.c
+				$(addprefix ${SRC_PARSING}, start.c			parsing.c		init.c \
+											identifier.c	content.c		textures.c \
+											colors.c		copy.c			checker.c \
+											walls.c) \
+				$(addprefix ${SRC_RENDER},	render.c		draw.c			window.c \
+											move.c			player.c		mlx.c \
+											scene.c			bresenham.c) \
+				$(addprefix ${SRC_RAYCAST},	raycast.c		dda.c			texture.c \
+											utils.c) \
+				$(addprefix ${SRC_UTILS},	error.c			gnl.c			is.c \
+											mem.c			str.c			file.c \
+											clean.c			display.c)
 
 OBJ 		= $(addprefix ${OBJDIR}, ${SRC:.c=.o})
 INC 		= -I./${INCDIR} -I./minilibx-linux

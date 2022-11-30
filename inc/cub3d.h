@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/29 18:30:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:01:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	check_walls(t_game *game, char **content);
 int		key_hook(int keycode, t_game *game);
 int		close_window(t_game *game);
 int		ft_render(t_game *game);
-int		change_player_dir(t_player *player, int key);
-void	assign_player_pos(t_game *game, t_elem elem, char c);
+void	set_player_data(t_game *game, t_player *player, t_elem elem, char c);
 void	assign_minimap_size(t_game *game, t_minimap *minimap);
 void	draw_lines(t_game *game);
 void	draw_square(t_game *game, t_elem elem, t_img *img);
@@ -87,16 +86,14 @@ void	ft_mlx(t_game *game);
 /*
 ** RAYCASTING
 */
-int		is_looking_right(float angle);
-int		is_looking_left(float angle);
-int		is_looking_up(float angle);
-int		is_looking_down(float angle);
+int		is_wall(t_game *game, double square_x, double square_y);
 int		is_pixel_in_window_range(t_game *game, t_coord coord);
 int		get_grid_coord(t_game *game, int pixel, int axis);
-void	put_angle_in_range(float *angle);
+void	init_ray(t_game *game, t_ray *ray, t_player *player, int x);
+void	init_dda_vector(t_ray *ray, t_player *player);
+void	run_dda(t_game *game, t_ray *ray);
+void	init_line(t_game *game, t_line *line, t_ray *ray);
 void	ft_raycast(t_game *game, t_player *player);
-void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
-t_coord	get_horizontal_ray(t_game *game, t_player *player, float ray_dir);
-t_coord	get_vertical_ray(t_game *game, t_player *player, float ray_dir);
+void	draw_texture(t_game *game, t_ray ray, t_line line, int x);
 
 #endif

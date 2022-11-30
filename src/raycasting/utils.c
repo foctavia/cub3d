@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:44:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/21 15:21:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:35:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,24 @@ int	is_pixel_in_window_range(t_game *game, t_coord coord)
 	return (TRUE);
 }
 
-int	is_looking_up(float angle)
+int	is_wall(t_game *game, double square_x, double square_y)
 {
-	if (angle > LEFT && angle < RIGHT_MAX)
+	if ((int)square_y < 0 || (int)square_x < 0 || \
+		(int)square_y >= game->map->height || (int)square_x >= game->map->width)
+		return (FALSE);
+	if (game->map->content[(int)square_y][(int)square_x] == WALL)
 		return (TRUE);
 	return (FALSE);
 }
 
-int	is_looking_down(float angle)
+int	get_grid_coord(t_game *game, int pixel, int axis)
 {
-	if (angle < LEFT && angle > RIGHT_MIN)
-		return (TRUE);
-	return (FALSE);
-}
+	int	grid;
 
-int	is_looking_right(float angle)
-{
-	if (angle > UP || angle < DOWN)
-		return (TRUE);
-	return (FALSE);
-}
-
-int	is_looking_left(float angle)
-{
-	if (angle < UP && angle > DOWN)
-		return (TRUE);
-	return (FALSE);
+	grid = 0;
+	if (axis == 'x')
+		grid = pixel * game->map->width / game->mlx->minimap->width;
+	else if (axis == 'y')
+		grid = pixel * game->map->height / game->mlx->minimap->height;
+	return (grid);
 }
