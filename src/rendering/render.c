@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 13:02:57 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:05:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_player(t_game *game, t_map *map, t_img *img, t_player *player)
+void	render_player(t_game *game, t_map *map, t_img img, t_player *player)
 {
 	int		x;
 	int		y;
@@ -37,7 +37,7 @@ void	render_player(t_game *game, t_map *map, t_img *img, t_player *player)
 	}
 }
 
-void	render_minimap(t_game *game, t_map *map, t_img *img)
+void	render_minimap(t_game *game, t_map *map, t_img img)
 {
 	int		x;
 	int		y;
@@ -68,12 +68,11 @@ int	ft_render(t_game *game)
 {
 	render_minimap(game, game->map, game->mlx->img_minimap);
 	render_player(game, game->map, game->mlx->img_minimap, game->player);
-	draw_floor_and_ceiling(game, game->mlx->img_3d);
 	ft_raycast(game, game->player);
 	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->img_3d->img, 0, 0);
+		game->mlx->window, game->mlx->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx->mlx, \
-		game->mlx->window, game->mlx->img_minimap->img, \
+		game->mlx->window, game->mlx->img_minimap.img, \
 		game->mlx->width - game->mlx->minimap->width, 0);
 	return (EXIT_SUCCESS);
 }

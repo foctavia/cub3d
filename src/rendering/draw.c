@@ -6,21 +6,21 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:09:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/22 17:37:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:55:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_game *game, t_img *img, t_coord coord, int color)
+void	put_pixel(t_game *game, t_img img, t_coord coord, int color)
 {
 	char	*dst;
 
 	if (coord.x > game->mlx->width || \
 		coord.y > game->mlx->height)
 		return ;
-	dst = img->addr + ((int)coord.y * img->line_length \
-		+ (int)coord.x * (img->bits_per_pixel / 8));
+	dst = img.addr + ((int)coord.y * img.line_length \
+		+ (int)coord.x * (img.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -53,7 +53,7 @@ void	draw_lines(t_game *game)
 	}
 }
 
-void	draw_square(t_game *game, t_elem elem, t_img *img)
+void	draw_square(t_game *game, t_elem elem, t_img img)
 {
 	t_coord	index;
 
@@ -72,7 +72,7 @@ void	draw_square(t_game *game, t_elem elem, t_img *img)
 	}
 }
 
-void	draw_player(t_game *game, t_img *img, t_coord dest, int color)
+void	draw_player(t_game *game, t_img img, t_coord dest, int color)
 {
 	t_coord	center;
 	int		radius;

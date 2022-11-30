@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:34:08 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:49:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:16:25 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ void	run_dda(t_game *game, t_ray *ray)
 void	init_line(t_game *game, t_line *line, t_ray *ray)
 {
 	line->height = (int)(game->mlx->height / ray->perpwall_dist);
-	line->start = -1 * line->height / 2 + game->mlx->height / 2;
+	line->start = -1 * line->height / 2 + game->mlx->height / 2
+		+ game->player->pitch;
 	if (line->start < 0)
 		line->start = 0;
-	line->end = line->height / 2 + game->mlx->height / 2 ;
+	line->end = line->height / 2 + game->mlx->height / 2
+		+ game->player->pitch;
 	if (line->end >= game->mlx->height)
 		line->end = game->mlx->height - 1;
 }

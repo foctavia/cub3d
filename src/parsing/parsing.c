@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:35:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 16:20:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:04:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int	ft_parse(t_game *game)
 	parse_map(game, game->file, &line_index);
 	copy_map(game, game->file, &line_index);
 	checker_map(game, line_index);
-	display_map(game->map);
 	return (EXIT_SUCCESS);
 }

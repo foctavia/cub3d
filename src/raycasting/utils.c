@@ -6,11 +6,19 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:44:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:35:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:07:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_in_range(t_game *game, int x, int y)
+{
+	if (x >= 0 && x < game->mlx->width
+		&& y >= 0 && y < game->mlx->height)
+		return (TRUE);
+	return (FALSE);
+}
 
 int	is_pixel_in_window_range(t_game *game, t_coord coord)
 {

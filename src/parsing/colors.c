@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:21:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:14:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:05:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static int	set_rgb(char *line, t_game *game, int *i, int color)
 	int	j;
 	int	rgb;
 
+	while (line && line[*i] == ' ')
+		(*i)++;
 	j = *i;
 	while (line && line[*i] && is_digit(line[*i]))
 		(*i)++;
-	if ((color == RED || color == GREEN)
-		&& line[*i] == ',')
-		line[*i] = '\0';
+	if (color == RED || color == GREEN)
+	{
+		if (line[*i] == ',')
+			line[*i] = '\0';
+	}
 	else if (color == BLUE)
 		line[*i] = '\0';
 	else
