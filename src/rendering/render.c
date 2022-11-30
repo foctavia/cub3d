@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:25:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:02:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	render_player(t_game *game, t_map *map, t_img *img, t_player *player)
 			elem.y = y * game->mlx->minimap->elem_size;
 			if (is_player(map->content[y][x]) && player && \
 				player->pos.x == 0 && player->pos.y == 0)
-				assign_player_pos(game, elem, map->content[y][x]);
+				set_player_data(game, game->player, elem, map->content[y][x]);
 			if (is_player(map->content[y][x]) && player)
 				draw_player(game, img, player->pos, HEX_RED);
 			x++;

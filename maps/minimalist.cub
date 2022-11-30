@@ -1,14 +1,10 @@
-NO	maps/textures/wall42-2-64x64.xpm
+NO	eagle.xpm
 SO	maps/textures/wall42-3-64x64.xpm
-WE	maps/textures/wall42-64x64.xpm
+WE	maps/textures/wall42-2-64x64.xpm
 EA	maps/textures/wall42-4-64x64.xpm
 
 F 164,225,155
 C 70,83,136
-
-
-
-
 
 
 

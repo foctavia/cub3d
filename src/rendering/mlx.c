@@ -6,11 +6,26 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 18:00:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 10:47:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	load_texture(t_game *game, t_texture **texture)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		texture[i]->img.img = mlx_xpm_file_to_image(game->mlx->mlx, texture[i]->path, \
+			&texture[i]->width, &texture[i]->height);
+		texture[i]->img.addr = mlx_get_data_addr(texture[i]->img.img, \
+			&texture[i]->img.bits_per_pixel, &texture[i]->img.line_length, &texture[i]->img.endian);
+		i++;
+	}
+}
 
 void	ft_mlx(t_game *game)
 {
@@ -37,6 +52,7 @@ void	ft_mlx(t_game *game)
 		&img_minimap.bits_per_pixel, &img_minimap.line_length, \
 		&img_minimap.endian);
 	game->mlx->img_minimap = &img_minimap;
+	load_texture(game, game->texture);
 	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_hook, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);

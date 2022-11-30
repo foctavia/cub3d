@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 11:56:35 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:15:25 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 int	close_window(t_game *game)
 {
-	if (game->mlx->img_minimap)
-		mlx_destroy_image(game->mlx->mlx, game->mlx->img_minimap->img);
-	if (game->mlx->img_3d)
-		mlx_destroy_image(game->mlx->mlx, game->mlx->img_3d->img);
-	if (game && game->mlx && game->mlx->mlx)
-		mlx_loop_end(game->mlx->mlx);
-	if (game && game->mlx && game->mlx->window)
-		mlx_destroy_window(game->mlx->mlx, game->mlx->window);
-	if (game && game->mlx && game->mlx->mlx)
-	{
-		mlx_destroy_display(game->mlx->mlx);
-		free(game->mlx->mlx);
-	}
 	ft_clean(game);
 	exit (EXIT_SUCCESS);
 }

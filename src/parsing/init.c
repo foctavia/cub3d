@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:36:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 11:53:47 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:34:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ static void	init_map(t_game *game)
 	if (!game->map->ceiling)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	ft_memset(game->map->ceiling, 0, sizeof(t_color));
-	game->map->texture = malloc(sizeof(t_texture));
-	if (!game->map->texture)
-		ft_error(ERR_MALLOC, 0, NULL, game);
-	ft_memset(game->map->texture, 0, sizeof(t_texture));
 	game->map->checker = malloc(sizeof(t_checker));
 	if (!game->map->checker)
 		ft_error(ERR_MALLOC, 0, NULL, game);
@@ -56,6 +52,24 @@ void	init_player(t_game *game)
 	ft_memset(game->player, 0, sizeof(t_player));
 }
 
+void	init_texture(t_game *game)
+{
+	int	i;
+
+	game->texture = malloc(sizeof(t_texture *) * 4);
+	if (!game->texture)
+		ft_error(ERR_MALLOC, 0, NULL, game);
+	i = 0;
+	while (i < 4)
+	{
+		game->texture[i] = malloc(sizeof(t_texture));
+		if (!game->texture[i])
+			ft_error(ERR_MALLOC, 0, NULL, game);
+		ft_memset(game->texture[i], 0, sizeof(t_texture));
+		i++;
+	}
+}
+
 void	init_game(t_game *game, char *path)
 {
 	ft_memset(game, 0, sizeof(t_game));
@@ -63,4 +77,5 @@ void	init_game(t_game *game, char *path)
 	init_map(game);
 	init_mlx(game);
 	init_player(game);
+	init_texture(game);
 }

@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/24 11:53:26 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:56:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef struct s_texture
-{
-	char	*south;
-	char	*north;
-	char	*west;
-	char	*east;
-}				t_texture;
 
 typedef struct s_color
 {
@@ -59,8 +51,8 @@ typedef struct s_checker
 
 typedef struct	s_coord
 {
-	float	x;
-	float	y;	
+	double	x;
+	double	y;	
 }				t_coord;
 
 typedef struct s_map
@@ -70,7 +62,6 @@ typedef struct s_map
 	char		**content;
 	t_color 	*floor;
 	t_color		*ceiling;
-	t_texture	*texture;
 	t_checker	*checker;
 }				t_map;
 
@@ -81,6 +72,19 @@ typedef struct	s_elem
 	int	side;
 	int	color;
 }				t_elem;
+
+typedef struct	s_texture
+{
+	int		id;
+	int		width;
+	int		height;
+	char	*path;
+	float	offset;
+	float	step;
+	float	pos;
+	t_img	img;
+	t_coord	coord;
+}				t_texture;
 
 typedef struct s_mlx
 {
@@ -93,12 +97,51 @@ typedef struct s_mlx
 	t_minimap	*minimap;
 }				t_mlx;
 
+typedef struct	s_line
+{
+	int			height;
+	int			start;
+	int			end;
+}				t_line;
+
+typedef struct	s_ray
+{
+	t_coord		map;
+	t_coord		dir;
+	t_coord		side_dist;
+	t_coord		delta_dist;
+	t_coord		step;
+	double		perpwall_dist;
+	double		camera_x;
+	int			side;
+	int			hit;
+	
+}				t_ray;
+
+typedef struct	s_time
+{
+	double		current;
+	double		old;
+	double		frame;
+	double		move_speed;
+	double		rot_speed;
+}				t_time;
+
+typedef struct	s_speed
+{
+	double		move;
+	double		rotation;
+}				t_speed;
+
 typedef struct s_player
 {
-	float		dir;
 	double		delta_x;
 	double		delta_y;
 	t_coord		pos;
+	t_coord		square;
+	t_coord		plane;
+	t_coord		dir;
+	t_speed		speed;
 }				t_player;
 
 typedef struct s_game 
@@ -109,6 +152,7 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_texture	**texture;
 }				t_game;
 
 
