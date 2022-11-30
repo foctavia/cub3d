@@ -6,11 +6,25 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:33:18 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 18:33:42 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 20:37:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	rotate_up(t_game *game, t_player *player)
+{
+	player->pitch += game->mlx->height / 2 * player->speed.move;
+	if (player->pitch > game->mlx->height / 4)
+		player->pitch = game->mlx->height / 4;
+}
+
+void	rotate_down(t_game *game, t_player *player)
+{
+	player->pitch -= game->mlx->height / 2 * player->speed.move;
+	if (player->pitch < -game->mlx->height / 4)
+		player->pitch = -game->mlx->height / 4;
+}
 
 void	rotate_right(t_game *game, t_player *player)
 {

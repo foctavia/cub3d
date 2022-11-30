@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 18:36:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:03:06 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,14 @@ int	key_hook(int keycode, t_game *game)
 		move_left(game, game->player);
 	else if (keycode == KEY_LEFT)
 		rotate_left(game, game->player);
-	else if (keycode == KEY_UP || keycode == KEY_W)
+	else if (keycode == KEY_W)
 		move_up(game, game->player);
-	else if (keycode == KEY_DOWN || keycode == KEY_S)
+	else if (keycode == KEY_UP)
+		rotate_up(game, game->player);
+	else if (keycode == KEY_S)
 		move_down(game, game->player);
+	else if (keycode == KEY_DOWN)
+		rotate_down(game, game->player);
 	else if (keycode == KEY_ESC)
 		close_window(game);
 	return (EXIT_SUCCESS);

@@ -34,7 +34,7 @@ SRC			=	cub3d.c \
 											walls.c) \
 				$(addprefix ${SRC_RENDER},	render.c		draw.c			window.c \
 											move.c			player.c		mlx.c \
-											scene.c			bresenham.c		rotate.c) \
+											bresenham.c		rotate.c) \
 				$(addprefix ${SRC_RAYCAST},	raycast.c		dda.c			texture.c \
 											utils.c) \
 				$(addprefix ${SRC_UTILS},	error.c			gnl.c			is.c \

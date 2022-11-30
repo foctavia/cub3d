@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:33:44 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:48:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 20:53:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_raycast(t_game *game, t_player *player)
 		init_dda_vector(&ray, player);
 		run_dda(game, &ray);
 		init_line(game, &line, &ray);
-		draw_texture(game, ray, line, x);
+		draw(game, ray, line, x);
 		x++;
 	}
 }

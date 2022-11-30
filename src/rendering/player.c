@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:30:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 18:46:20 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:14:17 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	set_player_data(t_game *game, t_player *player,
 		/ game->mlx->minimap->elem_size;
 	player->speed.move = 0.1;
 	player->speed.rotation = 0.033 * 1.8;
+	player->pitch = 100;
 	set_player_dir_horizontal(player, c);
 	set_player_dir_vertical(player, c);
 }

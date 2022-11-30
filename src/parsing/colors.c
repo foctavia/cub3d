@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:21:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 17:59:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 19:05:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	add_color(int id, char *line, int *i, t_game *game)
 	(*i)++;
 	while (line && line[*i] && is_space(line[*i]))
 		(*i)++;
-	if (!line[*i])	
+	if (!line[*i])
 		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	if (id == FLOOR)
 	{
