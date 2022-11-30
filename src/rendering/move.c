@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:52:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 12:55:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:38:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	move_up(t_game *game, t_player *player)
 	y = player->square.y + player->dir.y * player->speed.move;
 	if (game->map->content[(int)y][(int)x] != '1')
 	{
+		draw_player(game, game->mlx->img_minimap, player->pos, HEX_BLACK);
 		player->square.y += player->dir.y * player->speed.move;
 		player->square.x += player->dir.x * player->speed.move;
 		player->pos.y = player->square.y * game->mlx->minimap->elem_size;
@@ -37,6 +38,7 @@ void	move_down(t_game *game, t_player *player)
 	y = player->square.y - player->dir.y * player->speed.move;
 	if (game->map->content[(int)y][(int)x] != '1')
 	{
+		draw_player(game, game->mlx->img_minimap, player->pos, HEX_BLACK);
 		player->square.y -= player->dir.y * player->speed.move;
 		player->square.x -= player->dir.x * player->speed.move;
 		player->pos.y = player->square.y * game->mlx->minimap->elem_size;
