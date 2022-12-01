@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:16:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 21:23:03 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:37:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_color
 	int	hex;
 }				t_color;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	int		bits_per_pixel;
 	int		line_length;
@@ -30,7 +30,7 @@ typedef struct	s_img
 	void	*img;
 }				t_img;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
 	float	width;
 	float	height;
@@ -40,16 +40,15 @@ typedef struct	s_minimap
 typedef struct s_checker
 {
 	int		player;
-	int			no;
-	int			so;
-	int			we;
-	int			ea;
-	int			f;
-	int			c;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
 }				t_checker;
 
-
-typedef struct	s_coord
+typedef struct s_coord
 {
 	double	x;
 	double	y;	
@@ -60,12 +59,12 @@ typedef struct s_map
 	int			height;
 	int			width;
 	char		**content;
-	t_color 	*floor;
+	t_color		*floor;
 	t_color		*ceiling;
 	t_checker	*checker;
 }				t_map;
 
-typedef struct	s_elem
+typedef struct s_elem
 {
 	int	x;
 	int	y;
@@ -73,7 +72,7 @@ typedef struct	s_elem
 	int	color;
 }				t_elem;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	int		id;
 	int		width;
@@ -97,14 +96,14 @@ typedef struct s_mlx
 	t_minimap	*minimap;
 }				t_mlx;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	int			height;
 	int			start;
 	int			end;
 }				t_line;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_coord		map;
 	t_coord		dir;
@@ -115,10 +114,9 @@ typedef struct	s_ray
 	double		camera_x;
 	int			side;
 	int			hit;
-	
 }				t_ray;
 
-typedef struct	s_time
+typedef struct s_time
 {
 	double		current;
 	double		old;
@@ -127,13 +125,13 @@ typedef struct	s_time
 	double		rot_speed;
 }				t_time;
 
-typedef struct	s_speed
+typedef struct s_speed
 {
 	double		move;
 	double		rotation;
 }				t_speed;
 
-typedef struct	s_move
+typedef struct s_move
 {
 	int			up;
 	int			down;
@@ -141,7 +139,7 @@ typedef struct	s_move
 	int			left;
 }				t_move;
 
-typedef struct	s_look
+typedef struct s_look
 {
 	int			up;
 	int			down;
@@ -163,7 +161,7 @@ typedef struct s_player
 	t_look		look;
 }				t_player;
 
-typedef struct s_game 
+typedef struct s_game
 {
 	int			err;
 	char		*path;
@@ -173,6 +171,5 @@ typedef struct s_game
 	t_player	*player;
 	t_texture	**texture;
 }				t_game;
-
 
 #endif

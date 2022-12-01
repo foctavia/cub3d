@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 21:33:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:42:27 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	render_minimap(t_game *game, t_map *map, t_img img)
 		{
 			elem.x = x * game->mlx->minimap->elem_size;
 			elem.y = y * game->mlx->minimap->elem_size;
-			if (map->content[y][x] == GROUND)
+			if (map->content[y][x] == GROUND || is_player(map->content[y][x]))
 				elem.color = HEX_BLACK;
 			else if (map->content[y][x] == WALL)
 				elem.color = HEX_WHITE;
-			if (map->content[y][x] != ' ' && !is_player(map->content[y][x]))
+			if (map->content[y][x] != ' ')
 				draw_square(game, elem, img);
 			x++;
 		}

@@ -3,15 +3,6 @@ RED			= "\033[1;31m"
 GREEN		= "\033[1;32m"
 RESET		= "\033[m"
 
-# Compilation flags
-ifeq ($(DMEM),1)
-MEM 		= -fsanitize=address
-endif
-
-ifeq ($(DTHREAD),1)
-MEM 		= -fsanitize=thread
-endif
-
 # Variables
 NAME 		= cub3D
 MINILIBX 	= $(INCDIR)minilibx-linux/libmlx_Linux.a
@@ -39,7 +30,7 @@ SRC			=	cub3d.c \
 											utils.c) \
 				$(addprefix ${SRC_UTILS},	error.c			gnl.c			is.c \
 											mem.c			str.c			file.c \
-											clean.c			display.c)
+											clean.c)
 
 OBJ 		= $(addprefix ${OBJDIR}, ${SRC:.c=.o})
 INC 		= -I./${INCDIR} -I./minilibx-linux

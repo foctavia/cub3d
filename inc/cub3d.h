@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 21:34:18 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:33:44 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
-	
+
 /*
 ** UTILS
 */
@@ -85,7 +85,6 @@ void	rotate_left(t_game *game, t_player *player);
 void	rotate_up(t_game *game, t_player *player);
 void	rotate_down(t_game *game, t_player *player);
 void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color);
-void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color);
 void	ft_mlx(t_game *game);
 
@@ -100,7 +99,8 @@ void	init_ray(t_game *game, t_ray *ray, t_player *player, int x);
 void	init_dda_vector(t_ray *ray, t_player *player);
 void	run_dda(t_game *game, t_ray *ray);
 void	init_line(t_game *game, t_line *line, t_ray *ray);
-void	draw_texture(t_game *game, t_texture *texture, t_img img, t_coord coord);
+void	draw_texture(t_game *game, t_texture *texture,
+			t_img img, t_coord coord);
 void	draw(t_game *game, t_ray ray, t_line line, int x);
 void	ft_raycast(t_game *game, t_player *player);
 

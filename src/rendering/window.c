@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:13:29 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 13:15:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:50:51 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	assign_minimap_size(t_game *game, t_minimap *minimap)
 
 	if (game->map->width > game->map->height)
 	{
-		minimap->width = game->mlx->width * 0.5;
+		minimap->width = game->mlx->width * 0.3;
 		ratio = (float)game->map->height / game->map->width;
 		minimap->height = ratio * minimap->width;
 	}
 	else
 	{
-		minimap->height = game->mlx->height * 0.5;
+		minimap->height = game->mlx->height * 0.3;
 		ratio = (float)game->map->width / game->map->height;
 		minimap->width = ratio * minimap->height;
 	}

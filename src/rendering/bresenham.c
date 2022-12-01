@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:26:35 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/22 17:37:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:37:49 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
 void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color)
 {
@@ -20,34 +27,12 @@ void	bresenham_wall(t_game *game, t_coord coord1, t_coord coord2, int color)
 
 	d_x = coord2.x - coord1.x;
 	d_y = coord2.y - coord1.y;
-	max = BIGGER(ABS(d_x), ABS(d_y));
+	max = ft_max(fabs(d_x), fabs(d_y));
 	d_x /= max;
 	d_y /= max;
 	while ((int)(coord1.x - coord2.x) || (int)(coord1.y - coord2.y))
 	{
 		put_pixel(game, game->mlx->img_3d, coord1, color);
-		coord1.x += d_x;
-		coord1.y += d_y;
-	}
-}
-
-void	bresenham_pixel(t_game *game, t_coord coord1, t_coord coord2, int color)
-{
-	float	d_x;
-	float	d_y;
-	int		max;
-
-	if (!is_pixel_in_window_range(game, coord1) || \
-		!is_pixel_in_window_range(game, coord2))
-		return ;
-	d_x = coord2.x - coord1.x;
-	d_y = coord2.y - coord1.y;
-	max = BIGGER(ABS(d_x), ABS(d_y));
-	d_x /= max;
-	d_y /= max;
-	while ((int)(coord1.x - coord2.x) || (int)(coord1.y - coord2.y))
-	{
-		put_pixel(game, game->mlx->img_minimap, coord1, color);
 		coord1.x += d_x;
 		coord1.y += d_y;
 	}
@@ -65,7 +50,7 @@ void	bresenham(t_game *game, t_coord coord1, t_coord coord2, int color)
 	coord2.y = (float)(coord2.y * game->mlx->minimap->elem_size);
 	d_x = coord2.x - coord1.x;
 	d_y = coord2.y - coord1.y;
-	max = BIGGER(ABS(d_x), ABS(d_y));
+	max = ft_max(fabs(d_x), fabs(d_y));
 	d_x /= max;
 	d_y /= max;
 	while ((int)(coord1.x - coord2.x) || (int)(coord1.y - coord2.y))

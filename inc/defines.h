@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 11:05:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 15:32:01 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,6 @@
 
 # define SIDE_X 0
 # define SIDE_Y 1
-
-// Direction
-# define UP (3 * PI / 2)
-# define RIGHT 0
-# define RIGHT_MIN 0
-# define RIGHT_MAX 2 * PI
-# define DOWN (PI / 2)
-# define LEFT (PI)
-
-# define BIGGER(a, b) (a > b ? a : b)
-# define ABS(a) ((a < 0) ? -a : a)
 
 // Hex_color
 # define HEX_BLACK 0x000000
