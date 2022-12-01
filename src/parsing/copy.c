@@ -94,7 +94,7 @@ void	copy_map(t_game *game, char **file, int *line_index)
 	game->map->content = malloc(sizeof(char *) * (game->map->height + 1));
 	if (!game->map->content)
 		ft_error(ERR_MALLOC, 0, NULL, game);
-	while (file && file[(*line_index) + i])
+	while (i < game->map->height && file && file[(*line_index) + i])
 	{
 		game->map->content[i] = copy_line(file[(*line_index) + i], game);
 		i++;

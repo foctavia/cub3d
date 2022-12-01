@@ -13,7 +13,7 @@ MEM 		= -fsanitize=thread
 endif
 
 # Variables
-NAME 		= cub3d
+NAME 		= cub3D
 MINILIBX 	= $(INCDIR)minilibx-linux/libmlx_Linux.a
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3

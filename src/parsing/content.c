@@ -53,4 +53,5 @@ void	parse_map(t_game *game, char **file, int *line_index)
 		game->map->height++;
 		i++;
 	}
+	// printf("")
 }
