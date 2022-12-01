@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:47:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 21:05:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:33:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	ft_render(t_game *game)
 	mlx_put_image_to_window(game->mlx->mlx, \
 		game->mlx->window, game->mlx->img_minimap.img, \
 		game->mlx->width - game->mlx->minimap->width, 0);
+	player_move(game, game->player);
 	return (EXIT_SUCCESS);
 }
