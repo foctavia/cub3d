@@ -24,6 +24,7 @@ static void	check_arg(t_game *game, char **argv)
 
 int	ft_start(char **argv, t_game *game)
 {
+	ft_memset(game, 0, sizeof(t_game));
 	check_arg(game, argv);
 	init_game(game, argv[1]);
 	if (ft_parse(game))

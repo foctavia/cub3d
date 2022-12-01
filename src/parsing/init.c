@@ -72,7 +72,6 @@ void	init_texture(t_game *game)
 
 void	init_game(t_game *game, char *path)
 {
-	ft_memset(game, 0, sizeof(t_game));
 	game->path = path;
 	init_map(game);
 	init_mlx(game);

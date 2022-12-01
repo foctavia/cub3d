@@ -41,10 +41,6 @@
 # define WEST_DIR 'W'
 # define EAST_DIR 'E'
 
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
-# define FOV 60
-
 # define SIDE_X 0
 # define SIDE_Y 1
 
