@@ -56,7 +56,7 @@ void	ft_mlx(t_game *game)
 	load_texture(game, game->texture);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_press, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
-	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_hook(game->mlx->window, 3, 1L << 1, &key_release, game);
+	mlx_loop_hook(game->mlx->mlx, ft_render, game);
 	mlx_loop(game->mlx->mlx);
 }

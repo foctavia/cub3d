@@ -67,13 +67,13 @@ void	destroy_mlx(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (game->texture[i] && &game->texture[i]->img)
+		if (game->texture[i] && game->texture[i]->img.addr)
 			mlx_destroy_image(game->mlx->mlx, game->texture[i]->img.img);
 		i++;
 	}
-	if (&game->mlx->img_minimap)
+	if (game->mlx->img_minimap.addr)
 		mlx_destroy_image(game->mlx->mlx, game->mlx->img_minimap.img);
-	if (&game->mlx->img_3d)
+	if (game->mlx->img_3d.addr)
 		mlx_destroy_image(game->mlx->mlx, game->mlx->img_3d.img);
 	if (game->mlx->mlx)
 		mlx_loop_end(game->mlx->mlx);

@@ -67,7 +67,7 @@ void	check_walls(t_game *game, char **content);
 ** RENDERING
 */
 int		key_press(int keycode, t_game *game);
-int		key_release(t_game *game, int keycode);
+int		key_release(int keycode, t_game *game);
 int		player_move(t_game *game, t_player *player);
 int		close_window(t_game *game);
 int		ft_render(t_game *game);
