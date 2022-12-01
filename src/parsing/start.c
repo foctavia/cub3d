@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:31:57 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/16 17:32:18 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 17:20:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	check_arg(t_game *game, char **argv)
 
 int	ft_start(char **argv, t_game *game)
 {
-	ft_memset(game, 0, sizeof(t_game));
 	check_arg(game, argv);
 	init_game(game, argv[1]);
 	if (ft_parse(game))

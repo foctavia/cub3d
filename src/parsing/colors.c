@@ -6,11 +6,36 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:21:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 19:05:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/01 17:19:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	ft_atoi(const char *nptr)
+{
+	char	*str;
+	int		result;
+	int		sign;
+
+	sign = 1;
+	result = 0;
+	str = (char *)nptr;
+	while (*str == 32 || (*str > 8 && *str < 14))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (result * sign);
+}
 
 int	from_rgb_to_hex(int r, int g, int b)
 {
@@ -37,7 +62,7 @@ static int	set_rgb(char *line, t_game *game, int *i, int color)
 	else
 		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	(*i)++;
-	rgb = atoi(&line[j]);
+	rgb = ft_atoi(&line[j]);
 	if (rgb < 0 || rgb > 255)
 		ft_error_map(ERR_RGB, game->path, game);
 	return (rgb);
