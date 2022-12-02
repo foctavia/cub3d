@@ -44,6 +44,7 @@ typedef struct s_checker
 	int		so;
 	int		we;
 	int		ea;
+	int		sp;
 	int		f;
 	int		c;
 }				t_checker;

@@ -17,7 +17,7 @@ void	load_texture(t_game *game, t_texture **texture)
 	int		i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		texture[i]->img.img = mlx_xpm_file_to_image(game->mlx->mlx,
 				texture[i]->path, &texture[i]->width, &texture[i]->height);

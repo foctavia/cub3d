@@ -29,6 +29,9 @@ void	valid_texture_file(t_game *game)
 	else if (texture[3] && texture[3]->path
 		&& open_file(texture[3]->path) == -1)
 		ft_error(0, errno, texture[3]->path, game);
+	else if (texture[4] && texture[4]->path
+		&& open_file(texture[4]->path) == -1)
+		ft_error(0, errno, texture[4]->path, game);
 }
 
 static void	assign_texture(t_game *game, int id, char *line, int n)
@@ -54,6 +57,11 @@ static void	assign_texture(t_game *game, int id, char *line, int n)
 	{
 		game->texture[3]->path = ft_strndup(line, n);
 		game->map->checker->ea++;
+	}
+	else if (id == SPRITE_TEXTURE)
+	{
+		game->texture[4]->path = ft_strndup(line, n);
+		game->map->checker->sp++;
 	}
 }
 

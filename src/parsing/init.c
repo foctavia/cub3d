@@ -56,11 +56,11 @@ void	init_texture(t_game *game)
 {
 	int	i;
 
-	game->texture = malloc(sizeof(t_texture *) * 4);
+	game->texture = malloc(sizeof(t_texture *) * 5);
 	if (!game->texture)
 		ft_error(ERR_MALLOC, 0, NULL, game);
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		game->texture[i] = malloc(sizeof(t_texture));
 		if (!game->texture[i])

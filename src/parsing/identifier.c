@@ -22,6 +22,8 @@ int	check_identifier(char *str)
 		return (WEST_TEXTURE);
 	else if (str && !ft_strncmp("EA", str, 2))
 		return (EAST_TEXTURE);
+	else if (str && !ft_strncmp("SP", str, 2))
+		return (SPRITE_TEXTURE);
 	else if (str && !ft_strncmp("F", str, 1))
 		return (FLOOR);
 	else if (str && !ft_strncmp("C", str, 1))
@@ -35,10 +37,10 @@ int	complete_identifiers(t_game *game)
 
 	checker = game->map->checker;
 	if (checker->c == 1 && checker->f == 1 && checker->no == 1
-		&& checker->so == 1 && checker->we == 1 && checker->ea == 1)
+		&& checker->so == 1 && checker->we == 1 && checker->ea == 1 && checker->sp == 1)
 		return (TRUE);
 	else if (checker->c > 1 && checker->f > 1 && checker->no > 1
-		&& checker->so > 1 && checker->we > 1 && checker->ea > 1)
+		&& checker->so > 1 && checker->we > 1 && checker->ea > 1 && checker->sp > 1)
 		ft_error_map(ERR_TOOMANY_ID, game->path, game);
 	return (FALSE);
 }

@@ -31,6 +31,7 @@
 # define SOUTH_TEXTURE 1
 # define WEST_TEXTURE 2
 # define EAST_TEXTURE 3
+# define SPRITE_TEXTURE 4
 # define FLOOR 104
 # define CEILING 105
 

@@ -18,7 +18,7 @@ static int	check_allowed_char(char c, t_game *game)
 	char	*allowed;
 
 	i = 0;
-	allowed = "10NWSE ";
+	allowed = "102NWSE ";
 	while (allowed && allowed[i])
 	{
 		if (allowed[i] == c)
