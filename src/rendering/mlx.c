@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:35:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 21:37:39 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/08 19:45:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	load_img(t_mlx	*mlx)
 			&mlx->img_minimap.endian);
 }
 
+int	mouse_hook(int x, int y)
+{
+	printf("mouse moved to pos x:%d y:%d\n", x, y);
+	return (EXIT_SUCCESS);
+}
+
 void	ft_mlx(t_game *game)
 {
 	game->mlx->mlx = mlx_init();
@@ -54,6 +60,7 @@ void	ft_mlx(t_game *game)
 	assign_minimap_size(game, game->mlx->minimap);
 	load_img(game->mlx);
 	load_texture(game, game->texture);
+	// mlx_mouse_hook(game->mlx->window, mouse_hook, 0);
 	mlx_hook(game->mlx->window, 2, 1L << 0, &key_press, game);
 	mlx_hook(game->mlx->window, 33, 1L << 2, &close_window, game);
 	mlx_hook(game->mlx->window, 3, 1L << 1, &key_release, game);
