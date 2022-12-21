@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:15:59 by owalsh            #+#    #+#             */
-/*   Updated: 2022/12/01 15:32:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:10:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define EAST_TEXTURE 3
 # define FLOOR 104
 # define CEILING 105
+# define MAP_START 106
 
 # define GROUND 48
 # define WALL 49
@@ -78,5 +79,6 @@
 # define ERR_RGB -12
 # define ERR_MLX_INIT -20
 # define ERR_MLX_WIN -21
+# define ERR_OPENDIR -22
 
 #endif

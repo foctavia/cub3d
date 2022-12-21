@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:12:22 by foctavia          #+#    #+#             */
-/*   Updated: 2022/11/29 18:45:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 17:21:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_identifier(char *str)
+int	check_identifier(t_game *game, char *str)
 {
 	if (str && !ft_strncmp("NO", str, 2))
 		return (NORTH_TEXTURE);
@@ -26,7 +26,9 @@ int	check_identifier(char *str)
 		return (FLOOR);
 	else if (str && !ft_strncmp("C", str, 1))
 		return (CEILING);
-	return (FALSE);
+	else if (str && !ft_strncmp("1", str, 1))
+		return (MAP_START);
+	return (ft_error_map(ERR_MAP_WRONGID, game->path, game));
 }
 
 int	complete_identifiers(t_game *game)
@@ -43,10 +45,12 @@ int	complete_identifiers(t_game *game)
 	return (FALSE);
 }
 
-void	goto_map_content(char **file, int *j)
+void	goto_map_content(t_game *game, char **file, int *j)
 {
 	int	i;
 
+	if (!complete_identifiers(game))
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	while (file && file[*j])
 	{
 		i = 0;
@@ -80,9 +84,9 @@ void	get_identifiers(t_game *game, char **file, int *line_index)
 			i++;
 		if (file[j][i])
 		{
-			id = check_identifier(&file[j][i]);
-			if (!id)
-				ft_error_map(ERR_MAP_WRONGID, game->path, game);
+			id = check_identifier(game, &file[j][i]);
+			if (id == MAP_START)
+				break ;
 			else if (id == FLOOR || id == CEILING)
 				add_color(id, file[j], &i, game);
 			else
@@ -91,6 +95,6 @@ void	get_identifiers(t_game *game, char **file, int *line_index)
 		}
 		j++;
 	}
-	goto_map_content(file, &j);
+	goto_map_content(game, file, &j);
 	*line_index += j;
 }

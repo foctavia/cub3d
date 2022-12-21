@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/12/21 13:08:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 17:21:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_error(int code, int err, char *arg, t_game *game);
 int		ft_error_map(int code, char *arg, t_game *game);
 int		ft_error_mlx(int code, t_game *game);
 int		file_extension(char *file, char *extension);
-int		open_file(char *path);
+int		open_file(t_game *game, char *path);
 char	*ft_strndup(const char *s, int n);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*get_next_line(int fd);
@@ -51,7 +51,7 @@ void	display_player(t_game *game);
 int		ft_start(char **argv, t_game *game);
 int		ft_parse_init(char **argv, t_game *game);
 int		ft_parse(t_game *game);
-int		check_identifier(char *str);
+int		check_identifier(t_game *game, char *str);
 int		add_color(int id, char *line, int *i, t_game *game);
 int		add_texture(int id, char *line, int *i, t_game *game);
 int		get_map_content(int fd, t_game *game);

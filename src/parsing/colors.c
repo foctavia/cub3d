@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:21:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/12/01 17:19:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 17:25:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ static int	set_rgb(char *line, t_game *game, int *i, int color)
 	while (line && line[*i] == ' ')
 		(*i)++;
 	j = *i;
+	if (line && line[*i] && !is_digit(line[*i]))
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	while (line && line[*i] && is_digit(line[*i]))
 		(*i)++;
-	if (color == RED || color == GREEN)
-	{
-		if (line[*i] == ',')
+	while (line && line[*i] == ' ')
+		(*i)++;
+	if ((color == RED || color == GREEN) && line[*i] == ',')
 			line[*i] = '\0';
-	}
+	else if ((color == RED || color == GREEN) && line[*i] != ',')
+		ft_error_map(ERR_MAP_INCOMPLETEID, game->path, game);
 	else if (color == BLUE)
 		line[*i] = '\0';
 	else

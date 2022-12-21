@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:29:40 by owalsh            #+#    #+#             */
-/*   Updated: 2022/12/21 12:59:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 17:22:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	ft_error(int code, int err, char *arg, t_game *game)
 	else if (code == ERR_WRONG_FILE_EXTENSION)
 		write(STDERR_FILENO, \
 			"wrong file extension provided. expected: *.cub file.\n", 53);
+	else if (code == ERR_OPENDIR)
+		write(STDERR_FILENO, \
+			"trying to open a directory. expected: file format.\n", 51);
 	else if (err)
 	{
 		write(STDERR_FILENO, strerror(errno), ft_strlen(strerror(errno)));
@@ -60,7 +63,7 @@ int	ft_error_map(int code, char *arg, t_game *game)
 	else if (code == ERR_MAP_UNEXPECTED)
 		write(STDERR_FILENO, "unexpected data in map\n", 23);
 	else if (code == ERR_MAP_INCOMPLETEID)
-		write(STDERR_FILENO, "incomplete information in identifier\n", 37);
+		write(STDERR_FILENO, "incomplete information in map\n", 30);
 	else if (code == ERR_TOOMANY_ID)
 		write(STDERR_FILENO, \
 			"one identifier has been encountered more than once\n", 51);

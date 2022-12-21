@@ -6,17 +6,22 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:15:22 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/31 15:21:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:33:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	open_file(char *path)
+int	open_file(t_game *game, char *path)
 {
 	int	fd;
 
+	fd = open(path, __O_DIRECTORY);
+	if (fd != -1)
+		ft_error(ERR_OPENDIR, 0, path, game);
 	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		ft_error(0, errno, path, game);
 	return (fd);
 }
 
