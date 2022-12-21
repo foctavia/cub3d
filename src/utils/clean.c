@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:31:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/30 19:01:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:07:03 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	ft_clean(t_game *game)
 				free(game->mlx->minimap);
 			free(game->mlx);
 		}
+		if (game->player)
+			free(game->player);
 		if (game->file)
 			free_tab(game->file);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/12/01 15:33:44 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:08:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		add_color(int id, char *line, int *i, t_game *game);
 int		add_texture(int id, char *line, int *i, t_game *game);
 int		get_map_content(int fd, t_game *game);
 int		is_player(char c);
-char	**copy_file(t_game *game);
+void	copy_file(t_game *game);
 void	init_game(t_game *game, char *path);
 void	get_identifiers(t_game *game, char **tab, int *line);
 void	parse_map(t_game *game, char **tab, int *line);

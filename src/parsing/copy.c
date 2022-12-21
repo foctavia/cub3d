@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:14:33 by owalsh            #+#    #+#             */
-/*   Updated: 2022/11/09 17:43:05 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:11:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ static int	file_len(t_game *game)
 	return (i);
 }
 
-char	**copy_file(t_game *game)
+void	copy_file(t_game *game)
 {
-	char	**file;
 	char	*line;
 	int		fd;
 	int		i;
 
-	file = malloc(sizeof(char *) * (file_len(game) + 1));
-	if (!file)
+	game->file = malloc(sizeof(char *) * (file_len(game) + 1));
+	if (!game->file)
 		ft_error(ERR_MALLOC, 0, NULL, game);
+	game->file[0] = NULL;
+	fd = open(game->path, __O_DIRECTORY);
+	if (fd != -1)
+		ft_error(0, errno, game->path, game);
 	fd = open(game->path, O_RDONLY);
 	if (fd == -1)
 		ft_error(0, errno, game->path, game);
@@ -50,14 +53,13 @@ char	**copy_file(t_game *game)
 	i = 0;
 	while (line)
 	{
-		file[i] = ft_strndup(line, ft_strlen(line));
+		game->file[i] = ft_strndup(line, ft_strlen(line));
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	file[i] = NULL;
+	game->file[i] = NULL;
 	close(fd);
-	return (file);
 }
 
 char	*copy_line(char *line, t_game *game)

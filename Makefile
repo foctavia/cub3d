@@ -44,9 +44,9 @@ $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 $(NAME) : $(OBJ) $(MINILIBX)
-	@echo -n "Compiling cub3d"
+	@echo -n "Compiling " $(NAME)
 	@$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MINILIBX) $(MLXLIBX) -o $@
-	@echo ${GREEN}"\t\tOK"${RESET}
+	@echo ${GREEN}"\tOK"${RESET}
 
 $(MINILIBX) :
 	@echo -n "Compiling minilibx"
